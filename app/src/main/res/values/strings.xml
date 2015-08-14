@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Gestemps</string>
+
+    <string name="hello_world">Hello Naelle!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Destination</string>
+    <string name="title_activity_rdv_liste">Liste des RDV</string>
+    <string name="title_activity_personne_creation">Ajouter un élève</string>
+    <string name="title_ajouter_eleve">Les coordonnées de l élève</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="adresse">Adresse</string>
+    <string name="tel">Téléphone</string>
+    <string name="mail">Email</string>
+    <string name="bt_valider">Valider</string>
+    <string name="bt_annuler">Annuler</string>
+    <string name="title_activity_rdv_creation">Ajouter un RDV</string>
+
+    <string name="title_ajouter_rdv">Renseignement d un RDV</string>
+    <string name="title_activity_trajet">Trajet au domicile</string>
+    <string name="title_activity_seance_debut">Début de séance</string>
+
+
+</resources>

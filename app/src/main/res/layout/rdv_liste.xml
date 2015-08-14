@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView android:text="Libellé" android:id="@+id/rdv_libelle"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+		</TextView>
+		
+	<TextView android:text="Date" android:id="@+id/rdv_date"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+		</TextView>
+
+	<TextView android:text="Horaire" android:id="@+id/rdv_horaire"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</TextView>
+
+	<TextView android:text="Destination" android:id="@+id/rdv_dest"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+		</TextView>	 
+		
+	<TextView android:text="Durée" android:id="@+id/rdv_duree"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+		</TextView>	 	
+
+</LinearLayout>

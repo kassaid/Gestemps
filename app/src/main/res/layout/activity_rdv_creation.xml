@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.cnam.mobile.gestemps.RdvCreation">
+
+
+    <TextView
+        android:id="@+id/titreView"
+        android:text="@string/title_ajouter_rdv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/libEdit"
+        android:hint="Libellé"
+        android:layout_below="@+id/titreView"
+        android:layout_marginTop="50dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+
+
+    <EditText
+        android:id="@+id/adresseEdit"
+        android:hint="Adresse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/libEdit" />
+
+    <EditText
+        android:id="@+id/dateEdit"
+        android:hint="Date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/adresseEdit" />
+
+    <EditText
+        android:id="@+id/horaireEdit"
+        android:hint="Horaire"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dateEdit" />
+
+    <EditText android:id="@+id/dureeEdit"
+        android:hint="Durée prévue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/horaireEdit" />
+
+    <EditText
+        android:id="@+id/niveauEdit"
+        android:hint="Niveau"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dureeEdit" />
+
+    <EditText
+        android:id="@+id/tarifEdit"
+        android:hint="Tarif horaire"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/niveauEdit" />
+
+    <EditText
+        android:id="@+id/infoEdit"
+        android:hint="Information utile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tarifEdit" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_valider"
+        android:id="@+id/button1"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/infoEdit" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_annuler"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/infoEdit"
+        android:layout_centerHorizontal="true" />
+
+
+
+</RelativeLayout>

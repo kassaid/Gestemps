@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.cnam.mobile.gestemps.Trajet">
+
+
+
+    <TextView
+        android:id="@+id/titreView"
+        android:text="RDV PREVU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/libRdvView"
+        android:text="libellé rdv"
+        android:layout_below="@+id/titreView"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/niveauRdvView"
+        android:text="niveau rdv"
+        android:layout_below="@+id/libRdvView"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dureeRdvView"
+        android:text="durée rdv"
+        android:layout_below="@+id/niveauRdvView"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lieuRdvView"
+        android:text="lieu rdv : "
+        android:layout_below="@+id/dureeRdvView"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/horaireRdvView"
+        android:text="Horaire rdv : "
+        android:layout_below="@+id/lieuRdvView"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/adresRdvView"
+        android:text="adresse rdv"
+        android:layout_below="@+id/horaireRdvView"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnRetard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS Retard"
+        android:layout_gravity="center_horizontal"
+        />
+    <Button
+        android:id="@+id/btnAnnule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS Annulation"
+        android:layout_gravity="center_horizontal"
+        />
+    <Button
+        android:id="@+id/btnArrive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrivé à destination"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>
