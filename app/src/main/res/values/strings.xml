@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Gestemps</string>
 
-    <string name="hello_world">Hello Naelle!</string>
+    <string name="hello_world">Hello le Stroumph!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Destination</string>
     <string name="title_activity_rdv_liste">Liste des RDV</string>
