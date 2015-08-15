@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TestPersonne extends AndroidTestCase {
 
-    String tag = "testBD";
+    String tag = "testBDPers";
 
     //Context ct;
     PersonneDAO persDao;
@@ -25,8 +25,8 @@ public class TestPersonne extends AndroidTestCase {
 
         persDao.open();
         rdvDao.open();
-        //persDao.deleteAll();
-        //rdvDao.deleteAll();
+//        persDao.deleteAll();
+//        rdvDao.deleteAll();
     }
 
     public void testCreation(){
@@ -66,7 +66,7 @@ public class TestPersonne extends AndroidTestCase {
         rdvdao.open();
         //Log.i(tag, "liste3 des tables " + rdvdao.allTableNames());
         Rdv rdv = new Rdv("RDV Martin","12 rue Papin 25000 Besançon",67,89,
-                "2015-08-13","10:30","2h","2015-08-13 10:34","2015-08-13 12:38","Terminale",40,80,320,"ok man",1);
+                "2015-08-13","10:30",2,745,4677,"Terminale",40,80,320,"ok man",1);
         rdvdao.save(rdv);
 
         Cursor c = rdvdao.getRdvAsCursor();
@@ -115,7 +115,7 @@ public class TestPersonne extends AndroidTestCase {
         rdvdao.open();
         Log.i(tag, "liste6 des tables " + persdao.allTableNames());
         Rdv rdv = new Rdv("RDV Martin","12 rue Papin 25000 Besançon",67,89,
-                "2015-08-13","10:30","2h","2015-08-13 10:34","2015-08-13 12:38","Terminale",40,80,320,"ok man",1);
+                "2015-08-13","10:30",3,5678,23457,"Terminale",40,80,320,"ok man",1);
         rdvdao.save(rdv);
 
         List<Personne> list = persdao.getAllPersonne();

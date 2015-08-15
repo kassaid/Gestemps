@@ -1,5 +1,9 @@
 package com.cnam.mobile.gestemps;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by mac on 07/08/2015.
  */
@@ -12,9 +16,9 @@ public class Rdv {
     private float latitRdv;
     private String dateRdv;
     private String horaireRdv;
-    private String dureeRdv;
-    private String pointDebRdv;
-    private String pointFinRdv;
+    private long dureeRdv;
+    private long pointDebRdv;
+    private long pointFinRdv;
     private String niveauRdv;
     private float tarifRdv;
     private float montantRdv;
@@ -27,7 +31,7 @@ public class Rdv {
 
 
     public Rdv(String libRdv, String adresRdv, float longitRdv, float latitRdv, String dateRdv, String horaireRdv,
-               String dureeRdv, String pointDebRdv, String pointFinRdv, String niveauRdv, float tarifRdv,
+               long dureeRdv, long pointDebRdv, long pointFinRdv, String niveauRdv, float tarifRdv,
                float montantRdv, float soldeRdv, String infoRdv, long idPers) {
         this.libRdv = libRdv;
         this.adresRdv = adresRdv;
@@ -102,27 +106,27 @@ public class Rdv {
         this.horaireRdv = horaireRdv;
     }
 
-    public String getDureeRdv() {
+    public long getDureeRdv() {
         return dureeRdv;
     }
 
-    public void setDureeRdv(String dureeRdv) {
+    public void setDureeRdv(long dureeRdv) {
         this.dureeRdv = dureeRdv;
     }
 
-    public String getPointDebRdv() {
+    public long getPointDebRdv() {
         return pointDebRdv;
     }
 
-    public void setPointDebRdv(String pointDebRdv) {
+    public void setPointDebRdv(long pointDebRdv) {
         this.pointDebRdv = pointDebRdv;
     }
 
-    public String getPointFinRdv() {
+    public long getPointFinRdv() {
         return pointFinRdv;
     }
 
-    public void setPointFinRdv(String pointFinRdv) {
+    public void setPointFinRdv(long pointFinRdv) {
         this.pointFinRdv = pointFinRdv;
     }
 
@@ -174,9 +178,86 @@ public class Rdv {
         this.idPers = idPers;
     }
 
+
+    public long dureeSeance (long debut, long fin){
+        return fin - debut;
+    }
+
+    public float montantSeance (long debut, long fin){
+        return (fin - debut)*getTarifRdv();
+    }
+
+    public String diffDate(Date date1,Date date2){
+        long diff = date1.getTime() - date2.getTime();
+        long seconds=0;
+        long minutes=0;
+        long hours=0;
+        long days=0;
+
+        while(diff>1000){
+            diff=diff-1000;
+            seconds++;
+            if(seconds==60){
+                seconds=0;
+                minutes++;
+            }
+
+            if(minutes==60){
+                minutes=0;
+                hours++;
+            }
+
+            if(hours==24){
+                hours=0;
+                days++;
+            }
+        }
+
+        String inter=""+days+"jours "+hours+"h"+minutes+"m"+seconds+"s";
+        return inter;
+
+    }
+
+    public String diffDateTime(long recent,long ancien){
+        long diff = recent - ancien;
+        long seconds=0;
+        long minutes=0;
+        long hours=0;
+        long days=0;
+
+        while(diff>1000){
+            diff=diff-1000;
+            seconds++;
+            if(seconds==60){
+                seconds=0;
+                minutes++;
+            }
+
+            if(minutes==60){
+                minutes=0;
+                hours++;
+            }
+
+            if(hours==24){
+                hours=0;
+                days++;
+            }
+        }
+
+        String inter=""+days+"jours "+hours+"h "+minutes+"min "+seconds+"s";
+        return inter;
+
+    }
+
+    public  long changeDate(String s) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm");
+        Date d = sdf.parse(s);
+        return d.getTime();
+    }
+
     @Override
     public String toString() {
-        return "Rdv{" +
+        return "\nRdv{" +
                 "idRdv=" + idRdv +
                 ", libRdv='" + libRdv + '\'' +
                 ", adresRdv='" + adresRdv + '\'' +

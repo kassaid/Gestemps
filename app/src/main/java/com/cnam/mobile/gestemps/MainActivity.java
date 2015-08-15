@@ -120,16 +120,10 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    //Date du jour au format alphabétique
     public String lejour() {
         final Date date = new Date();
-//        DateFormat dateEntiere = DateFormat.getDateTimeInstance(
-//                DateFormat.FULL,
-//                DateFormat.FULL);
         return new SimpleDateFormat("EEEE d MMM yyyy").format(date);
-
-        //return new SimpleDateFormat("dd-MM-yyyy").format(date);
-        //return dateEntiere.format(date);
-
     }
 
     @Override

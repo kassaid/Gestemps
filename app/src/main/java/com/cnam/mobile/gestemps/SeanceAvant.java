@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Trajet extends ActionBarActivity {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class SeanceAvant extends ActionBarActivity {
 
     Context ct = this;
     Button btnSmsRetard;
@@ -25,10 +28,10 @@ public class Trajet extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trajet);
+        setContentView(R.layout.activity_seance_avant);
 
 
-        final String tag = "Trajet-test";
+        final String tag = "SeanceAvant-test";
 
         TextView libRdv = (TextView) findViewById(R.id.libRdvView);
         TextView niveauRdv = (TextView) findViewById(R.id.niveauRdvView);
@@ -50,6 +53,8 @@ public class Trajet extends ActionBarActivity {
         final String iadresRdv = i.getStringExtra("adresRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
 
+        final String ipointDeb = timeJour();
+
         //libRdv.setText(String.valueOf(res0));
         libRdv.setText(ilibRdv);
         niveauRdv.setText(iniveauRdv);
@@ -69,6 +74,7 @@ public class Trajet extends ActionBarActivity {
         };
         btnSmsRetard.setOnClickListener(ecoute1);
 
+
         //Bouton envoyer SMS ANNULATION
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
@@ -80,18 +86,33 @@ public class Trajet extends ActionBarActivity {
         };
         btnSmsAnnule.setOnClickListener(ecoute2);
 
+
         //Bouton ARRIVÉ À DESTINATION
         View.OnClickListener ecoute3 = new  View.OnClickListener(){
 
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(Trajet.this, SeanceDebut.class);
+                RdvDAO rdvdao = new RdvDAO(ct);
+                rdvdao.open();
+                Rdv rdv = rdvdao.getRdvById(iidRdv);
+                rdv.setPointDebRdv(timeStamp());
+                rdvdao.modifier(rdv);
+                PersonneDAO persdao = new PersonneDAO(ct);
+                persdao.open();
+                Personne pers = persdao.getPersonneById(iidPers);
+                final String iprenomPers = pers.getPrenomPers();
+                final String inomPers = pers.getNomPers();
+
+                Intent i=new Intent(SeanceAvant.this, SeanceDebut.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
+                i.putExtra("prenom", iprenomPers);
+                i.putExtra("nom", inomPers);
                 i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("dateRdv", idateRdv);
+                i.putExtra("pointDeb", ipointDeb);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
                 startActivity(i);
@@ -99,8 +120,6 @@ public class Trajet extends ActionBarActivity {
             }
         };
         btnArrive.setOnClickListener(ecoute3);
-
-
     }
 
     //Transmettre un SMS
@@ -111,10 +130,22 @@ public class Trajet extends ActionBarActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    //Pointage
+    public long timeStamp(){
+        final Date date = new Date();
+        return date.getTime();
+    }
+
+    //Date du jour au format alphabétique
+    public String timeJour() {
+        final Date date = new Date();
+        return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_trajet, menu);
+        getMenuInflater().inflate(R.menu.menu_seance_avant, menu);
         return true;
     }
 

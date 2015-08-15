@@ -176,6 +176,20 @@ public class PersonneDAO {
         return retPersonne;
     }
 
+
+    //Selection d'un objet PERSONNE par son 'idPers'
+    public Personne getPersonneById (Long idPers){
+        Cursor c = db.query(
+                T_PERSONNE,
+                null,
+                ID + " =?",
+                new String[]{String.valueOf(idPers)},
+                null, null, null, null);
+        Log.i(tag,"PERSONNE selectionnée par son id");
+
+        return cursorToPersonne(c);
+    }
+
     public Personne getPersonneByTel (String tel){
         Cursor c = db.query(
                 T_PERSONNE,

@@ -19,10 +19,9 @@ import java.util.Calendar;
 public class DateFenetre extends DialogFragment implements DatePickerDialog.OnDateSetListener{
 
     EditText vDate;
-    EditText vTime;
+
     public DateFenetre(View v){
         vDate = (EditText)v;
-        vTime = (EditText)v;
     }
 
     @Override

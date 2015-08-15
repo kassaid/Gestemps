@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class RdvCreation extends FragmentActivity {
 
     public final String tag = "RdvCreation-test";
@@ -53,13 +57,21 @@ public class RdvCreation extends FragmentActivity {
                 infoRdv = info.getText().toString();
 
 
-                if (libRdv.equals("")||adresseRdv.equals("")||dateRdv.equals("")||horaireRdv.equals("")||dureeRdv.equals("")){
-                    Toast.makeText(getBaseContext(), "Veuillez remplir les champs obligatoires!", Toast.LENGTH_LONG).show();
+                if (libRdv.equals("")||adresseRdv.equals("")||dateRdv.equals("")||horaireRdv.equals("")||
+                        dureeRdv.equals("")){
+                    Toast.makeText(getBaseContext(), "Veuillez remplir les champs obligatoires!",
+                            Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Rdv rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv, dureeRdv, " ", " ", niveauRdv, 40,
-                            345, 678,  infoRdv, 1);
+                    Rdv rdv = null;
+                    try {
+                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv,
+                                5, changeDate(dateRdv+" "+horaireRdv), timeStamp(), niveauRdv, 40,
+                                345, 678,  infoRdv, 1);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     RdvDAO rdvdao = new RdvDAO(ct);
                     rdvdao.open();
                     rdvdao.save(rdv);
@@ -94,6 +106,19 @@ public class RdvCreation extends FragmentActivity {
 
     }
 
+    public  long changeDate(String s) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm");
+        Date d = sdf.parse(s);
+        return d.getTime();
+    }
+
+    //Pointage
+    public long timeStamp(){
+        final Date date = new Date();
+        return date.getTime();
+    }
+
+
     @Override
     public void onStart(){
         super.onStart();
@@ -107,7 +132,7 @@ public class RdvCreation extends FragmentActivity {
                 if(hasFocus){
                     DateFenetre fen = new DateFenetre(v);
                     FragmentTransaction frag = getFragmentManager().beginTransaction();
-                    fen.show(frag,"DateFenet");
+                    fen.show(frag,"DateFenetre");
                 }
             }
         });
@@ -117,9 +142,9 @@ public class RdvCreation extends FragmentActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
-                    DateFenetre fen = new DateFenetre(v);
+                    DateFenetreTime fenTime = new DateFenetreTime(v);
                     FragmentTransaction frag = getFragmentManager().beginTransaction();
-                    fen.show(frag,"DateFenet");
+                    fenTime.show(frag,"TimeFenetre");
                 }
             }
         });

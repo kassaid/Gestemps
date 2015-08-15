@@ -111,14 +111,14 @@ public class RdvDAO {
                 rdv.setLatitRdv(c.getFloat(c.getColumnIndex(LATITUDE)));
                 rdv.setDateRdv(c.getString(c.getColumnIndex(DATETIME)));
                 rdv.setHoraireRdv(c.getString(c.getColumnIndex(HORAIRE)));
-                rdv.setDureeRdv(c.getString(c.getColumnIndex(DUREE)));
-                rdv.setPointDebRdv(c.getString(c.getColumnIndex(POINTDEB)));
-                rdv.setPointFinRdv(c.getString(c.getColumnIndex(POINTFIN)));
+                rdv.setDureeRdv(c.getLong(c.getColumnIndex(DUREE)));
+                rdv.setPointDebRdv(c.getLong(c.getColumnIndex(POINTDEB)));
+                rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
                 rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
                 rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
                 rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
                 rdv.setIdPers(c.getLong(c.getColumnIndex(IDPERS)));
-                Log.i(tag,"Personne recupere de la BD : "+ rdv);
+                Log.i(tag,"RDV "+id+" recupere de la BD : "+ rdv);
                 result.add(rdv);
             }while(c.moveToNext());
         }
@@ -156,9 +156,9 @@ public class RdvDAO {
         retRdv.setLatitRdv(c.getFloat(4));
         retRdv.setDateRdv(c.getString(5));
         retRdv.setHoraireRdv(c.getString(6));
-        retRdv.setDureeRdv(c.getString(7));
-        retRdv.setPointDebRdv(c.getString(8));
-        retRdv.setPointFinRdv(c.getString(9));
+        retRdv.setDureeRdv(Integer.parseInt(c.getString(7)));
+        retRdv.setPointDebRdv(Integer.parseInt(c.getString(8)));
+        retRdv.setPointFinRdv(Integer.parseInt(c.getString(9)));
         retRdv.setNiveauRdv(c.getString(10));
         retRdv.setSoldeRdv(c.getFloat(11));
         retRdv.setInfoRdv(c.getString(12));
@@ -194,5 +194,30 @@ public class RdvDAO {
         Log.i(tag,"nombre de tuples: "+ c.getCount());
         return c;
     }
+
+
+
+    //Modifier un RDV
+    public void modifier(Rdv rdv)
+    {
+        ContentValues v = new ContentValues();
+        v.put(LIBELLE, rdv.getLibRdv());
+        v.put(ADRESSE, rdv.getAdresRdv());
+        v.put(LONGITUDE, rdv.getLongitRdv());
+        v.put(LATITUDE, rdv.getLatitRdv());
+        v.put(DATETIME, rdv.getDateRdv());
+        v.put(HORAIRE, rdv.getHoraireRdv());
+        v.put(DUREE, rdv.getDureeRdv());
+        v.put(POINTDEB, rdv.getPointDebRdv());
+        v.put(POINTFIN, rdv.getPointFinRdv());
+        v.put(NIVEAU, rdv.getNiveauRdv());
+        v.put(SOLDE, rdv.getSoldeRdv());
+        v.put(INFO, rdv.getInfoRdv());
+        v.put(IDPERS, rdv.getIdPers());
+        db.update(T_RDV, v, ID + " = ?", new String[]{String.valueOf(rdv.getIdPers())});
+        Log.i(tag, "modification RDV "+rdv.getIdRdv()+" réussi!");
+    }
+
+
 
 }

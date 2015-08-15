@@ -28,25 +28,26 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
             {
                 //I get a compile error here, it wants result to be final.
                 //ListOffre.this.finish();
-                RdvDAO rdvdao = new RdvDAO(getBaseContext());
-                rdvdao.open();
+//                RdvDAO rdvdao = new RdvDAO(getBaseContext());
+//                rdvdao.open();
                 //rdvdao.delete(item.getIdRdv());
                 long iidRdv = item.getIdRdv();
                 String ilibRdv = item.getLibRdv();
                 String iniveauRdv = item.getNiveauRdv();
-                String idureeRdv = item.getDureeRdv();
+               // long idureeRdv = item.getDureeRdv();
                 String idateRdv = item.getDateRdv();
+//                long ipointDebRdv = item.getPointDebRdv();
+//                long ipointFinRdv = item.getPointFinRdv();
                 String iadresRdv = item.getAdresRdv();
                 long iidPers = item.getIdPers();
 //                finish();
 //                startActivity(getIntent());
                 //startActivity(ListOffre.this, ListOffre.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                Intent i=new Intent(RdvListe.this, Trajet.class);
+                Intent i=new Intent(RdvListe.this, SeanceAvant.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
                 i.putExtra("niveauRdv", iniveauRdv);
-                i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("dateRdv", idateRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);

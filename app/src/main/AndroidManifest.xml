@@ -53,12 +53,16 @@
             android:label="@string/title_activity_rdv_creation" >
         </activity>
         <activity
-            android:name=".Trajet"
-            android:label="@string/title_activity_trajet" >
-        </activity>
-        <activity
             android:name=".SeanceDebut"
             android:label="@string/title_activity_seance_debut" >
+        </activity>
+        <activity
+            android:name=".SeanceAvant"
+            android:label="@string/title_activity_seance_avant" >
+        </activity>
+        <activity
+            android:name=".SeanceFin"
+            android:label="@string/title_activity_seance_fin" >
         </activity>
     </application>
 

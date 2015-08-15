@@ -4,27 +4,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <TextView android:text="Libellé" android:id="@+id/rdv_libelle"
+    <TextView
+		android:text="Libellé"
+		android:id="@+id/rdv_libelle"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
 		</TextView>
 		
-	<TextView android:text="Date" android:id="@+id/rdv_date"
+	<TextView
+		android:text="Date"
+		android:id="@+id/rdv_date"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
 		</TextView>
-
-	<TextView android:text="Horaire" android:id="@+id/rdv_horaire"
+	<TextView
+		android:text="PointDeb"
+		android:id="@+id/rdv_pointDeb"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content">
 	</TextView>
 
-	<TextView android:text="Destination" android:id="@+id/rdv_dest"
+	<TextView
+		android:text="PointFin"
+		android:id="@+id/rdv_pointFin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</TextView>
+
+	<TextView
+		android:text="Horaire"
+		android:id="@+id/rdv_horaire"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</TextView>
+
+	<TextView
+		android:text="Destination"
+		android:id="@+id/rdv_dest"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
 		</TextView>	 
 		
-	<TextView android:text="Durée" android:id="@+id/rdv_duree"
+	<TextView
+		android:text="Durée"
+		android:id="@+id/rdv_duree"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
 		</TextView>	 	

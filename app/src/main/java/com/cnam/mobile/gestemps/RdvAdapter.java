@@ -62,6 +62,8 @@ public class RdvAdapter extends BaseAdapter{
 
         TextView rdv_libelle = (TextView)item.findViewById(R.id.rdv_libelle);
         TextView rdv_date = (TextView)item.findViewById(R.id.rdv_date);
+        TextView rdv_pointDeb = (TextView)item.findViewById(R.id.rdv_pointDeb);
+        TextView rdv_pointFin = (TextView)item.findViewById(R.id.rdv_pointFin);
         TextView rdv_horaire = (TextView)item.findViewById(R.id.rdv_horaire);
         TextView rdv_dest = (TextView)item.findViewById(R.id.rdv_dest);
         TextView rdv_duree = (TextView)item.findViewById(R.id.rdv_duree);
@@ -70,10 +72,12 @@ public class RdvAdapter extends BaseAdapter{
 
         rdv_libelle.setText(list.get(position).getLibRdv());
         rdv_date.setText(list.get(position).getDateRdv());
+        rdv_pointDeb.setText(String.valueOf(list.get(position).getPointDebRdv()));
+        rdv_pointFin.setText(String.valueOf(list.get(position).getPointFinRdv()));
         rdv_horaire.setText(list.get(position).getHoraireRdv());
         rdv_dest.setText(list.get(position).getAdresRdv());
         //rdv_duree.setText(String.valueOf(list.get(position).getNbplace()));
-        rdv_duree.setText(list.get(position).getDureeRdv());
+        rdv_duree.setText(String.valueOf(list.get(position).getDureeRdv()));
 
 
 
