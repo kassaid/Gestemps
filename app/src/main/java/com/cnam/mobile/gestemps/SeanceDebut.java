@@ -44,8 +44,9 @@ public class SeanceDebut extends ActionBarActivity {
         final String iprenom = i.getStringExtra("prenom");
         final String inom = i.getStringExtra("nom");
         final String iniveau = i.getStringExtra("niveauRdv");
-        final String iduree = i.getStringExtra("dureeRdv");
+        final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String ipointDeb = i.getStringExtra("pointDeb");
+        final String imontantRdv = i.getStringExtra("montantRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
 
 
@@ -53,7 +54,7 @@ public class SeanceDebut extends ActionBarActivity {
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-        duree.setText(iduree);
+        duree.setText(String.valueOf(idureeRdv));
         pointDeb.setText(ipointDeb);
 
 
@@ -67,17 +68,21 @@ public class SeanceDebut extends ActionBarActivity {
 
                 RdvDAO rdvdao = new RdvDAO(ct);
                 rdvdao.open();
-                Rdv rdv = rdvdao.getRdvById(iidRdv);
-                rdv.setPointFinRdv(timeStamp());
+                Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
+                r.setPointFinRdv(timeStamp());
+                rdvdao.modifier(r);
 
-                rdvdao.modifier(rdv);
-//                Rdv rdv2 = rdvdao.getRdvById(iidRdv);
-                long pointF = timeStamp()+1000;
-                long pointD = timeStamp()-25600;
-                String idureeSeance = null;
+                Rdv rdv2 = (Rdv) rdvdao.getRdvById(iidRdv);
+                long pointF = rdv2.getPointFinRdv();
+                long pointD = rdv2.getPointDebRdv();
+                String idureeSeance = "rien";
 //                try {
-                    //idureeSeance = rdv2.diffDateTime(rdv2.changeDate(ipointFin),rdv2.changeDate(ipointDeb));
-                    idureeSeance = diffDateTime(pointF, pointD);
+                    //idureeSeance = rdv2.diffDateTime(rdv2.changeDate(ipointFin), rdv2.changeDate(ipointDeb));
+                    //idureeSeance = rdv2.diffDateTime(rdv2.getPointFinRdv(),rdv2.getPointDebRdv());
+                    idureeSeance = rdv2.diffDateTime(pointF, pointD);
+                    long m = rdv2.montantSeance(pointF,pointD);
+                    String iimontantRdv = String.valueOf(m)+" euros";
+                //String iimontantRdv = String.v
 //                } catch (ParseException e) {
 //                    e.printStackTrace();
 //                }
@@ -89,13 +94,14 @@ public class SeanceDebut extends ActionBarActivity {
                 i.putExtra("prenom", iprenom);
                 i.putExtra("nom", inom);
                 i.putExtra("niveauRdv", iniveau);
-                i.putExtra("dureeRdv", iduree);
+                i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("pointDeb", ipointDeb);
                 i.putExtra("pointFin", ipointFin);
                 i.putExtra("dureeSeance", idureeSeance);
+                i.putExtra("montantRdv", iimontantRdv);
                 i.putExtra("idPers", iidPers);
                 startActivity(i);
-                finish();
+                //finish();
             }
         };
         btnTerminer.setOnClickListener(ecoute1);
@@ -105,6 +111,8 @@ public class SeanceDebut extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
+
+
 //                RdvDAO rdvdao = new RdvDAO(ct);
 //                rdvdao.open();
 //                Rdv rdv = rdvdao.getRdvById(iidRdv);
@@ -113,6 +121,8 @@ public class SeanceDebut extends ActionBarActivity {
 //                pointDeb.setText(ipointDeb);
 
                 //setResult(RESULT_CANCELED);
+                //startActivity(SeanceDebut.this, SeanceDebut.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                 finish();
             }
 
@@ -133,36 +143,6 @@ public class SeanceDebut extends ActionBarActivity {
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
     }
 
-    public String diffDateTime(long recent,long ancien){
-        long diff = recent - ancien;
-        long seconds=0;
-        long minutes=0;
-        long hours=0;
-        long days=0;
-
-        while(diff>1000){
-            diff=diff-1000;
-            seconds++;
-            if(seconds==60){
-                seconds=0;
-                minutes++;
-            }
-
-            if(minutes==60){
-                minutes=0;
-                hours++;
-            }
-
-            if(hours==24){
-                hours=0;
-                days++;
-            }
-        }
-
-        String inter=""+days+"jours "+hours+"h "+minutes+"min "+seconds+"s";
-        return inter;
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

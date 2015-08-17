@@ -10,15 +10,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 
 public class RdvCreation extends FragmentActivity {
+
+    private String nomPosition;
+    private List<String> allNomPers;
+    private List<Personne> listPers;
+    private Personne pers;
+    private long idPersRdv = 1;
 
     public final String tag = "RdvCreation-test";
     String libRdv, adresseRdv, dateRdv, horaireRdv, dureeRdv, niveauRdv, tarifRdv, infoRdv;
@@ -29,18 +43,73 @@ public class RdvCreation extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rdv_creation);
 
+
+
         final EditText lib = (EditText) findViewById(R.id.libEdit);
         final EditText adresse = (EditText) findViewById(R.id.adresseEdit);
         final EditText date = (EditText) findViewById(R.id.dateEdit);
         final EditText horaire = (EditText) findViewById(R.id.horaireEdit);
         final EditText duree = (EditText) findViewById(R.id.dureeEdit);
-        final EditText niveau = (EditText) findViewById(R.id.niveauEdit);
+        //final EditText niveau = (EditText) findViewById(R.id.niveauEdit);
         final EditText tarif = (EditText) findViewById(R.id.tarifEdit);
         final EditText info = (EditText) findViewById(R.id.infoEdit);
         final Button btValider=(Button) findViewById(R.id.button1);
         final Button btAnnuler=(Button) findViewById(R.id.button2);
 
+        //final String niv;
+        final Spinner spinlistPers = (Spinner) findViewById(R.id.personneSpinner);
 
+//        List<String> list = new ArrayList<String>();
+//        list.add("MAMA");
+//        list.add("PAPA");
+//        list.add("FIFILLE");
+
+        final PersonneDAO persdao = new PersonneDAO(ct);
+        persdao.open();
+        allNomPers = persdao.allPersNames();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,allNomPers);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinlistPers.setAdapter(adapter);
+        spinlistPers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nomPosition = allNomPers.get(position);
+                pers = persdao.getPersonneByNomPrenom(nomPosition);
+                adresse.setText(pers.getAdresPers());
+                idPersRdv = pers.getIdPers();
+                if (position!=0){
+                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position)+" est choisi",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        final Spinner spinNiv = (Spinner) findViewById(R.id.niveauSpinner);
+        final ArrayAdapter<CharSequence> adaptNiveau = ArrayAdapter.createFromResource(this,R.array.spinNiveau,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinNiv.setAdapter(adaptNiveau);
+        spinNiv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                niveauRdv = parent.getItemAtPosition(position).toString();
+                if (position!=0){
+                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position)+" est choisi",
+                            Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         View.OnClickListener ecoute1 = new  View.OnClickListener() {
@@ -52,7 +121,6 @@ public class RdvCreation extends FragmentActivity {
                 dateRdv = date.getText().toString();
                 horaireRdv = horaire.getText().toString();
                 dureeRdv = duree.getText().toString();
-                niveauRdv = niveau.getText().toString();
                 tarifRdv = tarif.getText().toString();
                 infoRdv = info.getText().toString();
 
@@ -65,13 +133,25 @@ public class RdvCreation extends FragmentActivity {
                 else
                 {
                     Rdv rdv = null;
+//                    try {
+//                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv,
+//                                5, changeDate(dateRdv+" "+horaireRdv), timeStamp(), niveauRdv, 40,
+//                                345, 678,  infoRdv, idPersRdv);
+//                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv,
+//                                0, 0, 0, niveauRdv, 40,
+//                                345, 678,  infoRdv, idPersRdv);
+
                     try {
-                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv,
-                                5, changeDate(dateRdv+" "+horaireRdv), timeStamp(), niveauRdv, 40,
-                                345, 678,  infoRdv, 1);
+                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, changeDate(dateRdv+" "+horaireRdv), horaireRdv,
+                                changeInt(dureeRdv), 0, 0, niveauRdv,changeFloat(tarifRdv),
+                                345, 678,  infoRdv, idPersRdv);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+
+//                    } catch (ParseException e) {
+//                        e.printStackTrace();
+//                    }
                     RdvDAO rdvdao = new RdvDAO(ct);
                     rdvdao.open();
                     rdvdao.save(rdv);
@@ -79,8 +159,8 @@ public class RdvCreation extends FragmentActivity {
                     Toast.makeText(getBaseContext(),"Le RDV "+libRdv+" du "+dateRdv+" à "+horaireRdv+", a été créé!",
                             Toast.LENGTH_LONG).show();
                     Intent i=new Intent();
-                    i.putExtra("ret1", libRdv);
-                    i.putExtra("ret2", dateRdv);
+                    i.putExtra("libRdv", libRdv);
+                    i.putExtra("dateRdv", dateRdv);
                     setResult(RESULT_OK,i);
                     finish();
                 }
@@ -110,6 +190,14 @@ public class RdvCreation extends FragmentActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm");
         Date d = sdf.parse(s);
         return d.getTime();
+    }
+
+    public float changeFloat(String s){
+        return parseFloat(s);
+    }
+
+    public long changeInt(String s){
+        return parseInt(s,10);
     }
 
     //Pointage

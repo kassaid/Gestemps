@@ -59,6 +59,19 @@ public class PersonneDAO {
         return result;
     }
 
+    public List<String> allPersNames(){
+        List<String> result = new ArrayList<String>();
+        String selectQuery = "SELECT "+NOM+" FROM "+T_PERSONNE;
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c.moveToFirst()){
+            do{
+                String n = c.getString(c.getColumnIndex(NOM));
+                result.add(n);
+            }while (c.moveToNext());
+        }
+        return result;
+    }
+
     //Création d'une nouvelle PERSONNE
     public void save(Personne p){
         ContentValues v = new ContentValues();
@@ -190,6 +203,7 @@ public class PersonneDAO {
         return cursorToPersonne(c);
     }
 
+    //Selection d'un objet PERSONNE par son 'tel'
     public Personne getPersonneByTel (String tel){
         Cursor c = db.query(
                 T_PERSONNE,
@@ -202,6 +216,7 @@ public class PersonneDAO {
         return cursorToPersonne(c);
     }
 
+    //Selection d'un objet PERSONNE par son 'mail'
     public Personne getPersonneByMail (String mail){
         Cursor c = db.query(
                 T_PERSONNE,
@@ -216,8 +231,22 @@ public class PersonneDAO {
 
 
 
-    public Personne getPersonneByNomPrenom (String nom, String prenom){
-        return null;
+    //Selection d'un objet PERSONNE par son 'nom'
+    public Personne getPersonneByNomPrenom (String nom){
+//        String req = "SELECT  * FROM "+
+//                T_PERSONNE +" WHERE "+
+//                NOM +" = "+ nom +" AND "+
+//                PRENOM +" = "+ prenom;
+//        Cursor c = db.rawQuery(req, null);
+
+        Cursor c = db.query(
+                T_PERSONNE,
+                null,
+                NOM + " =?",
+                new String[] {String.valueOf(nom)},
+                null, null, null, null);
+        Log.i(tag,"PESONNE selectionnée par son mail");
+        return cursorToPersonne(c);
     }
 
     public int nbPersonne()

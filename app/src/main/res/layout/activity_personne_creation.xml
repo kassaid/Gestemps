@@ -15,7 +15,7 @@
 
     <EditText
         android:id="@+id/nomEdit"
-        android:hint="Nom de l'élève"
+        android:hint="Nom"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="50dp"
         android:layout_width="fill_parent"
@@ -25,7 +25,7 @@
 
 
     <EditText android:id="@+id/prenomEdit"
-        android:hint="Prénom de l'élève"
+        android:hint="Prénom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -63,7 +63,7 @@
         android:layout_below="@id/mailEdit" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 
         android:text="@string/bt_valider"
@@ -72,13 +72,15 @@
         android:layout_below="@id/infoEdit" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/bt_annuler"
         android:id="@+id/button2"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/infoEdit"
+        android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true" />
+
+
 
 
 

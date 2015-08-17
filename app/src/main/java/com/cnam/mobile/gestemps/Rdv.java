@@ -1,8 +1,11 @@
 package com.cnam.mobile.gestemps;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by mac on 07/08/2015.
@@ -14,7 +17,7 @@ public class Rdv {
     private String adresRdv;
     private float longitRdv;
     private float latitRdv;
-    private String dateRdv;
+    private long dateRdv;
     private String horaireRdv;
     private long dureeRdv;
     private long pointDebRdv;
@@ -30,7 +33,7 @@ public class Rdv {
     }
 
 
-    public Rdv(String libRdv, String adresRdv, float longitRdv, float latitRdv, String dateRdv, String horaireRdv,
+    public Rdv(String libRdv, String adresRdv, float longitRdv, float latitRdv, long dateRdv, String horaireRdv,
                long dureeRdv, long pointDebRdv, long pointFinRdv, String niveauRdv, float tarifRdv,
                float montantRdv, float soldeRdv, String infoRdv, long idPers) {
         this.libRdv = libRdv;
@@ -90,11 +93,11 @@ public class Rdv {
         this.latitRdv = latitRdv;
     }
 
-    public String getDateRdv() {
+    public long getDateRdv() {
         return dateRdv;
     }
 
-    public void setDateRdv(String dateRdv) {
+    public void setDateRdv(long dateRdv) {
         this.dateRdv = dateRdv;
     }
 
@@ -179,73 +182,45 @@ public class Rdv {
     }
 
 
-    public long dureeSeance (long debut, long fin){
+    public long dureeSeance (long fin, long debut){
         return fin - debut;
     }
 
-    public float montantSeance (long debut, long fin){
-        return (fin - debut)*getTarifRdv();
+    public long montantSeance (long fin, long debut){
+        float m = ((float) (fin - debut) * getTarifRdv()) / (1000 * 60 * 60);
+        long ma = Math.round(m);
+        return ma;
     }
 
-    public String diffDate(Date date1,Date date2){
-        long diff = date1.getTime() - date2.getTime();
-        long seconds=0;
-        long minutes=0;
-        long hours=0;
-        long days=0;
-
-        while(diff>1000){
-            diff=diff-1000;
-            seconds++;
-            if(seconds==60){
-                seconds=0;
-                minutes++;
-            }
-
-            if(minutes==60){
-                minutes=0;
-                hours++;
-            }
-
-            if(hours==24){
-                hours=0;
-                days++;
-            }
-        }
-
-        String inter=""+days+"jours "+hours+"h"+minutes+"m"+seconds+"s";
-        return inter;
-
-    }
 
     public String diffDateTime(long recent,long ancien){
-        long diff = recent - ancien;
-        long seconds=0;
-        long minutes=0;
-        long hours=0;
-        long days=0;
+        long differnce = recent - ancien;
+        long seconds = 0;
+        long minutes = 0;
+        long hours = 0;
+        //long days=0;
 
-        while(diff>1000){
-            diff=diff-1000;
+        while(differnce>1000){
+            differnce = differnce - 1000;
             seconds++;
             if(seconds==60){
-                seconds=0;
+                seconds = 0;
                 minutes++;
             }
 
             if(minutes==60){
-                minutes=0;
+                minutes = 0;
                 hours++;
             }
 
-            if(hours==24){
-                hours=0;
-                days++;
-            }
+//            if(hours==24){
+//                hours=0;
+//                days++;
+//            }
         }
 
-        String inter=""+days+"jours "+hours+"h "+minutes+"min "+seconds+"s";
-        return inter;
+        String intervalle = ""+hours+" h "+minutes+" min "+seconds+" s";
+        return intervalle;
 
     }
 
@@ -253,6 +228,13 @@ public class Rdv {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm");
         Date d = sdf.parse(s);
         return d.getTime();
+    }
+
+    //Ch
+    public String changeDate(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
     }
 
     @Override

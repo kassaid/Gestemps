@@ -67,19 +67,21 @@ public class RdvAdapter extends BaseAdapter{
         TextView rdv_horaire = (TextView)item.findViewById(R.id.rdv_horaire);
         TextView rdv_dest = (TextView)item.findViewById(R.id.rdv_dest);
         TextView rdv_duree = (TextView)item.findViewById(R.id.rdv_duree);
+        TextView rdv_idPers = (TextView)item.findViewById(R.id.rdv_idPers);
+        TextView rdv_montant = (TextView)item.findViewById(R.id.rdv_montant);
 
-
-
+        String strdate = list.get(position).changeDate(list.get(position).getDateRdv());
         rdv_libelle.setText(list.get(position).getLibRdv());
-        rdv_date.setText(list.get(position).getDateRdv());
+        //rdv_date.setText(String.valueOf(list.get(position).getDateRdv()));
+        rdv_date.setText(strdate);
         rdv_pointDeb.setText(String.valueOf(list.get(position).getPointDebRdv()));
         rdv_pointFin.setText(String.valueOf(list.get(position).getPointFinRdv()));
         rdv_horaire.setText(list.get(position).getHoraireRdv());
         rdv_dest.setText(list.get(position).getAdresRdv());
         //rdv_duree.setText(String.valueOf(list.get(position).getNbplace()));
         rdv_duree.setText(String.valueOf(list.get(position).getDureeRdv()));
-
-
+        rdv_idPers.setText(String.valueOf(list.get(position).getIdPers()));
+        rdv_montant.setText(String.valueOf(list.get(position).getMontantRdv()));
 
 
         item.setTag(position);
@@ -89,9 +91,7 @@ public class RdvAdapter extends BaseAdapter{
             public void onClick(View v) {
 
                 Integer position = (Integer)v.getTag();
-
                 sendListener(list.get(position), position);
-
             }
 
         });

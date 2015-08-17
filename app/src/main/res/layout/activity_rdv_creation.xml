@@ -18,11 +18,21 @@
         android:id="@+id/libEdit"
         android:hint="Libellé"
         android:layout_below="@+id/titreView"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" />
+
+    <Spinner
+        android:id="@+id/personneSpinner"
+        android:hint="Nom de la personne"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/libEdit"
+        />
+
 
 
     <EditText
@@ -31,7 +41,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/libEdit" />
+        android:layout_below="@id/personneSpinner" />
 
     <EditText
         android:id="@+id/dateEdit"
@@ -51,26 +61,31 @@
 
     <EditText android:id="@+id/dureeEdit"
         android:hint="Durée prévue"
+        android:inputType="numberDecimal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/horaireEdit" />
 
-    <EditText
-        android:id="@+id/niveauEdit"
-        android:hint="Niveau"
+
+    <Spinner
+        android:id="@+id/niveauSpinner"
+
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/dureeEdit" />
+        android:layout_below="@+id/dureeEdit"
+        />
+
 
     <EditText
         android:id="@+id/tarifEdit"
         android:hint="Tarif horaire"
+        android:inputType="number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/niveauEdit" />
+        android:layout_below="@+id/niveauSpinner" />
 
     <EditText
         android:id="@+id/infoEdit"
@@ -81,7 +96,7 @@
         android:layout_below="@id/tarifEdit" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/bt_valider"
         android:id="@+id/button1"
@@ -90,11 +105,10 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/bt_annuler"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/infoEdit"
+        android:layout_below="@id/button1"
         android:layout_centerHorizontal="true" />
 
 

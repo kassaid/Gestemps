@@ -60,7 +60,7 @@
         android:id="@+id/pointDebRdvView"
         android:text="pointage de début"
         android:layout_below="@+id/dureeRdvView"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -69,7 +69,7 @@
         android:id="@+id/pointFinRdvView"
         android:text="pointage de fin"
         android:layout_below="@+id/pointDebRdvView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -78,7 +78,17 @@
         android:id="@+id/dureeSeanceView"
         android:text="durée de la séance"
         android:layout_below="@+id/niveauSeanceView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/montantSeanceView"
+        android:text="durée de la séance"
+        android:layout_below="@+id/dureeSeanceView"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -86,17 +96,17 @@
 
     <Button
         android:id="@+id/btnSeanceNext"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="séance suivante"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/pointDebRdvView"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/montantSeanceView"
         android:layout_gravity="center_horizontal"
         />
 
     <Button
         android:id="@+id/btnSeanceNew"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="séance non prévue"
         android:layout_marginTop="10dp"
@@ -106,7 +116,7 @@
 
     <Button
         android:id="@+id/btnListeRdv"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="liste des rdv"
         android:layout_marginTop="10dp"

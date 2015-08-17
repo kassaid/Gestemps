@@ -25,8 +25,8 @@ public class TestPersonne extends AndroidTestCase {
 
         persDao.open();
         rdvDao.open();
-//        persDao.deleteAll();
-//        rdvDao.deleteAll();
+        persDao.deleteAll();
+        rdvDao.deleteAll();
     }
 
     public void testCreation(){
@@ -66,7 +66,7 @@ public class TestPersonne extends AndroidTestCase {
         rdvdao.open();
         //Log.i(tag, "liste3 des tables " + rdvdao.allTableNames());
         Rdv rdv = new Rdv("RDV Martin","12 rue Papin 25000 Besançon",67,89,
-                "2015-08-13","10:30",2,745,4677,"Terminale",40,80,320,"ok man",1);
+                123435535,"10:30",2,745,4677,"Terminale",40,80,320,"ok man",1);
         rdvdao.save(rdv);
 
         Cursor c = rdvdao.getRdvAsCursor();
@@ -115,7 +115,7 @@ public class TestPersonne extends AndroidTestCase {
         rdvdao.open();
         Log.i(tag, "liste6 des tables " + persdao.allTableNames());
         Rdv rdv = new Rdv("RDV Martin","12 rue Papin 25000 Besançon",67,89,
-                "2015-08-13","10:30",3,5678,23457,"Terminale",40,80,320,"ok man",1);
+                1234455563,"10:30",3,5678,23457,"Terminale",40,80,320,"ok man",1);
         rdvdao.save(rdv);
 
         List<Personne> list = persdao.getAllPersonne();
@@ -147,6 +147,42 @@ public class TestPersonne extends AndroidTestCase {
         Log.i(tag,"La personne selectionnée est: "+ selection);
     }
 
+    public void testSelectPersByNomPrenom(){
+        PersonneDAO persdao = new PersonneDAO(this.getContext());
+        persdao.open();
+        Log.i(tag, "liste8 des tables" + persdao.allTableNames());
+        Personne p = new Personne("BERMUDA","Bill","29 rue Papin 25000 Besançon",27,82,
+                "0678565622","bill.bermuda@mail.fr",98,"Elève bill");
+        persdao.save(p);
+        Log.i(tag, "Une personne est créée: " + p);
 
+        int nombPers = persdao.nbPersonne();
+        Log.i(tag, "Nombre de PERSONNE : " + nombPers);
+
+        Personne selection = persdao.getPersonneByNomPrenom(p.getNomPers());
+        Log.i(tag,"La personne selectionnée est: "+ selection);
+    }
+
+    public void testListeNomPersonne(){
+        PersonneDAO persdao = new PersonneDAO(this.getContext());
+        persdao.open();
+        for (int i=0;i<7;i++){
+            Personne p = new Personne("PIPOLINO"+i,"lili"+i, i+"16 rue Papin 25000 Besançon",27,82,
+                    "067856489"+i,"lili.pipo@mail.fr"+i,98,"cours avec lili"+i);
+            persdao.save(p);
+        }
+        persdao.allPersNames();
+
+        Log.i(tag, "liste des nom des personnes : " + persdao.allPersNames());
+
+
+        List<Personne> list = persdao.getAllPersonne();
+        Log.i(tag, "Liste PERSONNE " + list);
+
+
+        int nombPers = persdao.nbPersonne();
+        Log.i(tag, "Nombre de PERSONNE : " + nombPers);
+
+    }
 
 }

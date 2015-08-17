@@ -32,6 +32,7 @@ public class SeanceFin extends ActionBarActivity {
         TextView pointDeb = (TextView) findViewById(R.id.pointDebRdvView);
         TextView pointFin = (TextView) findViewById(R.id.pointFinRdvView);
         TextView dureeSeance = (TextView) findViewById(R.id.dureeSeanceView);
+        TextView montantSeance = (TextView) findViewById(R.id.montantSeanceView);
 
         btnSeanceNext = (Button) findViewById(R.id.btnSeanceNext);
         btnSeanceNew = (Button) findViewById(R.id.btnSeanceNew);
@@ -46,6 +47,7 @@ public class SeanceFin extends ActionBarActivity {
         final String ipointDeb = i.getStringExtra("pointDeb");
         final String ipointFin = i.getStringExtra("pointFin");
         final String idureeSeance = i.getStringExtra("dureeSeance");
+        final String imontantSeance = i.getStringExtra("montantRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
 
 
@@ -56,7 +58,7 @@ public class SeanceFin extends ActionBarActivity {
         pointDeb.setText(ipointDeb);
         pointFin.setText(ipointFin);
         dureeSeance.setText(idureeSeance);
-
+        montantSeance.setText(imontantSeance);
 
         //Bouton SEANCE NON PREVU
         View.OnClickListener ecoute2 = new  View.OnClickListener(){

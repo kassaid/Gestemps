@@ -16,7 +16,7 @@ public class ModelSQLite extends SQLiteOpenHelper {
 
     String tag = "model";
 
-    private final static int VERSION_BD = 11;
+    private final static int VERSION_BD = 12;
     private final static String NOM_BD = "BDGest";
 
 
@@ -48,6 +48,7 @@ public class ModelSQLite extends SQLiteOpenHelper {
             + "pointDebRdv TEXT,"
             + "pointFinRdv TEXT,"
             + "niveauRdv TEXT,"
+            + "tarifRdv TEXT,"
             + "soldeRdv TEXT,"
             + "infoRdv TEXT,"
             + "idPers TEXT,"

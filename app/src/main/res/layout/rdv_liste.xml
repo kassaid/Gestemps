@@ -50,6 +50,20 @@
 		android:id="@+id/rdv_duree"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
-		</TextView>	 	
+		</TextView>
+
+	<TextView
+		android:text="Numero Personne"
+		android:id="@+id/rdv_idPers"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</TextView>
+
+	<TextView
+		android:text="Montant"
+		android:id="@+id/rdv_montant"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</TextView>
 
 </LinearLayout>

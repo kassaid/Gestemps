@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/titreView"
-        android:text="Liste de rdv"
+        android:text="Liste des RDV qui débute :"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

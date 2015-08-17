@@ -2,6 +2,7 @@ package com.cnam.mobile.gestemps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,6 +27,7 @@ public class SeanceAvant extends ActionBarActivity {
     String mess_retard = "Désolé je serais en retard";
     String mess_annule = "Désolé, suite à un empêchement j'annule le cours";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,10 @@ public class SeanceAvant extends ActionBarActivity {
         TextView libRdv = (TextView) findViewById(R.id.libRdvView);
         TextView niveauRdv = (TextView) findViewById(R.id.niveauRdvView);
         TextView dureeRdv = (TextView) findViewById(R.id.dureeRdvView);
-        TextView dateRdv = (TextView) findViewById(R.id.horaireRdvView);
+
+        TextView horaireRdv = (TextView) findViewById(R.id.horaireRdvView);
         TextView adresRdv = (TextView) findViewById(R.id.adresRdvView);
+
 
         btnSmsRetard = (Button) findViewById(R.id.btnRetard);
         btnSmsAnnule = (Button) findViewById(R.id.btnAnnule);
@@ -47,20 +52,22 @@ public class SeanceAvant extends ActionBarActivity {
         Intent i = getIntent();
         final long iidRdv = i.getLongExtra("idRdv", 1);
         final String ilibRdv = i.getStringExtra("libRdv");
+        final long idureeRdv = i.getLongExtra("dureeRdv",0);
+        //final String idateRdv = i.getStringExtra("dateRdv");
+        final String ihoraireRdv = i.getStringExtra("horaireRdv");
         final String iniveauRdv = i.getStringExtra("niveauRdv");
-        final String idureeRdv = i.getStringExtra("dureeRdv");
-        final String idateRdv = i.getStringExtra("dateRdv");
         final String iadresRdv = i.getStringExtra("adresRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
+        final String imontantRdv = i.getStringExtra("montantRdv");
 
-        final String ipointDeb = timeJour();
 
-        //libRdv.setText(String.valueOf(res0));
+
         libRdv.setText(ilibRdv);
         niveauRdv.setText(iniveauRdv);
-        dureeRdv.setText(idureeRdv);
-        dateRdv.setText(idateRdv);
+        dureeRdv.setText(String.valueOf(idureeRdv));
+        horaireRdv.setText(ihoraireRdv);
         adresRdv.setText(iadresRdv);
+
 
 
         //Bouton envoyer SMS RETARD
@@ -93,9 +100,12 @@ public class SeanceAvant extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
+
+                final String ipointDeb = timeJour();
                 RdvDAO rdvdao = new RdvDAO(ct);
                 rdvdao.open();
                 Rdv rdv = rdvdao.getRdvById(iidRdv);
+                rdv.setLibRdv("SÉANCE RÉALISÉE !");
                 rdv.setPointDebRdv(timeStamp());
                 rdvdao.modifier(rdv);
                 PersonneDAO persdao = new PersonneDAO(ct);
@@ -111,12 +121,13 @@ public class SeanceAvant extends ActionBarActivity {
                 i.putExtra("nom", inomPers);
                 i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("dureeRdv", idureeRdv);
-                i.putExtra("dateRdv", idateRdv);
+                i.putExtra("horaireRdv", ihoraireRdv);
                 i.putExtra("pointDeb", ipointDeb);
+                i.putExtra("montantRdv", imontantRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
                 startActivity(i);
-                finish();
+                //finish();
             }
         };
         btnArrive.setOnClickListener(ecoute3);
@@ -140,6 +151,59 @@ public class SeanceAvant extends ActionBarActivity {
     public String timeJour() {
         final Date date = new Date();
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+
+//        //Bouton ARRIVÉ À DESTINATION
+//        View.OnClickListener ecoute3 = new  View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v)
+//            {
+//                RdvDAO rdvdao = new RdvDAO(ct);
+//                rdvdao.open();
+//                Rdv r = new Rdv();
+//                r = rdvdao.getRdvById(iidRdv);
+//                r.setPointDebRdv(timeStamp());
+//                //r.setLibRdv("OKOK");
+//                rdvdao.modifier(r);
+//                //               Rdv rdv = rdvdao.getRdvById(iidRdv);
+////                rdv.setPointDebRdv(timeStamp());
+////                rdvdao.modifier(rdv);
+////                PersonneDAO persdao = new PersonneDAO(ct);
+////                persdao.open();
+////                Personne pers = persdao.getPersonneById(iidPers);
+//                final String iprenomPers = "coco";
+//                //pers.getPrenomPers();
+//                final String inomPers = "ddidi";
+//                //pers.getNomPers();
+//
+//                Intent i=new Intent(SeanceAvant.this, SeanceDebut.class);
+//                i.putExtra("idRdv", iidRdv);
+//                i.putExtra("libRdv", ilibRdv);
+//                i.putExtra("prenom", iprenomPers);
+//                i.putExtra("nom", inomPers);
+//                i.putExtra("niveauRdv", iniveauRdv);
+//                i.putExtra("dureeRdv", idureeRdv);
+//                i.putExtra("horaireRdv", ihoraireRdv);
+//                i.putExtra("pointDeb", ipointDeb);
+//                i.putExtra("adresRdv", iadresRdv);
+//                i.putExtra("idPers", iidPers);
+//                startActivity(i);
+//                finish();
+//            }
+//        };
+//        btnArrive.setOnClickListener(ecoute3);
+
+    }
+
+    public void showDial(View v){
+        Intent i = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("tel:+33623154373"));
+        startActivity(i);
     }
 
     @Override

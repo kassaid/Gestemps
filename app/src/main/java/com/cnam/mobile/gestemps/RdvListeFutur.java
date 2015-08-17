@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapterListener {
+public class RdvListeFutur extends ActionBarActivity implements RdvAdapter.RdvAdapterListener {
 
     private ArrayList<Rdv> listOf;
 
@@ -26,40 +26,26 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
             @Override
             public void onClick(DialogInterface dialog, int whichButton)
             {
-
-//                RdvDAO rdvdao = new RdvDAO(getBaseContext());
-//                rdvdao.open();
-                //rdvdao.delete(item.getIdRdv());
-
                 long iidRdv = item.getIdRdv();
                 String ilibRdv = item.getLibRdv();
                 String iadresRdv = item.getAdresRdv();
-               // float ilongitRdv =item.getLongitRdv()
-                //float ilatitRdv=item.getLatitRdv()
                 long idateRdv = item.getDateRdv();
                 String ihoraireRdv = item.getHoraireRdv();
-                // long idureeRdv = item.getDureeRdv();
-                // long ipointDebRdv = item.getPointDebRdv();
-//                long ipointFinRdv = item.getPointFinRdv();
+                long idureeRdv=item.getDureeRdv();
                 String iniveauRdv = item.getNiveauRdv();
-//                float itarifRdv=item.getTarifRdv();
+                float itarifRdv = item.getTarifRdv();
                 float imontantRdv=item.getMontantRdv();
-//                float isoldeRdv=item.getSoldeRdv();
-//                String iinfoRdv=item.getInfoRdv();
-
                 long iidPers = item.getIdPers();
 
 
-//                finish();
-//                startActivity(getIntent());
-                //startActivity(ListOffre.this, ListOffre.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                Intent i=new Intent(RdvListe.this, SeanceAvant.class);
+                Intent i=new Intent(RdvListeFutur.this, SeanceAvant.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
-                i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("dateRdv", idateRdv);
                 i.putExtra("horaireRdv", ihoraireRdv);
+                i.putExtra("dureeRdv", idureeRdv);
+                i.putExtra("niveauRdv", iniveauRdv);
+                i.putExtra("tarifRdv", itarifRdv);
                 i.putExtra("montantRdv", imontantRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
@@ -74,65 +60,32 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
         builder.show();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rdv_liste);
+        setContentView(R.layout.activity_rdv_liste_futur);
 
-//        Intent i=getIntent();
-//        final long res0 = i.getLongExtra("id", 1);
-//        final String res1 = i.getStringExtra("nom");
-//        final String res2 = i.getStringExtra("prenom");
-//        final String choix = i.getStringExtra("choix");
-//        final long idRdv = i.getLongExtra("idRdv", 1);
 
         RdvDAO rdvdao = new RdvDAO(getBaseContext());
         rdvdao.open();
 
-//        if (choix.equals("act2")){
-//            listOf = (ArrayList<Rdv>) rdvdao.getOffreByIdcom(res0);
-//        }
-//        else{
-            listOf = (ArrayList<Rdv>) rdvdao.getAllRdv();
-            //listOf = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
-//        }
-//
-        RdvAdapter adapter = new RdvAdapter(this, listOf);
+        listOf = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
 
+        RdvAdapter adapter = new RdvAdapter(this, listOf);
 
         adapter.addListener((RdvAdapter.RdvAdapterListener) this);
 
         ListView list = (ListView)findViewById(R.id.listView1);
 
-
-
         list.setAdapter(adapter);
 
-
-
-
-//        final Button retour=(Button) findViewById(R.id.button1);
-//        OnClickListener ecoute = new OnClickListener ()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                //ValidationOffre.this.finish();
-//                Intent i=new Intent(ListOffre.this,MonMenu.class);
-//                i.putExtra("id", res0);
-//                i.putExtra("nom",res1);
-//                i.putExtra("prenom",res2);
-//                i.putExtra("idOff", idOff);
-//                startActivity(i);
-//            }
-//        };
-//        retour.setOnClickListener(ecoute);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_rdv_liste, menu);
+        getMenuInflater().inflate(R.menu.menu_rdv_liste_futur, menu);
         return true;
     }
 

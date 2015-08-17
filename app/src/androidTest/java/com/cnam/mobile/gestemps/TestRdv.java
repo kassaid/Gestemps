@@ -60,7 +60,7 @@ public class TestRdv extends AndroidTestCase {
         rdvdao.open();
         //Log.i(tag, "liste3 des tables " + rdvdao.allTableNames());
         Rdv rdv = new Rdv("RDV MAKOSSA","25 rue Papin 25000 Besançon",67,89,
-                "2015-08-13","10:30",2,100,200,"Terminale",40,80,320,"ok man",1);
+                234455,"10:30",2,100,200,"Terminale",40,80,320,"ok man",1);
         rdvdao.save(rdv);
         Log.i(tag,"Un RDV est créé: "+ rdv);
 
@@ -75,11 +75,93 @@ public class TestRdv extends AndroidTestCase {
 
         List<Rdv> list1 = rdvdao.getAllRdv();
         Log.i(tag, "Liste RDV : " + list1);
-//        Cursor c = rdvdao.getRdvAsCursor();
-//        Log.i(tag,"cursor RDV"+ c.getColumnCount() +" sur "+ c.getCount());
     }
 
+    public void testMontantRdv(){
+        RdvDAO rdvdao = new RdvDAO(this.getContext());
+        rdvdao.open();
+        rdvDao.deleteAll();
+        //Log.i(tag, "liste3 des tables " + rdvdao.allTableNames());
+        Rdv rdv = new Rdv("RDV KOPASTRUM","252 rue Papino 25000 Besançon",67,89,
+                1456789856,"10:30",2,1000,1801000,"Terminale",100,80,320,"ok man",1);
+        rdvdao.save(rdv);
+        Log.i(tag,"Un RDV est créé: "+ rdv);
+
+        float m = rdv.montantSeance(rdv.getPointFinRdv(), rdv.getPointDebRdv());
+        rdv.setMontantRdv(m);
+        rdvdao.modifier(rdv);
+        Log.i(tag, "Un RDV est modifié: " + rdv);
+
+        long id = rdv.getIdRdv();
+        Rdv rdv2 = rdvdao.getRdvById(id);
+        Log.i(tag,"Le RDV selectionné est: "+ rdv2);
+
+        Rdv rdv3 = rdvdao.getRdvById(id);
+        String date = rdv3.changeDate(rdv3.getDateRdv());
+        Log.i(tag,"La date rdv selectionné est: "+date);
+
+    }
+
+    public void testDatedeRdv(){
+        RdvDAO rdvdao = new RdvDAO(this.getContext());
+        rdvdao.open();
+        rdvDao.deleteAll();
+        Rdv dernier = null;
+            for (int i=0;i<4;i++) {
+                Rdv rdv = new Rdv("RDV VOPASTRUM"+i, i+"19 rue Papino 25000 Besançon", 67, 89,
+                        1456789856, "10:30", 2, 1000, 1801000, "Terminale", 100, 80, 320, "ok man"+i, 1);
+                rdvdao.save(rdv);
+                dernier = rdv;
+            }
+        List<Rdv> list1 = rdvdao.getAllRdv();
+        Log.i(tag, "Liste VOPASTRUM avant modification " + list1);
+
+        String date = dernier.changeDate(dernier.getDateRdv());
+        Log.i(tag,"La date rdv selectionné est: "+date);
 
 
+    }
+
+    public void testListRdvFutur(){
+        PersonneDAO persdao = new PersonneDAO(this.getContext());
+        persdao.open();
+        persdao.deleteAll();
+        for (int i=0;i<10;i++){
+            Personne p = new Personne("JEFFROIS"+i,"Sandra"+i, i+"16 rue Papin 25000 Besançon",27,82,
+                    "067856489"+i,"sandra.jeffrois@mail.fr"+i,98,"cours avec sandra"+i);
+            persdao.save(p);
+        }
+
+        RdvDAO rdvdao = new RdvDAO(this.getContext());
+        rdvdao.open();
+        rdvDao.deleteAll();
+        Rdv dernier = null;
+        for (int i=0;i<9;i++) {
+            Rdv rdv = new Rdv("RDV URGENT"+i, i+"19 rue Papino 25000 Besançon", 67, 89,1456789851, "10:30", 2, 0, 0, "Terminale", 100, 80, 320, "ok man"+i, i+1);
+            rdv.setDateRdv(rdvdao.timeStamp()+i*24*60*60*1000);
+            rdvdao.save(rdv);
+            dernier = rdv;
+        }
+        List<Personne> list = persdao.getAllPersonne();
+        Log.i(tag, "Liste PERSONNE " + list);
+
+        List<Rdv> list2 = rdvdao.getAllRdv();
+        Log.i(tag, "Liste RDV " + list2);
+
+        int nombPers = persdao.nbPersonne();
+        Log.i(tag, "Nombre de PERSONNE : " + nombPers);
+
+        int nombRdv = rdvdao.nbRdv();
+        Log.i(tag, "Nombre de RDV : " + nombRdv);
+
+        long t = rdvdao.timeStamp()+4*24*60*60*1000;
+
+        List<Rdv> list3 = rdvdao.getAllRdvFutur(t);
+        Log.i(tag, "Liste RDV FUTUR : " + list3);
+
+        Cursor c = rdvdao.getRdvFuturAsCurs(t);
+        Log.i(tag,"cursor RDV futur "+ c.getColumnCount() +" sur "+ c.getCount());
+
+    }
 
 }

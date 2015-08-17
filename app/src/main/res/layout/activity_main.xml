@@ -60,23 +60,23 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="RDV PREVU"
+        android:text="LISTE RDV FUTUR"
         android:id="@+id/button1"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="RDV NON PREVU"
+        android:text="NOUVEAU RDV"
         android:id="@+id/button2"
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="LISTE DES RDV"
         android:id="@+id/button3"
@@ -84,7 +84,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="AJOUTER UN ELEVE"
         android:id="@+id/button4"

@@ -46,20 +46,20 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-        //Bouton RDV PREVU
+        //Bouton LISTE RDV futur
         View.OnClickListener ecoute1=new  View.OnClickListener(){
 
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(MainActivity.this, MapsActivity.class);
+                Intent i=new Intent(MainActivity.this, RdvListeFutur.class);
                 startActivity(i);
             }
         };
         btnRdvPrevu.setOnClickListener(ecoute1);
 
 
-        //Bouton RDV NON PREVU
+        //Bouton LISTE RDV futur
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
             @Override
@@ -106,8 +106,9 @@ public class MainActivity extends ActionBarActivity {
             switch (resultCode)
             {
                 case RESULT_OK:
-                    String result1 = data.getStringExtra("ret1");
-                    String result2 = data.getStringExtra("ret2");
+                    String ilibRdv = data.getStringExtra("libRdv");
+                    String idateRdv = data.getStringExtra("dateRdv");
+
                     ///textnom.setText(result1);
                     //textprenom.setText(result2);
                     break;

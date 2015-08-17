@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/titreView"
-        android:text="RDV PREVU"
+        android:text="DESTINATION VERS CE RDV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -22,7 +22,8 @@
         android:text="libellé rdv"
         android:layout_below="@+id/titreView"
         android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
+        android:onClick="showDial"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -41,18 +42,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/lieuRdvView"
-        android:text="lieu rdv : "
-        android:layout_below="@+id/dureeRdvView"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/horaireRdvView"
         android:text="Horaire rdv : "
-        android:layout_below="@+id/lieuRdvView"
+        android:layout_below="@+id/dureeRdvView"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -67,24 +61,26 @@
 
     <Button
         android:id="@+id/btnRetard"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="SMS Retard"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
         />
     <Button
         android:id="@+id/btnAnnule"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="SMS Annulation"
         android:layout_gravity="center_horizontal"
         />
     <Button
         android:id="@+id/btnArrive"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Arrivé à destination"
         android:layout_gravity="center_horizontal"
         />
+
 
 </LinearLayout>
