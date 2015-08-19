@@ -130,7 +130,7 @@ public class PersonneDAO {
         //close();
     }
 
-    //Liste de tous les tuples PERSONNE
+    //Liste de toute les  PERSONNE
     public List<Personne> getAllPersonne(){
         //open();
         List<Personne> result = new ArrayList<Personne>();

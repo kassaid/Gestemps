@@ -26,8 +26,8 @@ public class TestRdv extends AndroidTestCase {
 
         persDao.open();
         rdvDao.open();
-        //persDao.deleteAll();
-        //rdvDao.deleteAll();
+//        persDao.deleteAll();
+//        rdvDao.deleteAll();
     }
 
     public void testDateRdv() throws ParseException {
@@ -60,7 +60,7 @@ public class TestRdv extends AndroidTestCase {
         rdvdao.open();
         //Log.i(tag, "liste3 des tables " + rdvdao.allTableNames());
         Rdv rdv = new Rdv("RDV MAKOSSA","25 rue Papin 25000 Besançon",67,89,
-                234455,"10:30",2,100,200,"Terminale",40,80,320,"ok man",1);
+                234455,"10:30",10000,100,200,"Terminale",40,80,320,"ok man",1);
         rdvdao.save(rdv);
         Log.i(tag,"Un RDV est créé: "+ rdv);
 
@@ -109,7 +109,7 @@ public class TestRdv extends AndroidTestCase {
         Rdv dernier = null;
             for (int i=0;i<4;i++) {
                 Rdv rdv = new Rdv("RDV VOPASTRUM"+i, i+"19 rue Papino 25000 Besançon", 67, 89,
-                        1456789856, "10:30", 2, 1000, 1801000, "Terminale", 100, 80, 320, "ok man"+i, 1);
+                        1456789856, "10:30", 10000, 1000, 1801000, "Terminale", 100, 80, 320, "ok man"+i, 1);
                 rdvdao.save(rdv);
                 dernier = rdv;
             }
@@ -137,7 +137,7 @@ public class TestRdv extends AndroidTestCase {
         rdvDao.deleteAll();
         Rdv dernier = null;
         for (int i=0;i<9;i++) {
-            Rdv rdv = new Rdv("RDV URGENT"+i, i+"19 rue Papino 25000 Besançon", 67, 89,1456789851, "10:30", 2, 0, 0, "Terminale", 100, 80, 320, "ok man"+i, i+1);
+            Rdv rdv = new Rdv("RDV URGENT"+i, i+"19 rue Papino 25000 Besançon", 67, 89,1456789851, "10:30", 10000, 0, 0, "Terminale", 100, 80, 320, "ok man"+i, i+1);
             rdv.setDateRdv(rdvdao.timeStamp()+i*24*60*60*1000);
             rdvdao.save(rdv);
             dernier = rdv;

@@ -1,37 +1,50 @@
 package com.cnam.mobile.gestemps;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-public class SeanceDebut extends ActionBarActivity {
+import static java.lang.Integer.parseInt;
+
+public class SeanceDebut extends AppCompatActivity {
 
     Context ct = this;
     Button btnTerminer;
     Button btnAnnuler;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+    private PendingIntent pendingIntent;
+
+    private static final String tag = "sam";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seance_debut);
 
-        final String tag = "SeanceDebut-test";
 
         TextView prenom = (TextView) findViewById(R.id.prenomPersView);
         TextView nom = (TextView) findViewById(R.id.nomPersView);
-        final TextView time = (TextView) findViewById(R.id.timeView);
-        TextView niveau = (TextView) findViewById(R.id.niveauRdvView);
         TextView duree = (TextView) findViewById(R.id.dureeRdvView);
+        TextView niveau = (TextView) findViewById(R.id.niveauRdvView);
+        final TextView time = (TextView) findViewById(R.id.timeView);
         TextView pointDeb = (TextView) findViewById(R.id.pointDebRdvView);
 
         btnTerminer = (Button) findViewById(R.id.btnTerminer);
@@ -43,20 +56,55 @@ public class SeanceDebut extends ActionBarActivity {
         final long iidRdv = i.getLongExtra("idRdv", 1);
         final String iprenom = i.getStringExtra("prenom");
         final String inom = i.getStringExtra("nom");
+        final String idureeRdv = i.getStringExtra("dureeRdv");
         final String iniveau = i.getStringExtra("niveauRdv");
-        final long idureeRdv = i.getLongExtra("dureeRdv", 0);
+        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String ipointDeb = i.getStringExtra("pointDeb");
         final String imontantRdv = i.getStringExtra("montantRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
 
-
-
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-        duree.setText(String.valueOf(idureeRdv));
+        //duree.setText(String.valueOf(idureeRdv));
+        duree.setText(idureeRdv);
         pointDeb.setText(ipointDeb);
 
+
+//        //Alarme service
+//        Calendar calendar = Calendar.getInstance();
+////
+//////        calendar.set(Calendar.MONTH, 9);
+//////        calendar.set(Calendar.YEAR, 2015);
+//////        calendar.set(Calendar.DAY_OF_MONTH, 18);
+////
+//        calendar.set(Calendar.HOUR_OF_DAY, 5);
+//        calendar.set(Calendar.MINUTE, 30);
+//        calendar.set(Calendar.SECOND, 0);
+//        calendar.set(Calendar.AM_PM,Calendar.AM);
+//
+//        Intent myIntent = new Intent(SeanceDebut.this, MonRecepteur.class);
+//        pendingIntent = PendingIntent.getBroadcast(SeanceDebut.this, 0, myIntent,0);
+//
+//        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+//        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+
+        RdvDAO rdvdao = new RdvDAO(ct);
+        rdvdao.open();
+        Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
+
+        final long dur = r.getDureeRdv();
+        final long tps = r.getPointDebRdv()+dur-timeStamp();
+
+        if (tps<0){
+            Log.d(tag, "temps écoulé");
+            Toast.makeText(getBaseContext(), "Séance est terminée!",
+                    Toast.LENGTH_LONG).show();
+            finish();
+
+        }
+
+        setAlerte(dur);
 
         //Bouton TERMINE LA SEANCE
         View.OnClickListener ecoute1 = new  View.OnClickListener(){
@@ -87,6 +135,7 @@ public class SeanceDebut extends ActionBarActivity {
 //                    e.printStackTrace();
 //                }
 
+                stopService(v);
 
                 Intent i=new Intent(SeanceDebut.this, SeanceFin.class);
                 i.putExtra("idRdv", iidRdv);
@@ -101,7 +150,7 @@ public class SeanceDebut extends ActionBarActivity {
                 i.putExtra("montantRdv", iimontantRdv);
                 i.putExtra("idPers", iidPers);
                 startActivity(i);
-                //finish();
+                finish();
             }
         };
         btnTerminer.setOnClickListener(ecoute1);
@@ -110,25 +159,52 @@ public class SeanceDebut extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-
-
-
-//                RdvDAO rdvdao = new RdvDAO(ct);
-//                rdvdao.open();
-//                Rdv rdv = rdvdao.getRdvById(iidRdv);
-//                rdv.setPointDebRdv(timeStamp());
-//                rdvdao.modifier(rdv);
-//                pointDeb.setText(ipointDeb);
-
                 //setResult(RESULT_CANCELED);
                 //startActivity(SeanceDebut.this, SeanceDebut.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+                stopService(v);
                 finish();
             }
 
         };
         btnAnnuler.setOnClickListener(ecoute2);
 
+
+//        alarmMgr = (AlarmManager)ct.getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(ct, MonRecepteur.class);
+//        alarmIntent = PendingIntent.getBroadcast(ct, 0, intent, 0);
+//
+//        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                SystemClock.elapsedRealtime() +
+//                        30 * 1000, alarmIntent);
+
+    }
+
+//    public void onResume(){
+//        super.onResume();
+//
+//
+//        alarmMgr = (AlarmManager)ct.getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(ct, MainActivity.class);
+//        alarmIntent = PendingIntent.getBroadcast(ct, 0, intent, 0);
+//
+//        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                SystemClock.elapsedRealtime() +
+//                        60 * 1000, alarmIntent);
+//    }
+
+    private void setAlerte(long duree){
+        alarmMgr = (AlarmManager)ct.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(ct, MonRecepteur.class);
+        alarmIntent = PendingIntent.getBroadcast(ct, 0, intent, 0);
+
+        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() +
+                        duree, alarmIntent);
+        Log.d(tag, "alarme déclenchée par setAlerte SeanceDebut");
+    }
+
+    public long changeEnInt(String s){
+        return parseInt(s,10);
     }
 
     //Pointage
@@ -156,13 +232,26 @@ public class SeanceDebut extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.action_accueil:
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                finish();
+
+            case R.id.action_settings:
+                // Comportement du bouton "Paramètres"
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+    }
+
+    public void startService(View v){
+        startService(new Intent(getBaseContext(),MonServiceAlarm.class));
+
+    }
+
+    public void stopService(View v){
+        stopService(new Intent(getBaseContext(),MonServiceAlarm.class));
     }
 }

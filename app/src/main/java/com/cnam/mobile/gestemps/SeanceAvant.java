@@ -1,10 +1,13 @@
 package com.cnam.mobile.gestemps;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +20,7 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SeanceAvant extends ActionBarActivity {
+public class SeanceAvant extends AppCompatActivity {
 
     Context ct = this;
     Button btnSmsRetard;
@@ -37,12 +40,12 @@ public class SeanceAvant extends ActionBarActivity {
         final String tag = "SeanceAvant-test";
 
         TextView libRdv = (TextView) findViewById(R.id.libRdvView);
+        TextView prenomPers = (TextView) findViewById(R.id.prenomPersView);
+        TextView nomPers = (TextView) findViewById(R.id.nomPersView);
         TextView niveauRdv = (TextView) findViewById(R.id.niveauRdvView);
         TextView dureeRdv = (TextView) findViewById(R.id.dureeRdvView);
-
         TextView horaireRdv = (TextView) findViewById(R.id.horaireRdvView);
         TextView adresRdv = (TextView) findViewById(R.id.adresRdvView);
-
 
         btnSmsRetard = (Button) findViewById(R.id.btnRetard);
         btnSmsAnnule = (Button) findViewById(R.id.btnAnnule);
@@ -52,7 +55,8 @@ public class SeanceAvant extends ActionBarActivity {
         Intent i = getIntent();
         final long iidRdv = i.getLongExtra("idRdv", 1);
         final String ilibRdv = i.getStringExtra("libRdv");
-        final long idureeRdv = i.getLongExtra("dureeRdv",0);
+        final String iprenomPers = i.getStringExtra("prenomPers");
+        final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         //final String idateRdv = i.getStringExtra("dateRdv");
         final String ihoraireRdv = i.getStringExtra("horaireRdv");
         final String iniveauRdv = i.getStringExtra("niveauRdv");
@@ -60,13 +64,25 @@ public class SeanceAvant extends ActionBarActivity {
         final long iidPers = i.getLongExtra("idPers", 1);
         final String imontantRdv = i.getStringExtra("montantRdv");
 
+        final String iniveau = "Niveau "+iniveauRdv;
+        final String iduree = "Séance de "+String.valueOf(idureeRdv/10000)+" h";
+        final String ihoraire = "Début de séance à "+ihoraireRdv;
 
+
+        PersonneDAO persdao = new PersonneDAO(ct);
+        persdao.open();
+        Personne pers = persdao.getPersonneById(iidPers);
+        String iprenom = pers.getPrenomPers();
+        String inom = pers.getNomPers();
 
         libRdv.setText(ilibRdv);
-        niveauRdv.setText(iniveauRdv);
-        dureeRdv.setText(String.valueOf(idureeRdv));
-        horaireRdv.setText(ihoraireRdv);
+        prenomPers.setText(iprenom);
+        nomPers.setText(inom);
+        niveauRdv.setText(iniveau);
+        dureeRdv.setText(iduree);
+        horaireRdv.setText(ihoraire);
         adresRdv.setText(iadresRdv);
+
 
 
 
@@ -76,10 +92,17 @@ public class SeanceAvant extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
-                smsTransmis(num_tel, mess_retard);
+                PersonneDAO persdao = new PersonneDAO(ct);
+                persdao.open();
+                Personne pers = persdao.getPersonneById(iidPers);
+                String tel = pers.getTelPers();
+                retardConf(v,tel);
+                //smsTransmis(num_tel, mess_retard);
             }
         };
         btnSmsRetard.setOnClickListener(ecoute1);
+
+
 
 
         //Bouton envoyer SMS ANNULATION
@@ -88,7 +111,12 @@ public class SeanceAvant extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
-                smsTransmis(num_tel, mess_annule);
+                PersonneDAO persdao = new PersonneDAO(ct);
+                persdao.open();
+                Personne pers = persdao.getPersonneById(iidPers);
+                String tel = pers.getTelPers();
+                annuleConf(v, tel);
+                //smsTransmis(num_tel, mess_annule);
             }
         };
         btnSmsAnnule.setOnClickListener(ecoute2);
@@ -113,24 +141,105 @@ public class SeanceAvant extends ActionBarActivity {
                 Personne pers = persdao.getPersonneById(iidPers);
                 final String iprenomPers = pers.getPrenomPers();
                 final String inomPers = pers.getNomPers();
+                final String itelPers = pers.getTelPers();
 
                 Intent i=new Intent(SeanceAvant.this, SeanceDebut.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
                 i.putExtra("prenom", iprenomPers);
                 i.putExtra("nom", inomPers);
-                i.putExtra("niveauRdv", iniveauRdv);
-                i.putExtra("dureeRdv", idureeRdv);
-                i.putExtra("horaireRdv", ihoraireRdv);
+                i.putExtra("niveauRdv", iniveau);
+                i.putExtra("dureeRdv", iduree);
+                i.putExtra("horaireRdv", ihoraire);
                 i.putExtra("pointDeb", ipointDeb);
                 i.putExtra("montantRdv", imontantRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
-                startActivity(i);
+
+                arriveConf(v, i);
+                //startActivity(i);
                 //finish();
             }
         };
         btnArrive.setOnClickListener(ecoute3);
+
+        //Bouton envoyer SMS RETARD
+        View.OnClickListener ecoute4 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                PersonneDAO persdao = new PersonneDAO(ct);
+                persdao.open();
+                Personne pers = persdao.getPersonneById(iidPers);
+                String tel = pers.getTelPers();
+                appelConf(tel);
+                //smsTransmis(num_tel, mess_retard);
+            }
+        };
+        libRdv.setOnClickListener(ecoute4);
+
+
+    }
+
+    //Envoie message de retard à la séance
+    public void retardConf(View v,final String num){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Vous arriverez en retard ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                smsTransmis(num, mess_retard);
+                dialog.dismiss();
+            }
+        }).setTitle("Message de retard").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    //Envoie message d'annulation de la séance
+    public void annuleConf(View v,final String num){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Vous annulez la séance ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                smsTransmis(num, mess_annule);
+                dialog.dismiss();
+            }
+        }).setTitle("Message d'annulation").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    //Arrivé à destination
+    public void arriveConf(View v, final Intent intent){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Vous commencez la séance ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        }).setTitle("Message d'arrivée").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    //Appel téléphonique
+    public void appelConf(final String num){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Vous souhaitez appeler?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                appelTel(num);
+                dialog.dismiss();
+            }
+        }).setTitle("Téléphone").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
     }
 
     //Transmettre un SMS
@@ -158,51 +267,13 @@ public class SeanceAvant extends ActionBarActivity {
         super.onStart();
 
 
-//        //Bouton ARRIVÉ À DESTINATION
-//        View.OnClickListener ecoute3 = new  View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v)
-//            {
-//                RdvDAO rdvdao = new RdvDAO(ct);
-//                rdvdao.open();
-//                Rdv r = new Rdv();
-//                r = rdvdao.getRdvById(iidRdv);
-//                r.setPointDebRdv(timeStamp());
-//                //r.setLibRdv("OKOK");
-//                rdvdao.modifier(r);
-//                //               Rdv rdv = rdvdao.getRdvById(iidRdv);
-////                rdv.setPointDebRdv(timeStamp());
-////                rdvdao.modifier(rdv);
-////                PersonneDAO persdao = new PersonneDAO(ct);
-////                persdao.open();
-////                Personne pers = persdao.getPersonneById(iidPers);
-//                final String iprenomPers = "coco";
-//                //pers.getPrenomPers();
-//                final String inomPers = "ddidi";
-//                //pers.getNomPers();
-//
-//                Intent i=new Intent(SeanceAvant.this, SeanceDebut.class);
-//                i.putExtra("idRdv", iidRdv);
-//                i.putExtra("libRdv", ilibRdv);
-//                i.putExtra("prenom", iprenomPers);
-//                i.putExtra("nom", inomPers);
-//                i.putExtra("niveauRdv", iniveauRdv);
-//                i.putExtra("dureeRdv", idureeRdv);
-//                i.putExtra("horaireRdv", ihoraireRdv);
-//                i.putExtra("pointDeb", ipointDeb);
-//                i.putExtra("adresRdv", iadresRdv);
-//                i.putExtra("idPers", iidPers);
-//                startActivity(i);
-//                finish();
-//            }
-//        };
-//        btnArrive.setOnClickListener(ecoute3);
-
     }
 
-    public void showDial(View v){
-        Intent i = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("tel:+33623154373"));
+    public void appelTel(final String num){
+       // Intent i = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("tel:+33623154373"));
+        //Intent i = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("content://contacts/people"));
+        Intent i = new Intent(android.content.Intent.ACTION_CALL,Uri.parse("tel:"+num));
+
         startActivity(i);
     }
 
@@ -218,13 +289,27 @@ public class SeanceAvant extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.action_accueil:
+                //Bouton "Accueil"
+//                Intent i = new Intent(SeanceAvant.this, MainActivity.class);
+//                startActivity(i);
+                finish();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+//            case R.id.menu_help:
+//                // Comportement du bouton "Aide"
+//                return true;
+//            case R.id.menu_refresh:
+//                // Comportement du bouton "Rafraichir"
+//                return true;
+//            case R.id.menu_search:
+//                // Comportement du bouton "Recherche"
+//                return true;
+            case R.id.action_settings:
+                // Comportement du bouton "Paramètres"
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -5,13 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class RdvListeFutur extends ActionBarActivity implements RdvAdapter.RdvAdapterListener {
+public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAdapterListener {
 
     private ArrayList<Rdv> listOf;
 
@@ -70,6 +74,9 @@ public class RdvListeFutur extends ActionBarActivity implements RdvAdapter.RdvAd
         RdvDAO rdvdao = new RdvDAO(getBaseContext());
         rdvdao.open();
 
+        TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
+        dateDuJour.setText(lejour());
+
         listOf = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
 
         RdvAdapter adapter = new RdvAdapter(this, listOf);
@@ -94,13 +101,45 @@ public class RdvListeFutur extends ActionBarActivity implements RdvAdapter.RdvAd
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_accueil:
+                //Bouton "Accueil"
+//                Intent i=new Intent(RdvListeFutur.this, MainActivity.class);
+//                startActivity(i);
+                finish();
+                return true;
+//            case R.id.menu_help:
+//                // Comportement du bouton "Aide"
+//                return true;
+//            case R.id.menu_refresh:
+//                // Comportement du bouton "Rafraichir"
+//                return true;
+//            case R.id.menu_search:
+//                // Comportement du bouton "Recherche"
+//                return true;
+            case R.id.action_settings:
+                // Comportement du bouton "Paramètres"
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
     }
+
+        //Date du jour au format alphabétique
+    public String lejour() {
+        final Date date = new Date();
+        return new SimpleDateFormat("EEEE d MMM yyyy").format(date);
+    }
+
+
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+
 }

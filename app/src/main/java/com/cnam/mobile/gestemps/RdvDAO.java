@@ -230,8 +230,8 @@ public class RdvDAO {
     }
 
     //Liste des tuples RDV à venir
-    //Tri par date de RDV
-    //RDV non réalisé
+    //Trié par date de RDV
+    //RDV non terminé
     public Cursor getRdvFuturAsCurs(long time){
         //open();
         Cursor c = db.query(
@@ -246,9 +246,9 @@ public class RdvDAO {
 
 
     //Liste des tuples RDV
-    //Tri par date de RDV
-    //RDV réalisé
-    public Cursor getRdvAsCurs(){
+    //Trié par date de RDV
+    //RDV terminé
+    public Cursor getRdvFinAsCurs(){
         //open();
         Cursor c = db.query(
                 T_RDV,
@@ -259,6 +259,22 @@ public class RdvDAO {
         Log.i(tag,"nombre de tuples: "+ c.getCount());
         return c;
     }
+
+    //Liste des tuples RDV d'une PERSONNE par son 'idPers'
+    //Trié par date de RDV
+    //RDV terminé
+    public Cursor getRdvFinPersAsCurs(long idPers){
+        //open();
+        Cursor c = db.query(
+                T_RDV,
+                null,
+                IDPERS+" =? AND "+POINTFIN+">0",
+                new String[] {String.valueOf(idPers)},
+                null, null, DATETIME+" DESC",null);
+        Log.i(tag,"nombre de tuples: "+ c.getCount());
+        return c;
+    }
+
 
 //    //Ensemble des tuples de la tale RDV
 //    public Cursor getRdvFuturAsCurs3(){
@@ -276,6 +292,67 @@ public class RdvDAO {
     public List<Rdv> getAllRdvFutur(long time){
         List<Rdv> result = new ArrayList<Rdv>();
         Cursor c = getRdvFuturAsCurs(time);
+        if (c.moveToFirst()){
+            do{
+                Rdv rdv = new Rdv();
+                long id = c.getLong(c.getColumnIndex(ID));
+                rdv.setIdRdv(id);
+                rdv.setLibRdv(c.getString(c.getColumnIndex(LIBELLE)));
+                rdv.setAdresRdv(c.getString(c.getColumnIndex(ADRESSE)));
+                rdv.setLongitRdv(c.getFloat(c.getColumnIndex(LONGITUDE)));
+                rdv.setLatitRdv(c.getFloat(c.getColumnIndex(LATITUDE)));
+                rdv.setDateRdv(c.getLong(c.getColumnIndex(DATETIME)));
+                rdv.setHoraireRdv(c.getString(c.getColumnIndex(HORAIRE)));
+                rdv.setDureeRdv(c.getLong(c.getColumnIndex(DUREE)));
+                rdv.setPointDebRdv(c.getLong(c.getColumnIndex(POINTDEB)));
+                rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
+                rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
+                rdv.setTarifRdv(c.getFloat(c.getColumnIndex(TARIF)));
+                rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
+                rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
+                rdv.setIdPers(c.getLong(c.getColumnIndex(IDPERS)));
+                Log.i(tag,"RDV futur "+id+" récupere de la BD : "+ rdv);
+                result.add(rdv);
+            }while(c.moveToNext());
+        }
+        return result;
+    }
+
+
+    //Liste des RDV terminé
+    public List<Rdv> getAllRdvFin(long time){
+        List<Rdv> result = new ArrayList<Rdv>();
+        Cursor c = getRdvFinAsCurs();
+        if (c.moveToFirst()){
+            do{
+                Rdv rdv = new Rdv();
+                long id = c.getLong(c.getColumnIndex(ID));
+                rdv.setIdRdv(id);
+                rdv.setLibRdv(c.getString(c.getColumnIndex(LIBELLE)));
+                rdv.setAdresRdv(c.getString(c.getColumnIndex(ADRESSE)));
+                rdv.setLongitRdv(c.getFloat(c.getColumnIndex(LONGITUDE)));
+                rdv.setLatitRdv(c.getFloat(c.getColumnIndex(LATITUDE)));
+                rdv.setDateRdv(c.getLong(c.getColumnIndex(DATETIME)));
+                rdv.setHoraireRdv(c.getString(c.getColumnIndex(HORAIRE)));
+                rdv.setDureeRdv(c.getLong(c.getColumnIndex(DUREE)));
+                rdv.setPointDebRdv(c.getLong(c.getColumnIndex(POINTDEB)));
+                rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
+                rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
+                rdv.setTarifRdv(c.getFloat(c.getColumnIndex(TARIF)));
+                rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
+                rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
+                rdv.setIdPers(c.getLong(c.getColumnIndex(IDPERS)));
+                Log.i(tag,"RDV futur "+id+" récupere de la BD : "+ rdv);
+                result.add(rdv);
+            }while(c.moveToNext());
+        }
+        return result;
+    }
+
+    //Liste des RDV terminé d'une PERSONNE
+    public List<Rdv> getAllRdvFinPers(long idPers){
+        List<Rdv> result = new ArrayList<Rdv>();
+        Cursor c = getRdvFinPersAsCurs(idPers);
         if (c.moveToFirst()){
             do{
                 Rdv rdv = new Rdv();

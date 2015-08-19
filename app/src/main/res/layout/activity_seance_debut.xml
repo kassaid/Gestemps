@@ -16,7 +16,7 @@
         android:id="@+id/prenomPersView"
         android:text="Prénom personne"
         android:layout_below="@+id/titreView"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -24,23 +24,15 @@
         android:id="@+id/nomPersView"
         android:text="Nom"
         android:layout_below="@+id/prenomPersView"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/timeView"
-        android:text="Heure-minute"
-        android:layout_below="@+id/nomPersView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/niveauRdvView"
         android:text="niveau du rdv"
-        android:layout_below="@+id/timeView"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/nomPersView"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -48,14 +40,26 @@
         android:id="@+id/dureeRdvView"
         android:text="durée du rdv"
         android:layout_below="@+id/niveauRdvView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
+
+
+    <TextView
+        android:id="@+id/timeView"
+        android:text="Heure-minute"
+        android:layout_below="@+id/dureeRdvView"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
     <TextView
         android:id="@+id/pointDebRdvView"
         android:text="pointage de début"
-        android:layout_below="@+id/dureeRdvView"
+        android:layout_below="@+id/timeView"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
@@ -66,7 +70,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Terminer la séance"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/pointDebRdvView"
         />
 
@@ -75,7 +79,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Recommencer la séance"
-        android:layout_marginTop="10dp"
         android:layout_below="@+id/btnTerminer"
         />
 

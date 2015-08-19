@@ -5,16 +5,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapterListener {
+public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapterListener {
 
     private ArrayList<Rdv> listOf;
 
+    //TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
 
     public void onClickNom(final Rdv item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -38,11 +43,11 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
                 //float ilatitRdv=item.getLatitRdv()
                 long idateRdv = item.getDateRdv();
                 String ihoraireRdv = item.getHoraireRdv();
-                // long idureeRdv = item.getDureeRdv();
+                long idureeRdv=item.getDureeRdv();
                 // long ipointDebRdv = item.getPointDebRdv();
 //                long ipointFinRdv = item.getPointFinRdv();
                 String iniveauRdv = item.getNiveauRdv();
-//                float itarifRdv=item.getTarifRdv();
+                float itarifRdv = item.getTarifRdv();
                 float imontantRdv=item.getMontantRdv();
 //                float isoldeRdv=item.getSoldeRdv();
 //                String iinfoRdv=item.getInfoRdv();
@@ -57,9 +62,11 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
                 Intent i=new Intent(RdvListe.this, SeanceAvant.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
-                i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("dateRdv", idateRdv);
                 i.putExtra("horaireRdv", ihoraireRdv);
+                i.putExtra("dureeRdv", idureeRdv);
+                i.putExtra("niveauRdv", iniveauRdv);
+                i.putExtra("tarifRdv", itarifRdv);
                 i.putExtra("montantRdv", imontantRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
@@ -74,6 +81,12 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
         builder.show();
     }
 
+    //Date du jour au format alphabétique
+    public String lejour() {
+        final Date date = new Date();
+        return new SimpleDateFormat("EEEE d MMM yyyy").format(date);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +98,9 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
 //        final String res2 = i.getStringExtra("prenom");
 //        final String choix = i.getStringExtra("choix");
 //        final long idRdv = i.getLongExtra("idRdv", 1);
+
+        TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
+        dateDuJour.setText(lejour());
 
         RdvDAO rdvdao = new RdvDAO(getBaseContext());
         rdvdao.open();
@@ -99,35 +115,15 @@ public class RdvListe extends ActionBarActivity implements RdvAdapter.RdvAdapter
 //
         RdvAdapter adapter = new RdvAdapter(this, listOf);
 
-
         adapter.addListener((RdvAdapter.RdvAdapterListener) this);
 
         ListView list = (ListView)findViewById(R.id.listView1);
 
-
-
         list.setAdapter(adapter);
 
-
-
-
-//        final Button retour=(Button) findViewById(R.id.button1);
-//        OnClickListener ecoute = new OnClickListener ()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                //ValidationOffre.this.finish();
-//                Intent i=new Intent(ListOffre.this,MonMenu.class);
-//                i.putExtra("id", res0);
-//                i.putExtra("nom",res1);
-//                i.putExtra("prenom",res2);
-//                i.putExtra("idOff", idOff);
-//                startActivity(i);
-//            }
-//        };
-//        retour.setOnClickListener(ecoute);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -4,13 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class SeanceFin extends ActionBarActivity {
+public class SeanceFin extends AppCompatActivity {
 
     Context ct = this;
     Button btnSeanceNext;
@@ -42,8 +43,10 @@ public class SeanceFin extends ActionBarActivity {
         final long iidRdv = i.getLongExtra("idRdv", 1);
         final String iprenom = i.getStringExtra("prenom");
         final String inom = i.getStringExtra("nom");
+
         final String iniveau = i.getStringExtra("niveauRdv");
-        final String iduree = i.getStringExtra("dureeRdv");
+        final String idureeRdv = i.getStringExtra("dureeRdv");
+        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String ipointDeb = i.getStringExtra("pointDeb");
         final String ipointFin = i.getStringExtra("pointFin");
         final String idureeSeance = i.getStringExtra("dureeSeance");
@@ -54,11 +57,26 @@ public class SeanceFin extends ActionBarActivity {
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-        duree.setText(iduree);
+        //duree.setText(String.valueOf(idureeRdv));
+        duree.setText(idureeRdv);
         pointDeb.setText(ipointDeb);
         pointFin.setText(ipointFin);
         dureeSeance.setText(idureeSeance);
         montantSeance.setText(imontantSeance);
+
+        //Bouton SEANCE SUIVANTE
+        View.OnClickListener ecoute1=new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                stopService(v);
+                Intent i=new Intent(SeanceFin.this, RdvListeFutur.class);
+                startActivity(i);
+                finish();
+            }
+        };
+        btnSeanceNext.setOnClickListener(ecoute1);
 
         //Bouton SEANCE NON PREVU
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
@@ -66,8 +84,10 @@ public class SeanceFin extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
+                stopService(v);
                 Intent i=new Intent(SeanceFin.this, RdvCreation.class);
                 startActivity(i);
+                finish();
             }
         };
         btnSeanceNew.setOnClickListener(ecoute2);
@@ -79,6 +99,7 @@ public class SeanceFin extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
+                //stopService(v);
                 Intent i=new Intent(SeanceFin.this, RdvListe.class);
                 startActivity(i);
             }
@@ -96,16 +117,21 @@ public class SeanceFin extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_accueil:
+                //Bouton "Accueil"
+                finish();
+
+            case R.id.action_settings:
+                // Comportement du bouton "Paramètres"
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void stopService(View v){
+        stopService(new Intent(getBaseContext(),MonServiceAlarm.class));
     }
 }

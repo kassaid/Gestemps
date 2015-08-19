@@ -198,7 +198,6 @@ public class Rdv {
         long seconds = 0;
         long minutes = 0;
         long hours = 0;
-        //long days=0;
 
         while(differnce>1000){
             differnce = differnce - 1000;
@@ -213,10 +212,6 @@ public class Rdv {
                 hours++;
             }
 
-//            if(hours==24){
-//                hours=0;
-//                days++;
-//            }
         }
 
         String intervalle = ""+hours+" h "+minutes+" min "+seconds+" s";

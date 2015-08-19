@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PersonneCreation extends ActionBarActivity {
+public class PersonneCreation extends AppCompatActivity {
 
     public final String tag = "PersonneCreation-test";
     String nomPers, prenomPers, adressePers, telPers, mailPers, infoPers;

@@ -44,7 +44,6 @@ public class RdvCreation extends FragmentActivity {
         setContentView(R.layout.activity_rdv_creation);
 
 
-
         final EditText lib = (EditText) findViewById(R.id.libEdit);
         final EditText adresse = (EditText) findViewById(R.id.adresseEdit);
         final EditText date = (EditText) findViewById(R.id.dateEdit);
@@ -133,25 +132,27 @@ public class RdvCreation extends FragmentActivity {
                 else
                 {
                     Rdv rdv = null;
-//                    try {
-//                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv,
-//                                5, changeDate(dateRdv+" "+horaireRdv), timeStamp(), niveauRdv, 40,
-//                                345, 678,  infoRdv, idPersRdv);
-//                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, dateRdv, horaireRdv,
-//                                0, 0, 0, niveauRdv, 40,
-//                                345, 678,  infoRdv, idPersRdv);
 
                     try {
-                        rdv = new Rdv(libRdv, adresseRdv, 123, 456, changeDate(dateRdv+" "+horaireRdv), horaireRdv,
-                                changeInt(dureeRdv), 0, 0, niveauRdv,changeFloat(tarifRdv),
-                                345, 678,  infoRdv, idPersRdv);
+                        rdv = new Rdv(libRdv,
+                                adresseRdv,
+                                123,
+                                456,
+                                changeDate(dateRdv+" "+horaireRdv),
+                                horaireRdv,
+                                changeInt(dureeRdv)*1000*30,
+                                0,
+                                0,
+                                niveauRdv,
+                                changeFloat(tarifRdv),
+                                345,
+                                678,
+                                infoRdv,
+                                idPersRdv);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
                     RdvDAO rdvdao = new RdvDAO(ct);
                     rdvdao.open();
                     rdvdao.save(rdv);
@@ -177,7 +178,9 @@ public class RdvCreation extends FragmentActivity {
 
             @Override
             public void onClick(View v) {
-                setResult(RESULT_CANCELED);
+                //setResult(RESULT_CANCELED);
+                Intent i=new Intent(RdvCreation.this, MainActivity.class);
+                startActivity(i);
                 finish();
             }
 
@@ -200,7 +203,7 @@ public class RdvCreation extends FragmentActivity {
         return parseInt(s,10);
     }
 
-    //Pointage
+    //Pointage horaire
     public long timeStamp(){
         final Date date = new Date();
         return date.getTime();
@@ -250,9 +253,7 @@ public class RdvCreation extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

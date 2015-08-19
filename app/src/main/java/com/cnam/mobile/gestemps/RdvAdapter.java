@@ -70,16 +70,22 @@ public class RdvAdapter extends BaseAdapter{
         TextView rdv_idPers = (TextView)item.findViewById(R.id.rdv_idPers);
         TextView rdv_montant = (TextView)item.findViewById(R.id.rdv_montant);
 
+        final String iduree = "Séance de "+String.valueOf(list.get(position).getDureeRdv()/10000)+" h";
+        final String ihoraire = "Début de séance à "+list.get(position).getHoraireRdv();
+
+
         String strdate = list.get(position).changeDate(list.get(position).getDateRdv());
+
+
         rdv_libelle.setText(list.get(position).getLibRdv());
         //rdv_date.setText(String.valueOf(list.get(position).getDateRdv()));
         rdv_date.setText(strdate);
         rdv_pointDeb.setText(String.valueOf(list.get(position).getPointDebRdv()));
         rdv_pointFin.setText(String.valueOf(list.get(position).getPointFinRdv()));
-        rdv_horaire.setText(list.get(position).getHoraireRdv());
+        rdv_horaire.setText(ihoraire);
         rdv_dest.setText(list.get(position).getAdresRdv());
         //rdv_duree.setText(String.valueOf(list.get(position).getNbplace()));
-        rdv_duree.setText(String.valueOf(list.get(position).getDureeRdv()));
+        rdv_duree.setText(iduree);
         rdv_idPers.setText(String.valueOf(list.get(position).getIdPers()));
         rdv_montant.setText(String.valueOf(list.get(position).getMontantRdv()));
 
