@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -135,6 +136,13 @@ public class RdvDAO {
     public int nbRdv()
     {
         Cursor c = getRdvAsCursor();
+        return c.getCount();
+    }
+
+    //Nombre de tuple à venir de la table RDV
+    public int nbRdvJour(long time)
+    {
+        Cursor c = getRdvFuturAsCurs(time);
         return c.getCount();
     }
 
@@ -286,6 +294,12 @@ public class RdvDAO {
     public long timeStamp(){
         final Date date = new Date();
         return date.getTime();
+    }
+
+    //Pointage
+    public long timeStampJour(){
+        final Date date = new Date();
+        return  0;
     }
 
     //Liste des RDV à venir

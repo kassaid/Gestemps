@@ -39,14 +39,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Toolbar toolbar =   (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-        //ActionBar actionBar = getSupportActionBar();
-        //Permet d'afficher le bouton de navigation up sur l'application
-        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
+        TextView nombreRdv = (TextView) findViewById(R.id.nb_rdvView);
 
         btnRdvPrevu = (Button) findViewById(R.id.button1);
         btnRdvNonPrevu = (Button) findViewById(R.id.button2);
@@ -56,6 +51,21 @@ public class MainActivity extends AppCompatActivity {
 
         dateDuJour.setText(lejour());
 
+
+        RdvDAO rdvdao = new RdvDAO(ct);
+        rdvdao.open();
+        long nbDAO = rdvdao.nbRdvJour(rdvdao.timeStamp()-2*60*60*1000);
+        final String nb_rdv;
+        if (nbDAO!=0) {
+            if (nbDAO<2){
+                 nb_rdv = "Vous avez une seule séance à venir !";
+            }else{
+                 nb_rdv = "Vous avez " + nbDAO + " séances à venir !";}
+        }else{
+             nb_rdv = "Vous n'avez aucune séance à venir !";
+        }
+
+        nombreRdv.setText(nb_rdv);
 
 
         //Bouton LISTE RDV futur

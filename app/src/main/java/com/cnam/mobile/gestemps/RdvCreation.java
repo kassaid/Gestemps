@@ -46,7 +46,7 @@ public class RdvCreation extends FragmentActivity {
         setContentView(R.layout.activity_rdv_creation);
 
 
-        final EditText lib = (EditText) findViewById(R.id.libEdit);
+        //final EditText lib = (EditText) findViewById(R.id.libEdit);
         final EditText adresse = (EditText) findViewById(R.id.adresseEdit);
         final EditText date = (EditText) findViewById(R.id.dateEdit);
         final EditText horaire = (EditText) findViewById(R.id.horaireEdit);
@@ -117,16 +117,17 @@ public class RdvCreation extends FragmentActivity {
 
             @Override
             public void onClick(View vu) {
-                libRdv = lib.getText().toString();
+                //libRdv = lib.getText().toString();
                 adresseRdv = adresse.getText().toString();
                 dateRdv = date.getText().toString();
                 horaireRdv = horaire.getText().toString();
                 dureeRdv = duree.getText().toString();
                 tarifRdv = tarif.getText().toString();
                 infoRdv = info.getText().toString();
+                libRdv = "OK";
 
 
-                if (libRdv.equals("")||adresseRdv.equals("")||dateRdv.equals("")||horaireRdv.equals("")||
+                if (adresseRdv.equals("")||dateRdv.equals("")||horaireRdv.equals("")||
                         dureeRdv.equals("")){
                     Toast.makeText(getBaseContext(), "Veuillez remplir les champs obligatoires!",
                             Toast.LENGTH_LONG).show();
