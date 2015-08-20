@@ -46,6 +46,7 @@ public class PersonneDAO {
     }
 
 
+    //Liste de toute les tales de la BASE
     public List<String> allTableNames(){
         List<String> result = new ArrayList<String>();
         String selectQuery = "SELECT NAME FROM sqlite_master WHERE type = 'table'";
@@ -59,6 +60,7 @@ public class PersonneDAO {
         return result;
     }
 
+    //Liste des NOM de la table PERSONNE
     public List<String> allPersNames(){
         List<String> result = new ArrayList<String>();
         String selectQuery = "SELECT "+NOM+" FROM "+T_PERSONNE;
@@ -114,7 +116,7 @@ public class PersonneDAO {
         Log.i(tag, "modification PERSONNE "+" réussi!");
     }
 
-    //Supprimer une PERSONNE
+    //Supprimer une PERSONNE par 'idPers'
     public void delete(long idPers)
     {
         //db = covoit.getWritableDatabase();
@@ -122,6 +124,7 @@ public class PersonneDAO {
         Log.i(tag,"Suppression réussi!");
     }
 
+    //Supprimer une PERSONNE par objet PERSONNE
     public void delete(Personne p)
     {
         //open();
@@ -157,6 +160,7 @@ public class PersonneDAO {
         return result;
     }
 
+    //Conversion d'un tuple en objet PERSONNE
     private Personne cursorToPersonne(Cursor c)
     {
         // Si la requête ne renvoie pas de résultat
@@ -232,7 +236,7 @@ public class PersonneDAO {
 
 
     //Selection d'un objet PERSONNE par son 'nom'
-    public Personne getPersonneByNomPrenom (String nom){
+    public Personne getPersonneByNom (String nom){
 //        String req = "SELECT  * FROM "+
 //                T_PERSONNE +" WHERE "+
 //                NOM +" = "+ nom +" AND "+
@@ -249,6 +253,20 @@ public class PersonneDAO {
         return cursorToPersonne(c);
     }
 
+
+    //Selection d'un objet PERSONNE par son 'nom' et 'prenom'
+    public Personne getPersonneByNomPrenom (String nom,String prenom){
+        Cursor c = db.query(
+                T_PERSONNE,
+                null,
+                NOM +"=? AND "+ PRENOM +"=?",
+                new String[] {String.valueOf(nom),String.valueOf(prenom)},
+                null, null, null, null);
+        Log.i(tag,"PESONNE selectionnée par son mail");
+        return cursorToPersonne(c);
+    }
+
+    //Nombre de personne de la table PERSONNE
     public int nbPersonne()
     {
         //String req = "SELECT  * FROM " + T_PERSONNE;

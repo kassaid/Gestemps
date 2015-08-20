@@ -74,10 +74,11 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
         RdvDAO rdvdao = new RdvDAO(getBaseContext());
         rdvdao.open();
 
-        TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
-        dateDuJour.setText(lejour());
+//        TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
+//        dateDuJour.setText(lejour());
 
         listOf = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
+       // listOf = (ArrayList<Rdv>) rdvdao.getAllRdv();
 
         RdvAdapter adapter = new RdvAdapter(this, listOf);
 
@@ -126,7 +127,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
 
     }
 
-        //Date du jour au format alphabétique
+    //Date du jour au format alphabétique
     public String lejour() {
         final Date date = new Date();
         return new SimpleDateFormat("EEEE d MMM yyyy").format(date);

@@ -16,81 +16,81 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:text="@string/title_ajouter_eleve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textView1"
+                android:text="@string/title_ajouter_eleve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
-    <EditText
-        android:id="@+id/nomEdit"
-        android:hint="Nom"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="50dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+            <EditText
+                android:id="@+id/nomEdit"
+                android:hint="Nom"
+                android:layout_below="@+id/textView1"
+                android:layout_marginTop="50dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
 
 
-    <EditText android:id="@+id/prenomEdit"
-        android:hint="Prénom"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/nomEdit" />
+            <EditText android:id="@+id/prenomEdit"
+                android:hint="Prénom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/nomEdit" />
 
-    <EditText android:id="@+id/adresseEdit"
-        android:hint="Adesse"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/prenomEdit" />
+            <EditText android:id="@+id/adresseEdit"
+                android:hint="Adesse"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/prenomEdit" />
 
-    <EditText android:id="@+id/telEdit"
-        android:hint="Téléphone"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:inputType="phone"
-        android:layout_below="@id/adresseEdit" />
+            <EditText android:id="@+id/telEdit"
+                android:hint="Téléphone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:inputType="phone"
+                android:layout_below="@id/adresseEdit" />
 
-    <EditText
-        android:id="@+id/mailEdit"
-        android:hint="Mail"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:inputType="textEmailAddress"
-        android:layout_below="@id/telEdit" />
+            <EditText
+                android:id="@+id/mailEdit"
+                android:hint="Mail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:inputType="textEmailAddress"
+                android:layout_below="@id/telEdit" />
 
-    <EditText
-        android:id="@+id/infoEdit"
-        android:hint="Information utile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/mailEdit" />
+            <EditText
+                android:id="@+id/infoEdit"
+                android:hint="Information utile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/mailEdit" />
 
 
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
 
-        android:text="@string/bt_valider"
-        android:layout_marginTop="20dp"
-        android:id="@+id/button1"
-        android:layout_below="@id/infoEdit" />
+                android:text="@string/bt_valider"
+                android:layout_marginTop="20dp"
+                android:id="@+id/button1"
+                android:layout_below="@id/infoEdit" />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_annuler"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button1"
-        android:layout_centerHorizontal="true" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bt_annuler"
+                android:id="@+id/button2"
+                android:layout_below="@+id/button1"
+                android:layout_centerHorizontal="true" />
 
 
         </LinearLayout>

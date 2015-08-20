@@ -8,8 +8,8 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
@@ -22,14 +22,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <receiver android:name=".MonRecepteur" />
 
-        <receiver android:name=".MonRecepteur"/>
-        <service android:name=".MonServiceAlarm"/>
+        <service android:name=".MonServiceAlarm" />
 
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,44 +47,49 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".RdvListe"
             android:label="@string/title_activity_rdv_liste" >
         </activity>
         <activity
-            android:name=".PersonnesListe"
+            android:name=".PersonneListe"
             android:label="@string/title_activity_personne_liste" >
         </activity>
         <activity
             android:name=".PersonneCreation"
             android:label="@string/title_activity_personne_creation"
-            android:screenOrientation="portrait">
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".RdvCreation"
             android:label="@string/title_activity_rdv_creation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SeanceDebut"
             android:label="@string/title_activity_seance_debut"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SeanceAvant"
             android:label="@string/title_activity_seance_avant"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SeanceFin"
             android:label="@string/title_activity_seance_fin"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".RdvListeFutur"
             android:label="@string/title_activity_rdv_liste_futur" >
+        </activity>
+        <activity
+            android:name=".SeanceHonorair"
+            android:label="@string/title_activity_seance_honorair" >
         </activity>
     </application>
 

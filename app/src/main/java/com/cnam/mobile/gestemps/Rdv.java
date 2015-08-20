@@ -232,6 +232,12 @@ public class Rdv {
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
     }
 
+    public float soldeTotal(long tps, float m){
+        float montantSeance = getTarifRdv() * tps;
+        float montantRecu = m;
+        return montantRecu - montantSeance;
+    }
+
     @Override
     public String toString() {
         return "\nRdv{" +

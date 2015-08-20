@@ -35,6 +35,7 @@ public class DateFenetreTime extends DialogFragment implements TimePickerDialog.
 
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute) {
+
         String time = hour+":"+minute;
         vTime.setText(time);
     }

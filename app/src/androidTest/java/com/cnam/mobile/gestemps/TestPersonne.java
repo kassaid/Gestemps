@@ -147,7 +147,7 @@ public class TestPersonne extends AndroidTestCase {
         Log.i(tag,"La personne selectionnée est: "+ selection);
     }
 
-    public void testSelectPersByNomPrenom(){
+    public void testSelectPersByNom(){
         PersonneDAO persdao = new PersonneDAO(this.getContext());
         persdao.open();
         Log.i(tag, "liste8 des tables" + persdao.allTableNames());
@@ -183,6 +183,25 @@ public class TestPersonne extends AndroidTestCase {
         int nombPers = persdao.nbPersonne();
         Log.i(tag, "Nombre de PERSONNE : " + nombPers);
 
+    }
+
+    public void testSelectPersByNomPrenom(){
+        PersonneDAO persdao = new PersonneDAO(this.getContext());
+        persdao.open();
+        Log.i(tag, "liste5 des tables" + persdao.allTableNames());
+        Personne dernier = null;
+        for (int i=0;i<5;i++){
+            Personne p = new Personne("ZOPALITO "+i,"Zoé "+i, i+"36 rue Papin 25000 Besançon",27,82,
+                    "0623154373","zoe.zopalito.fr"+i,0,"cours avec zoé "+i);
+            persdao.save(p);
+            dernier = p;
+        }
+        List<Personne> list1 = persdao.getAllPersonne();
+        Log.i(tag, "Liste ZOPALITO avant selection " + list1);
+
+        //persdao.delete(dernier);
+        Personne selection = persdao.getPersonneByNomPrenom(dernier.getNomPers(),dernier.getPrenomPers());
+        Log.i(tag,"La personne n°4 selectionnée est: "+ selection);
     }
 
 }

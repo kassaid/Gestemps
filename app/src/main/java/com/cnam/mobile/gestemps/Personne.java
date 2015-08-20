@@ -118,6 +118,10 @@ public class Personne {
         this.infoPers = infoPers;
     }
 
+    public float totalSolde(float m){
+        return m + getSoldePers();
+    }
+
     @Override
     public String toString() {
         return "\nPersonne{" +

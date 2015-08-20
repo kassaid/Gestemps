@@ -1,5 +1,6 @@
 package com.cnam.mobile.gestemps;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class SeanceFin extends AppCompatActivity {
+public class SeanceHonorair extends AppCompatActivity {
 
     Context ct = this;
     Button btnSeanceNext;
@@ -21,7 +22,8 @@ public class SeanceFin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seance_fin);
+        setContentView(R.layout.activity_seance_honorair);
+
 
         final String tag = "SeanceFin-test";
 
@@ -39,30 +41,30 @@ public class SeanceFin extends AppCompatActivity {
         btnSeanceNew = (Button) findViewById(R.id.btnSeanceNew);
         btnlisteRdv = (Button) findViewById(R.id.btnListeRdv);
 
-        Intent i = getIntent();
-        final long iidRdv = i.getLongExtra("idRdv", 1);
-        final String iprenom = i.getStringExtra("prenom");
-        final String inom = i.getStringExtra("nom");
-
-        final String iniveau = i.getStringExtra("niveauRdv");
-        final String idureeRdv = i.getStringExtra("dureeRdv");
-        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
-        final String ipointDeb = i.getStringExtra("pointDeb");
-        final String ipointFin = i.getStringExtra("pointFin");
-        final String idureeSeance = i.getStringExtra("dureeSeance");
-        final String imontantSeance = i.getStringExtra("montantRdv");
-        final long iidPers = i.getLongExtra("idPers", 1);
-
-
-        prenom.setText(iprenom);
-        nom.setText(inom);
-        niveau.setText(iniveau);
-        //duree.setText(String.valueOf(idureeRdv));
-        duree.setText(idureeRdv);
-        pointDeb.setText(ipointDeb);
-        pointFin.setText(ipointFin);
-        dureeSeance.setText(idureeSeance);
-        montantSeance.setText(imontantSeance);
+//        Intent i = getIntent();
+//        final long iidRdv = i.getLongExtra("idRdv", 1);
+//        final String iprenom = i.getStringExtra("prenom");
+//        final String inom = i.getStringExtra("nom");
+//
+//        final String iniveau = i.getStringExtra("niveauRdv");
+//        final String idureeRdv = i.getStringExtra("dureeRdv");
+//        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
+//        final String ipointDeb = i.getStringExtra("pointDeb");
+//        final String ipointFin = i.getStringExtra("pointFin");
+//        final String idureeSeance = i.getStringExtra("dureeSeance");
+//        final String imontantSeance = i.getStringExtra("montantRdv");
+//        final long iidPers = i.getLongExtra("idPers", 1);
+//
+//
+//        prenom.setText(iprenom);
+//        nom.setText(inom);
+//        niveau.setText(iniveau);
+//        //duree.setText(String.valueOf(idureeRdv));
+//        duree.setText(idureeRdv);
+//        pointDeb.setText(ipointDeb);
+//        pointFin.setText(ipointFin);
+//        dureeSeance.setText(idureeSeance);
+//        montantSeance.setText(imontantSeance);
 
         //Bouton SEANCE SUIVANTE
         View.OnClickListener ecoute1=new  View.OnClickListener(){
@@ -70,8 +72,8 @@ public class SeanceFin extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                stopService(v);
-                Intent i=new Intent(SeanceFin.this, RdvListeFutur.class);
+                //stopService(v);
+                Intent i=new Intent(SeanceHonorair.this, RdvListeFutur.class);
                 startActivity(i);
                 finish();
             }
@@ -84,8 +86,8 @@ public class SeanceFin extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                stopService(v);
-                Intent i=new Intent(SeanceFin.this, RdvCreation.class);
+                //stopService(v);
+                Intent i=new Intent(SeanceHonorair.this, RdvCreation.class);
                 startActivity(i);
                 finish();
             }
@@ -100,7 +102,7 @@ public class SeanceFin extends AppCompatActivity {
             public void onClick(View v)
             {
                 //stopService(v);
-                Intent i=new Intent(SeanceFin.this, RdvListe.class);
+                Intent i=new Intent(SeanceHonorair.this, RdvListe.class);
                 startActivity(i);
             }
         };
@@ -113,7 +115,7 @@ public class SeanceFin extends AppCompatActivity {
             public void onClick(View v)
             {
                 //stopService(v);
-                Intent i=new Intent(SeanceFin.this, SeanceHonorair.class);
+                Intent i=new Intent(SeanceHonorair.this, SeanceHonorair.class);
                 startActivity(i);
             }
         };
@@ -124,27 +126,22 @@ public class SeanceFin extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_seance_fin, menu);
+        getMenuInflater().inflate(R.menu.menu_seance_honorair, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        switch (item.getItemId()) {
-            case R.id.action_accueil:
-                //Bouton "Accueil"
-                finish();
-
-            case R.id.action_settings:
-                // Comportement du bouton "Paramètres"
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
-    }
 
-    public void stopService(View v){
-        stopService(new Intent(getBaseContext(),MonServiceAlarm.class));
+        return super.onOptionsItemSelected(item);
     }
 }

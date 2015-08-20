@@ -17,110 +17,110 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/titreView"
-        android:text="@string/title_ajouter_rdv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/titreView"
+                android:text="@string/title_ajouter_rdv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/libEdit"
-        android:hint="Libellé du RDV"
-        android:layout_below="@+id/titreView"
-        android:layout_marginTop="30dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
-
-
-
-    <Spinner
-        android:id="@+id/personneSpinner"
-        android:hint="Nom de la personne"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/libEdit"
-        />
+            <EditText
+                android:id="@+id/libEdit"
+                android:hint="Libellé du RDV"
+                android:layout_below="@+id/titreView"
+                android:layout_marginTop="30dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
 
 
 
-    <EditText
-        android:id="@+id/adresseEdit"
-        android:hint="Adresse du RDV"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/personneSpinner" />
-
-    <EditText
-        android:id="@+id/dateEdit"
-        android:hint="Date"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/adresseEdit" />
-
-    <EditText
-        android:id="@+id/horaireEdit"
-        android:hint="Horaire"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/dateEdit" />
-
-    <EditText android:id="@+id/dureeEdit"
-        android:hint="Durée prévue (heure)"
-        android:inputType="number"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/horaireEdit" />
+            <Spinner
+                android:id="@+id/personneSpinner"
+                android:hint="Nom de la personne"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/libEdit"
+                />
 
 
-    <Spinner
-        android:id="@+id/niveauSpinner"
 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/dureeEdit"
-        />
+            <EditText
+                android:id="@+id/adresseEdit"
+                android:hint="Adresse du RDV"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/personneSpinner" />
+
+            <EditText
+                android:id="@+id/dateEdit"
+                android:hint="Date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/adresseEdit" />
+
+            <EditText
+                android:id="@+id/horaireEdit"
+                android:hint="Horaire"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/dateEdit" />
+
+            <EditText android:id="@+id/dureeEdit"
+                android:hint="Durée prévue (heure)"
+                android:inputType="number"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/horaireEdit" />
 
 
-    <EditText
-        android:id="@+id/tarifEdit"
-        android:hint="Tarif horaire (euros)"
-        android:inputType="number"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/niveauSpinner" />
+            <Spinner
+                android:id="@+id/niveauSpinner"
 
-    <EditText
-        android:id="@+id/infoEdit"
-        android:hint="Information utile"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/tarifEdit" />
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/dureeEdit"
+                />
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_valider"
-        android:id="@+id/button1"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/infoEdit" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_annuler"
-        android:layout_below="@id/button1"
-        android:layout_centerHorizontal="true" />
+            <EditText
+                android:id="@+id/tarifEdit"
+                android:hint="Tarif horaire (euros)"
+                android:inputType="number"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/niveauSpinner" />
+
+            <EditText
+                android:id="@+id/infoEdit"
+                android:hint="Information utile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tarifEdit" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bt_valider"
+                android:id="@+id/button1"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/infoEdit" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bt_annuler"
+                android:layout_below="@id/button1"
+                android:layout_centerHorizontal="true" />
 
         </LinearLayout>
     </ScrollView>

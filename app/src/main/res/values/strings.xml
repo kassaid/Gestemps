@@ -23,6 +23,7 @@
     <string name="title_activity_seance_debut">Début de séance</string>
     <string name="title_activity_seance_avant">Avant la séance</string>
     <string name="title_activity_seance_fin">Fin de la séance</string>
+    <string name="title_activity_seance_honorair">Honoraire de la séance</string>
     
     <string-array name="spinNiveau">
         <item>Niveau d\'étude</item>

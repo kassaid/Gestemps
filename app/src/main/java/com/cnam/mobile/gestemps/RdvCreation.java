@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -27,6 +28,7 @@ import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class RdvCreation extends FragmentActivity {
+
 
     private String nomPosition;
     private List<String> allNomPers;
@@ -74,7 +76,7 @@ public class RdvCreation extends FragmentActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 nomPosition = allNomPers.get(position);
-                pers = persdao.getPersonneByNomPrenom(nomPosition);
+                pers = persdao.getPersonneByNom(nomPosition);
                 adresse.setText(pers.getAdresPers());
                 idPersRdv = pers.getIdPers();
                 if (position!=0){
@@ -132,8 +134,10 @@ public class RdvCreation extends FragmentActivity {
                 else
                 {
                     Rdv rdv = null;
+                    Log.i(tag, "envoie creation");
 
                     try {
+                        Log.i(tag, "Un compte creation en cours");
                         rdv = new Rdv(libRdv,
                                 adresseRdv,
                                 123,

@@ -35,9 +35,7 @@ public class PersonneCreation extends AppCompatActivity {
         final EditText info = (EditText) findViewById(R.id.infoEdit);
         final Button btValider=(Button) findViewById(R.id.button1);
         final Button btAnnuler=(Button) findViewById(R.id.button2);
-
-
-
+        
 
         View.OnClickListener ecoute1 = new  View.OnClickListener() {
 
@@ -55,8 +53,7 @@ public class PersonneCreation extends AppCompatActivity {
                 Matcher m = pat.matcher(mailPers);
 
 
-                if (nomPers.equals("")||prenomPers.equals("")||adressePers.equals("")||telPers.equals("")
-                        ||mailPers.equals("")){
+                if (nomPers.equals("")||prenomPers.equals("")||adressePers.equals("")||telPers.equals("")){
                     Toast.makeText(getBaseContext(), "Veuillez remplir les champs obligatoires !", Toast.LENGTH_LONG).show();
                 }
                 else
@@ -66,32 +63,38 @@ public class PersonneCreation extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Personne p = new Personne(nomPers, prenomPers, adressePers, 123, 456, telPers, mailPers, 54, infoPers);
+                    Personne p = new Personne(
+                            nomPers,
+                            prenomPers,
+                            adressePers,
+                            123, 456,
+                            telPers,
+                            mailPers,
+                            0,
+                            infoPers);
+
                     PersonneDAO persdao = new PersonneDAO(ct);
                     persdao.open();
-//                        if (persdao.selectByLogin(clogin)!=null)
-//                        {
-//                            Toast.makeText(getBaseContext(),"Login non accepté!",Toast.LENGTH_LONG).show();
-//                            pass.setText("");
-//                            conpass.setText("");
-//                            login.setText("");
-//                        }
+                    if (persdao.getPersonneByNomPrenom(nomPers, prenomPers)!=null) {
+                            Toast.makeText(getBaseContext(),nomPers+" "+prenomPers+" est déjà enregistré !",
+                                    Toast.LENGTH_LONG).show();
+                            nom.setText("");
+                    }
 
-//                        else
-//                        {
+                    else {
                             persdao.save(p);
                             Log.i(tag, "Un compte a été ajouté");
-                            Toast.makeText(getBaseContext(),"L'élève "+prenomPers+" "+nomPers+", a été créé!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(),"L'élève "+prenomPers+" "+nomPers+", a été créé !",
+                                    Toast.LENGTH_LONG).show();
                             //Toast.makeText(getBaseContext(), "Bienvenue "+cprenom+" "+cnom, Toast.LENGTH_LONG).show();
                             Intent i=new Intent();
-                            i.putExtra("ret1", nomPers);
-                            i.putExtra("ret2", prenomPers);
+                            i.putExtra("nomPers", nomPers);
+                            i.putExtra("prenomPers", prenomPers);
                             setResult(RESULT_OK,i);
                             finish();
- //                       }
- //                   }
-                }
 
+                    }
+                }
 
             }
 
