@@ -54,6 +54,10 @@
             android:label="@string/title_activity_rdv_liste" >
         </activity>
         <activity
+            android:name=".PersonnesListe"
+            android:label="@string/title_activity_personne_liste" >
+        </activity>
+        <activity
             android:name=".PersonneCreation"
             android:label="@string/title_activity_personne_creation"
             android:screenOrientation="portrait">

@@ -90,9 +90,17 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="AJOUTER UN ELEVE"
-        android:id="@+id/button4"
+        android:text="LISTE DES ELEVES"
+        android:id="@+id/btnListeEleves"
         android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true" />
+
+    <Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="AJOUTER UN ELEVE"
+    android:id="@+id/button4"
+    android:layout_below="@+id/btnListeEleves"
+    android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

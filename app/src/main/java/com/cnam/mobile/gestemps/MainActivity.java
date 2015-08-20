@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnRdvNonPrevu;
     Button btnListeRdv;
     Button btnAjouter;
+    Button btnListeEleves;
+
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
     Context ct=this;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         btnRdvPrevu = (Button) findViewById(R.id.button1);
         btnRdvNonPrevu = (Button) findViewById(R.id.button2);
         btnListeRdv = (Button) findViewById(R.id.button3);
+        btnListeEleves = (Button) findViewById(R.id.btnListeEleves);
         btnAjouter = (Button) findViewById(R.id.button4);
 
         dateDuJour.setText(lejour());
@@ -101,6 +105,16 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         btnListeRdv.setOnClickListener(ecoute3);
+
+        //Bouton Liste des élèves
+        btnListeEleves.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "btnListeEleves", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(MainActivity.this, PersonnesListe.class);
+                startActivity(i);
+            }
+        });
 
         //Ajouter une personne
         View.OnClickListener ecoute4 = new  View.OnClickListener(){

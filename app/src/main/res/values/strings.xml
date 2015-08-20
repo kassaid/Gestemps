@@ -3,6 +3,8 @@
 
     <string name="hello_world">Je ne mets pas de string !</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_rdv_liste_futur">Liste des RDV futur</string>
+    <string name="title_activity_personne_liste">Liste des personnes</string>
     <string name="title_activity_maps">Destination</string>
     <string name="title_activity_rdv_liste">Liste des RDV</string>
     <string name="title_activity_personne_creation">Ajouter un élève</string>
@@ -30,7 +32,6 @@
         <item>Collège</item>
         <item>Ecole primaire</item>
     </string-array>
-    <string name="title_activity_rdv_liste_futur">Liste des RDV futur</string>
 
 
 </resources>
