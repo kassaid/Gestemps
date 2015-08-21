@@ -22,7 +22,7 @@ public class PersonneListe extends AppCompatActivity implements PersonneAdapter.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Personne");
 
-        builder.setMessage("Voulez-vous voir " + item.getNomPers() +" ?");
+        builder.setMessage("Voulez-vous voir la fiche de " + item.getNomPers() +" ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener()
         {
             @Override
@@ -31,13 +31,21 @@ public class PersonneListe extends AppCompatActivity implements PersonneAdapter.
                 long iidPers = item.getIdPers();
                 String inomPers = item.getNomPers();
                 String iprenomPers = item.getPrenomPers();
+                String iadresPers = item.getAdresPers();
+                String itelPers = item.getTelPers();
+                String imailPers = item.getMailPers();
+                float isoldePers = item.getSoldePers();
+                String iinfoPers = item.getInfoPers();
 
-
-                Intent i=new Intent(PersonneListe.this, SeanceAvant.class);
+                Intent i=new Intent(PersonneListe.this, PersonneFiche.class);
                 i.putExtra("idPers", iidPers);
                 i.putExtra("nomPers", inomPers);
                 i.putExtra("prenomPers", iprenomPers);
-
+                i.putExtra("adresPers", iadresPers);
+                i.putExtra("telPers", itelPers);
+                i.putExtra("mailPers", imailPers);
+                i.putExtra("soldePers",isoldePers);
+                i.putExtra("infoPers", iinfoPers);
 
                 startActivity(i);
                 finish();

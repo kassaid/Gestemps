@@ -222,6 +222,7 @@ public class SeanceAvant extends AppCompatActivity {
 
                 startActivity(intent);
                 dialog.dismiss();
+                finish();
             }
         }).setTitle("Message d'arrivée").setIcon(R.drawable.autoriser).create();
         mes.setNegativeButton("Non",null);
@@ -231,7 +232,7 @@ public class SeanceAvant extends AppCompatActivity {
     //Appel téléphonique
     public void appelConf(final String num){
         AlertDialog.Builder mes = new AlertDialog.Builder(ct);
-        mes.setMessage("Vous souhaitez appeler?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+        mes.setMessage("Vous souhaitez appeler ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

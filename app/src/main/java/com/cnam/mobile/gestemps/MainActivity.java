@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btnRdvPrevu.setOnClickListener(ecoute1);
 
 
-        //Bouton NEW RDV
+        //Bouton AJOUTER UN RDV
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
             @Override
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent i=new Intent(MainActivity.this, RdvCreation.class);
                 startActivity(i);
-                //finish();
+                finish();
             }
         };
         btnRdvNonPrevu.setOnClickListener(ecoute2);
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         btnListeEleves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "btnListeEleves", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "btnListeEleves", Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(MainActivity.this, PersonneListe.class);
                 startActivity(i);
             }

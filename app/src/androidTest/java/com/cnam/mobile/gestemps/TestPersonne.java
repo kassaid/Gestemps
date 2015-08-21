@@ -159,7 +159,7 @@ public class TestPersonne extends AndroidTestCase {
         int nombPers = persdao.nbPersonne();
         Log.i(tag, "Nombre de PERSONNE : " + nombPers);
 
-        Personne selection = persdao.getPersonneByNomPrenom(p.getNomPers());
+        Personne selection = persdao.getPersonneByNom(p.getNomPers());
         Log.i(tag,"La personne selectionnée est: "+ selection);
     }
 

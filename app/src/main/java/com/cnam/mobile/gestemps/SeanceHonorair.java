@@ -101,23 +101,18 @@ public class SeanceHonorair extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //stopService(v);
-//                Intent i=new Intent(SeanceHonorair.this, RdvListeFutur.class);
-//                startActivity(i);
                 paiementRec = paiement.getText().toString();
-
-                //libRdv = "OK";
-
 
                 if (paiementRec.equals("")){
                     Toast.makeText(getBaseContext(), "Il n'y a aucun paiement !",
                             Toast.LENGTH_LONG).show();
                 }else{
-                    p.setSoldePers(p.totalSolde(parseFloat(paiementRec)));
-                    persdao.modifier(p);
+//                    p.setSoldePers(p.totalSolde(parseFloat(paiementRec)));
+//                    persdao.modifier(p);
+                    paiementConf(v);
 
-                    Log.d(tag, "Le solde de "+p.getNomPers()+" est modifié");
-                    finish();
+                    Log.d(tag, "Le solde de " + p.getNomPers() + " est modifié");
+                    //finish();
                 }
 
                 //finish();
@@ -150,25 +145,23 @@ public class SeanceHonorair extends AppCompatActivity {
 
 
     //Calcul du nouveau solde
-    public void paiementConf(View v,final String num){
+    public void paiementConf(View v){
         AlertDialog.Builder mes = new AlertDialog.Builder(ct);
         mes.setMessage("Vous avez reçu un paiement ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                //smsTransmis(num, mess_retard);
+                nouveauSolde();
                 dialog.dismiss();
+                finish();
             }
         }).setTitle("Confirmation paiement").setIcon(R.drawable.autoriser).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }
 
-    public void nouveauSolde(long idPers){
-        PersonneDAO persdao = new PersonneDAO(ct);
-        persdao.open();
-        Personne p = (Personne) persdao.getPersonneById(idPers);
-        //p.totalSolde(m);
+    public void nouveauSolde(){
+        p.setSoldePers(p.totalSolde(parseFloat(paiementRec)));
+        persdao.modifier(p);
 
     }
 

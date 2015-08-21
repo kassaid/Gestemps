@@ -60,10 +60,6 @@ public class RdvCreation extends FragmentActivity {
         //final String niv;
         final Spinner spinlistPers = (Spinner) findViewById(R.id.personneSpinner);
 
-//        List<String> list = new ArrayList<String>();
-//        list.add("MAMA");
-//        list.add("PAPA");
-//        list.add("FIFILLE");
 
         final PersonneDAO persdao = new PersonneDAO(ct);
         persdao.open();
@@ -184,8 +180,8 @@ public class RdvCreation extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 //setResult(RESULT_CANCELED);
-                Intent i=new Intent(RdvCreation.this, MainActivity.class);
-                startActivity(i);
+//                Intent i=new Intent(RdvCreation.this, MainActivity.class);
+//                startActivity(i);
                 finish();
             }
 
@@ -205,7 +201,7 @@ public class RdvCreation extends FragmentActivity {
     }
 
     public long changeInt(String s){
-        return parseInt(s,10);
+        return parseInt(s, 10);
     }
 
     //Pointage horaire
@@ -246,6 +242,12 @@ public class RdvCreation extends FragmentActivity {
         });
 
 
+    }
+
+    public void onDestroy(){
+        super.onDestroy();
+            Intent i = new Intent(RdvCreation.this, MainActivity.class);
+            startActivity(i);
     }
 
 

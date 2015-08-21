@@ -120,6 +120,8 @@ public class SeanceDebut extends AppCompatActivity {
             {
                 final String ipointFin = timeJour();
 
+                stopService(v);
+
                 RdvDAO rdvdao = new RdvDAO(ct);
                 rdvdao.open();
                 Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
@@ -130,18 +132,10 @@ public class SeanceDebut extends AppCompatActivity {
                 long pointF = rdv2.getPointFinRdv();
                 long pointD = rdv2.getPointDebRdv();
                 String idureeSeance = "rien";
-//                try {
-                //idureeSeance = rdv2.diffDateTime(rdv2.changeDate(ipointFin), rdv2.changeDate(ipointDeb));
-                //idureeSeance = rdv2.diffDateTime(rdv2.getPointFinRdv(),rdv2.getPointDebRdv());
+
                 idureeSeance = rdv2.diffDateTime(pointF, pointD);
                 long m = rdv2.montantSeance(pointF,pointD);
                 String iimontantRdv = String.valueOf(m)+" euros";
-                //String iimontantRdv = String.v
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-
-                stopService(v);
 
                 Intent i=new Intent(SeanceDebut.this, SeanceFin.class);
                 i.putExtra("idRdv", iidRdv);

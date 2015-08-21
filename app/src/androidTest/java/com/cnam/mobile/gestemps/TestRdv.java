@@ -164,4 +164,37 @@ public class TestRdv extends AndroidTestCase {
 
     }
 
+
+    public void testUnRdvFuturByIdPers(){
+        PersonneDAO persdao = new PersonneDAO(this.getContext());
+        persdao.open();
+        persdao.deleteAll();
+        for (int i=0;i<10;i++){
+            Personne p = new Personne("JEFFROIS"+i,"Sandra"+i, i+"16 rue Papin 25000 Besançon",27,82,
+                    "067856489"+i,"sandra.jeffrois@mail.fr"+i,98+i*100,"cours avec sandra"+i);
+            persdao.save(p);
+        }
+
+        RdvDAO rdvdao = new RdvDAO(this.getContext());
+        rdvdao.open();
+        rdvDao.deleteAll();
+        Rdv dernier = null;
+        for (int i=0;i<4;i++) {
+            Rdv rdv = new Rdv("RDV URGENT"+i, i+"19 rue Papino 25000 Besançon", 67, 89,1456789851, "10:30", 10000, 0, 0, "Terminale", 100, 80, 320, "ok man"+i, 5);
+            rdv.setDateRdv(rdvdao.timeStamp()+i*24*60*60*1000);
+            rdvdao.save(rdv);
+            dernier = rdv;
+        }
+        List<Personne> list = persdao.getAllPersonne();
+        Log.i(tag, "Liste PERSONNE " + list);
+
+        List<Rdv> list2 = rdvdao.getAllRdv();
+        Log.i(tag, "Liste RDV " + list2);
+
+        Rdv rdv = rdvdao.getRdvByIdPersAndTime(5,rdvdao.timeStamp());
+        Log.i(tag,"Le premier RDV trouvé: "+ rdv);
+
+
+    }
+
 }

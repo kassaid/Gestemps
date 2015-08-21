@@ -33,6 +33,8 @@
         <item>Collège</item>
         <item>Ecole primaire</item>
     </string-array>
+    <string name="title_activity_personne_fiche">Fiche de l élève</string>
+    <string name="title_activity_personne_fich">Fiche de la personne</string>
 
 
 </resources>

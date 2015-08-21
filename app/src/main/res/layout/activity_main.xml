@@ -74,7 +74,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="NOUVEAU RDV"
+        android:text="AJOUTER UN RDV"
         android:id="@+id/button2"
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true" />
