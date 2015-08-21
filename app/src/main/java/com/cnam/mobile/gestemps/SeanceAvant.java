@@ -23,6 +23,7 @@ import java.util.Date;
 public class SeanceAvant extends AppCompatActivity {
 
     Context ct = this;
+    TextView prenomPers;
     Button btnSmsRetard;
     Button btnSmsAnnule;
     Button btnArrive;
@@ -40,7 +41,7 @@ public class SeanceAvant extends AppCompatActivity {
         final String tag = "SeanceAvant-test";
 
         TextView libRdv = (TextView) findViewById(R.id.libRdvView);
-        TextView prenomPers = (TextView) findViewById(R.id.prenomPersView);
+        prenomPers = (TextView) findViewById(R.id.prenomPersView);
         TextView nomPers = (TextView) findViewById(R.id.nomPersView);
         TextView niveauRdv = (TextView) findViewById(R.id.niveauRdvView);
         TextView dureeRdv = (TextView) findViewById(R.id.dureeRdvView);
@@ -74,10 +75,12 @@ public class SeanceAvant extends AppCompatActivity {
         Personne pers = persdao.getPersonneById(iidPers);
         String iprenom = pers.getPrenomPers();
         String inom = pers.getNomPers();
+        //Float isolde = pers.getSoldePers();
 
         libRdv.setText(ilibRdv);
         prenomPers.setText(iprenom);
         nomPers.setText(inom);
+        //solde.setText(isolde);
         niveauRdv.setText(iniveau);
         dureeRdv.setText(iduree);
         horaireRdv.setText(ihoraire);
@@ -97,7 +100,6 @@ public class SeanceAvant extends AppCompatActivity {
                 Personne pers = persdao.getPersonneById(iidPers);
                 String tel = pers.getTelPers();
                 retardConf(v,tel);
-                //smsTransmis(num_tel, mess_retard);
             }
         };
         btnSmsRetard.setOnClickListener(ecoute1);
@@ -116,7 +118,6 @@ public class SeanceAvant extends AppCompatActivity {
                 Personne pers = persdao.getPersonneById(iidPers);
                 String tel = pers.getTelPers();
                 annuleConf(v, tel);
-                //smsTransmis(num_tel, mess_annule);
             }
         };
         btnSmsAnnule.setOnClickListener(ecoute2);
@@ -133,21 +134,24 @@ public class SeanceAvant extends AppCompatActivity {
                 RdvDAO rdvdao = new RdvDAO(ct);
                 rdvdao.open();
                 Rdv rdv = rdvdao.getRdvById(iidRdv);
-                rdv.setLibRdv("SÉANCE RÉALISÉE !");
+                rdv.setLibRdv("SÉANCE NON TERMINÉE !");
                 rdv.setPointDebRdv(timeStamp());
                 rdvdao.modifier(rdv);
                 PersonneDAO persdao = new PersonneDAO(ct);
                 persdao.open();
                 Personne pers = persdao.getPersonneById(iidPers);
+
                 final String iprenomPers = pers.getPrenomPers();
                 final String inomPers = pers.getNomPers();
                 final String itelPers = pers.getTelPers();
+                final float isolde = pers.getSoldePers();
 
                 Intent i=new Intent(SeanceAvant.this, SeanceDebut.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
                 i.putExtra("prenom", iprenomPers);
                 i.putExtra("nom", inomPers);
+                i.putExtra("solde",isolde);
                 i.putExtra("niveauRdv", iniveau);
                 i.putExtra("dureeRdv", iduree);
                 i.putExtra("horaireRdv", ihoraire);
@@ -155,15 +159,13 @@ public class SeanceAvant extends AppCompatActivity {
                 i.putExtra("montantRdv", imontantRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
-
                 arriveConf(v, i);
-                //startActivity(i);
-                //finish();
+
             }
         };
         btnArrive.setOnClickListener(ecoute3);
 
-        //Bouton envoyer SMS RETARD
+        //Clic sur le prenom
         View.OnClickListener ecoute4 = new  View.OnClickListener(){
 
             @Override
@@ -177,7 +179,7 @@ public class SeanceAvant extends AppCompatActivity {
                 //smsTransmis(num_tel, mess_retard);
             }
         };
-        libRdv.setOnClickListener(ecoute4);
+        prenomPers.setOnClickListener(ecoute4);
 
 
     }

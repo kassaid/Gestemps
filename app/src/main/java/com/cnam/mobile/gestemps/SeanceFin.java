@@ -13,10 +13,12 @@ import android.widget.TextView;
 
 public class SeanceFin extends AppCompatActivity {
 
+
     Context ct = this;
     Button btnSeanceNext;
     Button btnSeanceNew;
-    Button btnlisteRdv;
+    Button btnListeRdv;
+    Button btnPaiement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,8 @@ public class SeanceFin extends AppCompatActivity {
 
         btnSeanceNext = (Button) findViewById(R.id.btnSeanceNext);
         btnSeanceNew = (Button) findViewById(R.id.btnSeanceNew);
-        btnlisteRdv = (Button) findViewById(R.id.btnListeRdv);
+        btnListeRdv = (Button) findViewById(R.id.btnListeRdv);
+        btnPaiement = (Button) findViewById(R.id.btnPaiement);
 
         Intent i = getIntent();
         final long iidRdv = i.getLongExtra("idRdv", 1);
@@ -64,6 +67,7 @@ public class SeanceFin extends AppCompatActivity {
         dureeSeance.setText(idureeSeance);
         montantSeance.setText(imontantSeance);
 
+
         //Bouton SEANCE SUIVANTE
         View.OnClickListener ecoute1=new  View.OnClickListener(){
 
@@ -77,6 +81,7 @@ public class SeanceFin extends AppCompatActivity {
             }
         };
         btnSeanceNext.setOnClickListener(ecoute1);
+
 
         //Bouton SEANCE NON PREVU
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
@@ -104,7 +109,7 @@ public class SeanceFin extends AppCompatActivity {
                 startActivity(i);
             }
         };
-        btnlisteRdv.setOnClickListener(ecoute3);
+        btnListeRdv.setOnClickListener(ecoute3);
 
         //Bouton PAIEMENT
         View.OnClickListener ecoute4 = new  View.OnClickListener(){
@@ -112,12 +117,18 @@ public class SeanceFin extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //stopService(v);
+                stopService(v);
                 Intent i=new Intent(SeanceFin.this, SeanceHonorair.class);
+                i.putExtra("idRdv",iidRdv);
+                i.putExtra("idPers",iidPers);
+                i.putExtra("dureeRdv",idureeRdv);
+                i.putExtra("dureeSeance",idureeSeance);
+                i.putExtra("montantSeance",imontantSeance);
                 startActivity(i);
+                finish();
             }
         };
-        btnlisteRdv.setOnClickListener(ecoute4);
+        btnPaiement.setOnClickListener(ecoute4);
 
     }
 

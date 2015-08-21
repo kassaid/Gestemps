@@ -125,11 +125,11 @@ public class SeanceDebut extends AppCompatActivity {
                 long pointD = rdv2.getPointDebRdv();
                 String idureeSeance = "rien";
 //                try {
-                    //idureeSeance = rdv2.diffDateTime(rdv2.changeDate(ipointFin), rdv2.changeDate(ipointDeb));
-                    //idureeSeance = rdv2.diffDateTime(rdv2.getPointFinRdv(),rdv2.getPointDebRdv());
-                    idureeSeance = rdv2.diffDateTime(pointF, pointD);
-                    long m = rdv2.montantSeance(pointF,pointD);
-                    String iimontantRdv = String.valueOf(m)+" euros";
+                //idureeSeance = rdv2.diffDateTime(rdv2.changeDate(ipointFin), rdv2.changeDate(ipointDeb));
+                //idureeSeance = rdv2.diffDateTime(rdv2.getPointFinRdv(),rdv2.getPointDebRdv());
+                idureeSeance = rdv2.diffDateTime(pointF, pointD);
+                long m = rdv2.montantSeance(pointF,pointD);
+                String iimontantRdv = String.valueOf(m)+" euros";
                 //String iimontantRdv = String.v
 //                } catch (ParseException e) {
 //                    e.printStackTrace();

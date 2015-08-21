@@ -25,6 +25,7 @@
         <receiver android:name=".MonRecepteur" />
 
         <service android:name=".MonServiceAlarm" />
+        <service android:name=".MonServiceSeance"/>
 
         <activity
             android:name=".MainActivity"
@@ -89,7 +90,8 @@
         </activity>
         <activity
             android:name=".SeanceHonorair"
-            android:label="@string/title_activity_seance_honorair" >
+            android:label="@string/title_activity_seance_honorair"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

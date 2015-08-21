@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         RdvDAO rdvdao = new RdvDAO(ct);
         rdvdao.open();
         long nbDAO = rdvdao.nbRdvJour(rdvdao.timeStamp()-2*60*60*1000);
+
         final String nb_rdv;
         if (nbDAO!=0) {
             if (nbDAO<2){

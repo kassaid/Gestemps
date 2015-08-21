@@ -41,8 +41,8 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/niveauRdvView"
-                android:text="niveau du rdv"
+                android:id="@+id/tarifView"
+                android:text="tarif horaire"
                 android:layout_below="@+id/nomPersView"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
@@ -50,35 +50,26 @@
 
             <TextView
                 android:id="@+id/dureeRdvView"
-                android:text="durée du rdv"
-                android:layout_below="@+id/niveauRdvView"
+                android:text="durée prévue du rdv"
+                android:layout_below="@+id/tarifView"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
 
             <TextView
-                android:id="@+id/pointDebRdvView"
-                android:text="pointage de début"
+                android:id="@+id/soldeView"
+                android:text="solde"
                 android:layout_below="@+id/dureeRdvView"
                 android:layout_marginTop="15dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/pointFinRdvView"
-                android:text="pointage de fin"
-                android:layout_below="@+id/pointDebRdvView"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/dureeSeanceView"
                 android:text="durée de la séance"
-                android:layout_below="@+id/niveauSeanceView"
+                android:layout_below="@+id/soldeView"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,49 +78,43 @@
 
             <TextView
                 android:id="@+id/montantSeanceView"
-                android:text="durée de la séance"
+                android:text="montant de la séance"
                 android:layout_below="@+id/dureeSeanceView"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 />
-
-            <Button
-                android:id="@+id/btnSeanceNext"
+            <EditText
+                android:id="@+id/paiementEdit"
+                android:hint="Paiement reçu (euros)"
+                android:inputType="number"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="séance suivante"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/montantSeanceView" />
+
+            <Button
+                android:id="@+id/btnValider"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Valider"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/montantSeanceView"
                 android:layout_gravity="center_horizontal"
                 />
 
             <Button
-                android:id="@+id/btnSeanceNew"
+                android:id="@+id/btnQuitter"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="séance non prévue"
+                android:text="Quitter"
                 android:layout_below="@+id/btnTerminer"
                 android:layout_gravity="center_horizontal"
                 />
 
-            <Button
-                android:id="@+id/btnListeRdv"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="liste des rdv"
-                android:layout_below="@+id/btnTerminer"
-                android:layout_gravity="center_horizontal"
-                />
-            <Button
-                android:id="@+id/btnPaiement"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Paiement"
-                android:layout_below="@+id/btnListeRdv"
-                android:layout_gravity="center_horizontal"
-                />
+
+
 
 
 

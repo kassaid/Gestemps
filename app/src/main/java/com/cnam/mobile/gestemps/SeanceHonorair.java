@@ -10,14 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class SeanceHonorair extends AppCompatActivity {
 
     Context ct = this;
-    Button btnSeanceNext;
-    Button btnSeanceNew;
-    Button btnlisteRdv;
+    Button btnValider;
+    Button btnQuitter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,42 +32,58 @@ public class SeanceHonorair extends AppCompatActivity {
 
         TextView prenom = (TextView) findViewById(R.id.prenomPersView);
         TextView nom = (TextView) findViewById(R.id.nomPersView);
-        TextView time = (TextView) findViewById(R.id.timeView);
-        TextView niveau = (TextView) findViewById(R.id.niveauRdvView);
-        TextView duree = (TextView) findViewById(R.id.dureeRdvView);
-        TextView pointDeb = (TextView) findViewById(R.id.pointDebRdvView);
-        TextView pointFin = (TextView) findViewById(R.id.pointFinRdvView);
+        TextView tarif = (TextView) findViewById(R.id.tarifView);
+        TextView dureeRdv = (TextView) findViewById(R.id.dureeRdvView);
+        TextView solde = (TextView) findViewById(R.id.soldeView);
         TextView dureeSeance = (TextView) findViewById(R.id.dureeSeanceView);
         TextView montantSeance = (TextView) findViewById(R.id.montantSeanceView);
+        EditText paiement = (EditText) findViewById(R.id.paiementEdit);
 
-        btnSeanceNext = (Button) findViewById(R.id.btnSeanceNext);
-        btnSeanceNew = (Button) findViewById(R.id.btnSeanceNew);
-        btnlisteRdv = (Button) findViewById(R.id.btnListeRdv);
+        btnValider = (Button) findViewById(R.id.btnValider);
+        btnQuitter = (Button) findViewById(R.id.btnQuitter);
 
-//        Intent i = getIntent();
-//        final long iidRdv = i.getLongExtra("idRdv", 1);
+
+        Intent i = getIntent();
+        final long iidRdv = i.getLongExtra("idRdv", 1);
+        final long iidPers = i.getLongExtra("idPers", 1);
 //        final String iprenom = i.getStringExtra("prenom");
 //        final String inom = i.getStringExtra("nom");
-//
-//        final String iniveau = i.getStringExtra("niveauRdv");
-//        final String idureeRdv = i.getStringExtra("dureeRdv");
+//        //final float isolde = i.getFloatExtra("solde", 0);
+//        //final String iniveau = i.getStringExtra("niveauRdv");
+//        //final float itarif = i.getFloatExtra("tarif", 0);
+        final String idureeRdv = i.getStringExtra("dureeRdv");
 //        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
-//        final String ipointDeb = i.getStringExtra("pointDeb");
-//        final String ipointFin = i.getStringExtra("pointFin");
-//        final String idureeSeance = i.getStringExtra("dureeSeance");
-//        final String imontantSeance = i.getStringExtra("montantRdv");
+//        //final String ipointDeb = i.getStringExtra("pointDeb");
+//        //final String ipointFin = i.getStringExtra("pointFin");
+        final String idureeSeance = i.getStringExtra("dureeSeance");
+        final String imontantSeance = i.getStringExtra("montantSeance");
 //        final long iidPers = i.getLongExtra("idPers", 1);
-//
-//
-//        prenom.setText(iprenom);
-//        nom.setText(inom);
-//        niveau.setText(iniveau);
-//        //duree.setText(String.valueOf(idureeRdv));
-//        duree.setText(idureeRdv);
-//        pointDeb.setText(ipointDeb);
-//        pointFin.setText(ipointFin);
-//        dureeSeance.setText(idureeSeance);
-//        montantSeance.setText(imontantSeance);
+
+        RdvDAO rdvdao = new RdvDAO(ct);
+        rdvdao.open();
+        Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
+        PersonneDAO persdao = new PersonneDAO(ct);
+        persdao.open();
+        Personne p = (Personne) persdao.getPersonneById(iidPers);
+        String iprenom = p.getPrenomPers();
+        String inom = p.getNomPers();
+        float isolde = p.getSoldePers();
+        float itarif = r.getTarifRdv();
+       // long iduree = r.getDureeRdv();
+
+        String iitarif = "Tarif : "+String.valueOf(itarif)+" euros/h";
+        String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
+        String iidureeSeance = "Durée : "+idureeSeance;
+        String iimontantSeance = "Montant de la séance : "+imontantSeance;
+
+        prenom.setText(iprenom);
+        nom.setText(inom);
+
+        dureeRdv.setText(idureeRdv);
+        tarif.setText(iitarif);
+        solde.setText(iisolde);
+        dureeSeance.setText(iidureeSeance);
+        montantSeance.setText(iimontantSeance);
 
         //Bouton SEANCE SUIVANTE
         View.OnClickListener ecoute1=new  View.OnClickListener(){
@@ -73,12 +92,12 @@ public class SeanceHonorair extends AppCompatActivity {
             public void onClick(View v)
             {
                 //stopService(v);
-                Intent i=new Intent(SeanceHonorair.this, RdvListeFutur.class);
-                startActivity(i);
+//                Intent i=new Intent(SeanceHonorair.this, RdvListeFutur.class);
+//                startActivity(i);
                 finish();
             }
         };
-        btnSeanceNext.setOnClickListener(ecoute1);
+        btnValider.setOnClickListener(ecoute1);
 
         //Bouton SEANCE NON PREVU
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
@@ -87,39 +106,15 @@ public class SeanceHonorair extends AppCompatActivity {
             public void onClick(View v)
             {
                 //stopService(v);
-                Intent i=new Intent(SeanceHonorair.this, RdvCreation.class);
-                startActivity(i);
+//                Intent i=new Intent(SeanceHonorair.this, RdvListe.class);
+//                startActivity(i);
                 finish();
             }
         };
-        btnSeanceNew.setOnClickListener(ecoute2);
+        btnQuitter.setOnClickListener(ecoute2);
 
 
-        //Bouton LISTE DES RDV
-        View.OnClickListener ecoute3 = new  View.OnClickListener(){
 
-            @Override
-            public void onClick(View v)
-            {
-                //stopService(v);
-                Intent i=new Intent(SeanceHonorair.this, RdvListe.class);
-                startActivity(i);
-            }
-        };
-        btnlisteRdv.setOnClickListener(ecoute3);
-
-        //Bouton PAIEMENT
-        View.OnClickListener ecoute4 = new  View.OnClickListener(){
-
-            @Override
-            public void onClick(View v)
-            {
-                //stopService(v);
-                Intent i=new Intent(SeanceHonorair.this, SeanceHonorair.class);
-                startActivity(i);
-            }
-        };
-        btnlisteRdv.setOnClickListener(ecoute4);
 
     }
 

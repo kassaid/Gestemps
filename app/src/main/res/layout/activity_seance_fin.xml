@@ -10,7 +10,7 @@
     tools:context="com.cnam.mobile.gestemps.Trajet">
 
 
-<TextView
+    <TextView
         android:id="@+id/titreView"
         android:text="GESTEMPS"
         android:layout_width="wrap_content"
@@ -19,120 +19,120 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/prenomPersView"
-        android:text="Prénom personne"
-        android:layout_below="@+id/titreView"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/nomPersView"
-        android:text="Nom"
-        android:layout_below="@+id/prenomPersView"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/niveauRdvView"
-        android:text="niveau du rdv"
-        android:layout_below="@+id/nomPersView"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/dureeRdvView"
-        android:text="durée du rdv"
-        android:layout_below="@+id/niveauRdvView"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-    <TextView
-        android:id="@+id/pointDebRdvView"
-        android:text="pointage de début"
-        android:layout_below="@+id/dureeRdvView"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/pointFinRdvView"
-        android:text="pointage de fin"
-        android:layout_below="@+id/pointDebRdvView"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/dureeSeanceView"
-        android:text="durée de la séance"
-        android:layout_below="@+id/niveauSeanceView"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        />
-
-    <TextView
-        android:id="@+id/montantSeanceView"
-        android:text="durée de la séance"
-        android:layout_below="@+id/dureeSeanceView"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        />
-
-    <Button
-        android:id="@+id/btnSeanceNext"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="séance suivante"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/montantSeanceView"
-        android:layout_gravity="center_horizontal"
-        />
-
-    <Button
-        android:id="@+id/btnSeanceNew"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="séance non prévue"
-        android:layout_below="@+id/btnTerminer"
-        android:layout_gravity="center_horizontal"
-        />
-
-    <Button
-        android:id="@+id/btnListeRdv"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="liste des rdv"
-        android:layout_below="@+id/btnTerminer"
-        android:layout_gravity="center_horizontal"
-        />
-        <Button
-            android:id="@+id/btnPaiement"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Paiement"
-            android:layout_below="@+id/btnListeRdv"
-            android:layout_gravity="center_horizontal"
-            />
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-        
+            <TextView
+                android:id="@+id/prenomPersView"
+                android:text="Prénom personne"
+                android:layout_below="@+id/titreView"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/nomPersView"
+                android:text="Nom"
+                android:layout_below="@+id/prenomPersView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/niveauRdvView"
+                android:text="niveau du rdv"
+                android:layout_below="@+id/nomPersView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dureeRdvView"
+                android:text="durée du rdv"
+                android:layout_below="@+id/niveauRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/pointDebRdvView"
+                android:text="pointage de début"
+                android:layout_below="@+id/dureeRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/pointFinRdvView"
+                android:text="pointage de fin"
+                android:layout_below="@+id/pointDebRdvView"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dureeSeanceView"
+                android:text="durée de la séance"
+                android:layout_below="@+id/niveauSeanceView"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <TextView
+                android:id="@+id/montantSeanceView"
+                android:text="durée de la séance"
+                android:layout_below="@+id/dureeSeanceView"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <Button
+                android:id="@+id/btnSeanceNext"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="séance suivante"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/montantSeanceView"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <Button
+                android:id="@+id/btnSeanceNew"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="séance non prévue"
+                android:layout_below="@+id/btnTerminer"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <Button
+                android:id="@+id/btnListeRdv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="liste des rdv"
+                android:layout_below="@+id/btnTerminer"
+                android:layout_gravity="center_horizontal"
+                />
+            <Button
+                android:id="@+id/btnPaiement"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Paiement"
+                android:layout_below="@+id/btnListeRdv"
+                android:layout_gravity="center_horizontal"
+                />
+
+
+
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
