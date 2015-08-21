@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -70,6 +71,44 @@ public class PersonneFiche extends ActionBarActivity {
         solde.setText(iisolde);
         rdvPers.setText(irdvPers);
         info.setText(iinfo);
+
+        //Bouton AJOUTER UN RDV
+        View.OnClickListener ecoute1 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(PersonneFiche.this, RdvCreation.class);
+                //i.putExtra("idPers", iidPers);
+                startActivity(i);
+                finish();
+            }
+        };
+        btnCreationRdv.setOnClickListener(ecoute1);
+
+        //Bouton AJOUTER UN RDV
+        View.OnClickListener ecoute2 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(PersonneFiche.this, PersonneModif.class);
+                i.putExtra("idPers", iidPers);
+                i.putExtra("nomPers", inom);
+                i.putExtra("prenomPers", iprenom);
+                i.putExtra("adresPers", iadresse);
+                i.putExtra("telPers", itel);
+                i.putExtra("mailPers", imail);
+                //i.putExtra("soldePers",isolde);
+                i.putExtra("infoPers", iinfo);
+
+                startActivity(i);
+                finish();
+            }
+        };
+        btnModifier.setOnClickListener(ecoute2);
+
+
 
     }
 

@@ -126,9 +126,6 @@ public class SeanceHonorair extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //stopService(v);
-//                Intent i=new Intent(SeanceHonorair.this, RdvListe.class);
-//                startActivity(i);
                 finish();
             }
         };

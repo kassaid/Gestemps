@@ -101,6 +101,10 @@
             android:name=".PersonneFich"
             android:label="@string/title_activity_personne_fich" >
         </activity>
+        <activity
+            android:name=".PersonneModif"
+            android:label="@string/title_activity_personne_modif" >
+        </activity>
     </application>
 
 </manifest>

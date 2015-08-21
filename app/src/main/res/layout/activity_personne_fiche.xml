@@ -11,12 +11,6 @@
 
 
 
-    <TextView
-        android:id="@+id/titreView"
-        android:text="DESTINATION VERS CE RDV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -100,10 +94,11 @@
         android:id="@+id/btnCreationRdv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="FIXER UN RDV"
+        android:text="AJOUTER UN RDV"
         android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
         />
+
     <Button
         android:id="@+id/btnModifier"
         android:layout_width="fill_parent"

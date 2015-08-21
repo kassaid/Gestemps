@@ -35,6 +35,7 @@
     </string-array>
     <string name="title_activity_personne_fiche">Fiche de l élève</string>
     <string name="title_activity_personne_fich">Fiche de la personne</string>
+    <string name="title_activity_personne_modif">Modification de la fiche</string>
 
 
 </resources>

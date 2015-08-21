@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 public class PersonneCreation extends AppCompatActivity {
 
     public final String tag = "PersonneCreation-test";
+
     String nomPers, prenomPers, adressePers, telPers, mailPers, infoPers;
     Context ct = this;
 
