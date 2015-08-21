@@ -1,25 +1,34 @@
 package com.cnam.mobile.gestemps;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import static java.lang.Float.parseFloat;
 
 public class SeanceHonorair extends AppCompatActivity {
 
     Context ct = this;
     Button btnValider;
     Button btnQuitter;
+    String paiementRec;
+    PersonneDAO persdao;
+    Personne p;
 
 
     @Override
@@ -37,7 +46,7 @@ public class SeanceHonorair extends AppCompatActivity {
         TextView solde = (TextView) findViewById(R.id.soldeView);
         TextView dureeSeance = (TextView) findViewById(R.id.dureeSeanceView);
         TextView montantSeance = (TextView) findViewById(R.id.montantSeanceView);
-        EditText paiement = (EditText) findViewById(R.id.paiementEdit);
+        final EditText paiement = (EditText) findViewById(R.id.paiementEdit);
 
         btnValider = (Button) findViewById(R.id.btnValider);
         btnQuitter = (Button) findViewById(R.id.btnQuitter);
@@ -62,14 +71,14 @@ public class SeanceHonorair extends AppCompatActivity {
         RdvDAO rdvdao = new RdvDAO(ct);
         rdvdao.open();
         Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
-        PersonneDAO persdao = new PersonneDAO(ct);
+        persdao = new PersonneDAO(ct);
         persdao.open();
-        Personne p = (Personne) persdao.getPersonneById(iidPers);
+        p = (Personne) persdao.getPersonneById(iidPers);
         String iprenom = p.getPrenomPers();
         String inom = p.getNomPers();
         float isolde = p.getSoldePers();
         float itarif = r.getTarifRdv();
-       // long iduree = r.getDureeRdv();
+        // long iduree = r.getDureeRdv();
 
         String iitarif = "Tarif : "+String.valueOf(itarif)+" euros/h";
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
@@ -85,7 +94,8 @@ public class SeanceHonorair extends AppCompatActivity {
         dureeSeance.setText(iidureeSeance);
         montantSeance.setText(iimontantSeance);
 
-        //Bouton SEANCE SUIVANTE
+        //Bouton VALIDER
+        //Valider le montant reçu par la personne
         View.OnClickListener ecoute1=new  View.OnClickListener(){
 
             @Override
@@ -94,12 +104,28 @@ public class SeanceHonorair extends AppCompatActivity {
                 //stopService(v);
 //                Intent i=new Intent(SeanceHonorair.this, RdvListeFutur.class);
 //                startActivity(i);
-                finish();
+                paiementRec = paiement.getText().toString();
+
+                //libRdv = "OK";
+
+
+                if (paiementRec.equals("")){
+                    Toast.makeText(getBaseContext(), "Il n'y a aucun paiement !",
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    p.setSoldePers(p.totalSolde(parseFloat(paiementRec)));
+                    persdao.modifier(p);
+
+                    Log.d(tag, "Le solde de "+p.getNomPers()+" est modifié");
+                    finish();
+                }
+
+                //finish();
             }
         };
         btnValider.setOnClickListener(ecoute1);
 
-        //Bouton SEANCE NON PREVU
+        //Bouton QUITTER
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
             @Override
@@ -115,6 +141,34 @@ public class SeanceHonorair extends AppCompatActivity {
 
 
 
+
+    }
+
+//    public float changeFloat(String s){
+//        return parseFloat(s);
+//    }
+
+
+    //Calcul du nouveau solde
+    public void paiementConf(View v,final String num){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Vous avez reçu un paiement ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                //smsTransmis(num, mess_retard);
+                dialog.dismiss();
+            }
+        }).setTitle("Confirmation paiement").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    public void nouveauSolde(long idPers){
+        PersonneDAO persdao = new PersonneDAO(ct);
+        persdao.open();
+        Personne p = (Personne) persdao.getPersonneById(idPers);
+        //p.totalSolde(m);
 
     }
 

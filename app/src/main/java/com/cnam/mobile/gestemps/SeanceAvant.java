@@ -176,7 +176,6 @@ public class SeanceAvant extends AppCompatActivity {
                 Personne pers = persdao.getPersonneById(iidPers);
                 String tel = pers.getTelPers();
                 appelConf(tel);
-                //smsTransmis(num_tel, mess_retard);
             }
         };
         prenomPers.setOnClickListener(ecoute4);

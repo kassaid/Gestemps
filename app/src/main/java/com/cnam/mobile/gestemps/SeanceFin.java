@@ -29,9 +29,10 @@ public class SeanceFin extends AppCompatActivity {
 
         TextView prenom = (TextView) findViewById(R.id.prenomPersView);
         TextView nom = (TextView) findViewById(R.id.nomPersView);
-        TextView time = (TextView) findViewById(R.id.timeView);
+       // TextView time = (TextView) findViewById(R.id.timeView);
         TextView niveau = (TextView) findViewById(R.id.niveauRdvView);
         TextView duree = (TextView) findViewById(R.id.dureeRdvView);
+        TextView solde = (TextView) findViewById(R.id.soldeView);
         TextView pointDeb = (TextView) findViewById(R.id.pointDebRdvView);
         TextView pointFin = (TextView) findViewById(R.id.pointFinRdvView);
         TextView dureeSeance = (TextView) findViewById(R.id.dureeSeanceView);
@@ -49,6 +50,7 @@ public class SeanceFin extends AppCompatActivity {
 
         final String iniveau = i.getStringExtra("niveauRdv");
         final String idureeRdv = i.getStringExtra("dureeRdv");
+        final float isolde = i.getFloatExtra("solde", 0);
         //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String ipointDeb = i.getStringExtra("pointDeb");
         final String ipointFin = i.getStringExtra("pointFin");
@@ -57,11 +59,15 @@ public class SeanceFin extends AppCompatActivity {
         final long iidPers = i.getLongExtra("idPers", 1);
 
 
+        String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
+
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
         //duree.setText(String.valueOf(idureeRdv));
         duree.setText(idureeRdv);
+        solde.setText(iisolde);
+
         pointDeb.setText(ipointDeb);
         pointFin.setText(ipointFin);
         dureeSeance.setText(idureeSeance);

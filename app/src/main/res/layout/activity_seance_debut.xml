@@ -18,6 +18,7 @@
         android:text="Prénom personne"
         android:layout_below="@+id/titreView"
         android:layout_marginTop="30dp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -49,8 +50,8 @@
 
 
     <TextView
-        android:id="@+id/timeView"
-        android:text="Heure-minute"
+        android:id="@+id/soldeView"
+        android:text="solde compte"
         android:layout_below="@+id/dureeRdvView"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
     <TextView
         android:id="@+id/pointDebRdvView"
         android:text="pointage de début"
-        android:layout_below="@+id/timeView"
+        android:layout_below="@+id/soldeView"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
