@@ -11,6 +11,22 @@
 		android:layout_height="wrap_content"
 		android:textStyle="bold"
 		android:textSize="@dimen/abc_text_size_medium_material"/>
+
+	<TextView
+		android:text="Nom"
+		android:id="@+id/rdv_nomPers"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textStyle="bold"
+		android:textSize="@dimen/abc_text_size_medium_material"/>
+
+	<TextView
+		android:text="Prénom"
+		android:id="@+id/rdv_prenomPers"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textStyle="bold"
+		android:textSize="@dimen/abc_text_size_medium_material"/>
 		
 	<TextView
 		android:text="Date"

@@ -51,7 +51,7 @@ public class PersonneFiche extends ActionBarActivity {
         final String iadresse = i.getStringExtra("adresPers");
         final String itel = i.getStringExtra("telPers");
         final String imail = i.getStringExtra("mailPers");
-        final long isolde = i.getLongExtra("soldePers", 0);
+        final float isolde = i.getFloatExtra("soldePers", 0);
         final String iinfo = i.getStringExtra("infoPers");
 
         String iisolde = "Le solde du compte est de "+String.valueOf(isolde)+" euros";

@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     final int FROM_FIRST_ACTIVITY_REQUEST=0;
     private static final String tag = "main";
-    Button btnRdvPrevu;
-    Button btnRdvNonPrevu;
-    Button btnListeRdv;
+    Button btnListe;
     Button btnAjouter;
-    Button btnListeEleves;
 
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
@@ -43,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
         TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
         TextView nombreRdv = (TextView) findViewById(R.id.nb_rdvView);
 
-        btnRdvPrevu = (Button) findViewById(R.id.button1);
-        btnRdvNonPrevu = (Button) findViewById(R.id.button2);
-        btnListeRdv = (Button) findViewById(R.id.button3);
-        btnListeEleves = (Button) findViewById(R.id.btnListeEleves);
-        btnAjouter = (Button) findViewById(R.id.button4);
+        btnListe = (Button) findViewById(R.id.btnListe);
+        btnAjouter = (Button) findViewById(R.id.btnAjouter);
+        //btnListeRdv = (Button) findViewById(R.id.button3);
+        //btnListeEleves = (Button) findViewById(R.id.btnListeEleves);
+        //btnAjouter = (Button) findViewById(R.id.button4);
 
         dateDuJour.setText(lejour());
 
@@ -69,96 +68,80 @@ public class MainActivity extends AppCompatActivity {
         nombreRdv.setText(nb_rdv);
 
 
-        //Bouton LISTE RDV futur
+
         View.OnClickListener ecoute1=new  View.OnClickListener(){
 
             @Override
             public void onClick(View v)
             {
-                //setAlarme();
-                Intent i=new Intent(MainActivity.this, RdvListeFutur.class);
-                startActivity(i);
-                //finish();
+
+                PopupMenu pop = new PopupMenu(ct,v);
+                pop.inflate(R.menu.menu_main_liste);
+                pop.show();
+                pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+                            case R.id.liste_rdvFutur:
+                                Intent i = new Intent(MainActivity.this, RdvListeFutur.class);
+                                startActivity(i);
+                                return false;
+                            case R.id.liste_rdvPasse:
+                                Intent i2 = new Intent(MainActivity.this, RdvListe.class);
+                                startActivity(i2);
+                                return false;
+                            case R.id.liste_personne:
+                                Intent i3 = new Intent(MainActivity.this, PersonneListe.class);
+                                startActivity(i3);
+                                return false;
+                            default:
+                                return false;
+                        }
+                    }
+                });
             }
         };
-        btnRdvPrevu.setOnClickListener(ecoute1);
+        btnListe.setOnClickListener(ecoute1);
 
 
-        //Bouton AJOUTER UN RDV
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
             @Override
             public void onClick(View v)
             {
-                Intent i=new Intent(MainActivity.this, RdvCreation.class);
-                startActivity(i);
-                finish();
+
+                PopupMenu pop = new PopupMenu(ct,v);
+                pop.inflate(R.menu.menu_main_ajouter);
+                pop.show();
+                pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+                            case R.id.ajouter_rdv:
+                                Intent i = new Intent(MainActivity.this, RdvCreation.class);
+                                startActivity(i);
+                                finish();
+                                return false;
+                            case R.id.ajouter_personne:
+                                Intent i2 = new Intent(MainActivity.this, PersonneCreation.class);
+                                startActivity(i2);
+                                return false;
+                            default:
+                                return false;
+                        }
+                    }
+                });
             }
         };
-        btnRdvNonPrevu.setOnClickListener(ecoute2);
+        btnAjouter.setOnClickListener(ecoute2);
 
-        //Bouton LISTE DES RDV
-        View.OnClickListener ecoute3 = new  View.OnClickListener(){
-
-            @Override
-            public void onClick(View v)
-            {
-                Intent i=new Intent(MainActivity.this, RdvListe.class);
-                startActivity(i);
-                //finish();
-            }
-        };
-        btnListeRdv.setOnClickListener(ecoute3);
-
-        //Bouton Liste des élèves
-        btnListeEleves.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(MainActivity.this, "btnListeEleves", Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(MainActivity.this, PersonneListe.class);
-                startActivity(i);
-            }
-        });
-
-        //Ajouter une personne
-        View.OnClickListener ecoute4 = new  View.OnClickListener(){
-
-            @Override
-            public void onClick(View v)
-            {
-
-                Intent i=new Intent(MainActivity.this, PersonneCreation.class);
-                startActivity(i);
-                //finish();
-            }
-        };
-        btnAjouter.setOnClickListener(ecoute4);
 
     }
 
 
-//    private void setAlarme(){
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.SECOND,cal.get(Calendar.SECOND)+70);
-//
-//        Intent i = new Intent(MainActivity.this,MonRecepteur.class);
-//        PendingIntent pen =PendingIntent.getBroadcast(MainActivity.this,0,i,PendingIntent.FLAG_CANCEL_CURRENT);
-//        AlarmManager al = (AlarmManager) getSystemService(MainActivity.ALARM_SERVICE);
-//        al.setInexactRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),
-//                1000*30,pen);
-//        Log.d(tag, "alarme déclenchée par setAlarme");
-//    }
-//
-//    private void setAlerte(){
-//        alarmMgr = (AlarmManager)ct.getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(ct, MonRecepteur.class);
-//        alarmIntent = PendingIntent.getBroadcast(ct, 0, intent, 0);
-//
-//        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-//                SystemClock.elapsedRealtime() +
-//                        30 * 1000, alarmIntent);
-//        Log.d(tag, "alarme déclenchée par setAlerte");
-//    }
+
 
 
     protected void onDestroy(){

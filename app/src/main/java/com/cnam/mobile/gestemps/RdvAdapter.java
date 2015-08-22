@@ -22,6 +22,8 @@ public class RdvAdapter extends BaseAdapter{
 
     private LayoutInflater affiche;
 
+    private String nomPers, prenomPers;
+
 
     public RdvAdapter(Context context, List<Rdv> laliste) {
         ct = context;
@@ -61,6 +63,8 @@ public class RdvAdapter extends BaseAdapter{
 
 
         TextView rdv_libelle = (TextView)item.findViewById(R.id.rdv_libelle);
+        TextView rdv_nomPers = (TextView)item.findViewById(R.id.rdv_nomPers);
+        TextView rdv_prenomPers = (TextView)item.findViewById(R.id.rdv_prenomPers);
         TextView rdv_date = (TextView)item.findViewById(R.id.rdv_date);
         TextView rdv_pointDeb = (TextView)item.findViewById(R.id.rdv_pointDeb);
         TextView rdv_pointFin = (TextView)item.findViewById(R.id.rdv_pointFin);
@@ -74,10 +78,18 @@ public class RdvAdapter extends BaseAdapter{
         final String ihoraire = "Début de séance à "+list.get(position).getHoraireRdv();
 
 
+        PersonneDAO persdao = new PersonneDAO(ct);
+        persdao.open();
+        Personne p = persdao.getPersonneById(list.get(position).getIdPers());
+        nomPers = p.getNomPers();
+        prenomPers = p.getPrenomPers();
+
+
         String strdate = list.get(position).changeDate(list.get(position).getDateRdv());
 
-
         rdv_libelle.setText(list.get(position).getLibRdv());
+        rdv_nomPers.setText(nomPers);
+        rdv_prenomPers.setText(prenomPers);
         //rdv_date.setText(String.valueOf(list.get(position).getDateRdv()));
         rdv_date.setText(strdate);
         rdv_pointDeb.setText(String.valueOf(list.get(position).getPointDebRdv()));

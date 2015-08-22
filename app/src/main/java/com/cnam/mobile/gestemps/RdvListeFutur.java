@@ -1,6 +1,7 @@
 package com.cnam.mobile.gestemps;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +19,8 @@ import java.util.Date;
 public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAdapterListener {
 
     private ArrayList<Rdv> listRdv;
+    Context ct=this;
+
 
 
     public void onClickNom(final Rdv item, int position) {
@@ -25,24 +28,25 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
         builder.setTitle("RDV du "+item.changeDate(item.getDateRdv()));
 
         builder.setMessage("Voulez-vous aller à ce rdv ?");
-        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener()
-        {
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int whichButton)
-            {
+            public void onClick(DialogInterface dialog, int whichButton) {
                 long iidRdv = item.getIdRdv();
                 String ilibRdv = item.getLibRdv();
                 String iadresRdv = item.getAdresRdv();
                 long idateRdv = item.getDateRdv();
                 String ihoraireRdv = item.getHoraireRdv();
-                long idureeRdv=item.getDureeRdv();
+                long idureeRdv = item.getDureeRdv();
                 String iniveauRdv = item.getNiveauRdv();
                 float itarifRdv = item.getTarifRdv();
-                long ipaiementRdv=item.getPaiementRdv();
+                long ipaiementRdv = item.getPaiementRdv();
                 long iidPers = item.getIdPers();
 
 
-                Intent i=new Intent(RdvListeFutur.this, SeanceAvant.class);
+
+
+
+                Intent i = new Intent(RdvListeFutur.this, SeanceAvant.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
                 i.putExtra("dateRdv", idateRdv);

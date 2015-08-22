@@ -37,7 +37,7 @@ public class RdvCreation extends AppCompatActivity {
     private Personne pers;
     private long idPersRdv = 1;
 
-    public final String tag = "RdvCreation-test";
+    public final String tag = "rdvCreation-test";
     String libRdv, adresseRdv, dateRdv, horaireRdv, dureeRdv, niveauRdv, tarifRdv, infoRdv;
     Context ct = this;
 
@@ -111,6 +111,7 @@ public class RdvCreation extends AppCompatActivity {
         });
 
 
+        //Bouton VALIDER
         View.OnClickListener ecoute1 = new  View.OnClickListener() {
 
             @Override
@@ -148,8 +149,8 @@ public class RdvCreation extends AppCompatActivity {
                                 0,
                                 niveauRdv,
                                 changeFloat(tarifRdv),
-                                345,
-                                678,
+                                0,
+                                0f,
                                 infoRdv,
                                 idPersRdv);
                     } catch (ParseException e) {
@@ -177,6 +178,8 @@ public class RdvCreation extends AppCompatActivity {
         };
         btValider.setOnClickListener(ecoute1);
 
+
+        //bouton ANNULER
         View.OnClickListener ecoute2 = new View.OnClickListener() {
 
             @Override
