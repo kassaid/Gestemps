@@ -52,13 +52,13 @@
         </activity>
         <activity
             android:name=".RdvListe"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_rdv_liste" >
+            android:label="@string/title_activity_rdv_liste"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".PersonneListe"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_personne_liste" >
+            android:label="@string/title_activity_personne_liste"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".PersonneCreation"
@@ -88,8 +88,8 @@
         </activity>
         <activity
             android:name=".RdvListeFutur"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_rdv_liste_futur" >
+            android:label="@string/title_activity_rdv_liste_futur"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SeanceHonorair"
@@ -98,14 +98,21 @@
         </activity>
         <activity
             android:name=".PersonneFiche"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_personne_fiche" >
+            android:label="@string/title_activity_personne_fiche"
+            android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".PersonneModif"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_personne_modif" >
+            android:label="@string/title_activity_personne_modif"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".RdvListePasse"
+            android:label="@string/title_activity_rdv_liste_passe" >
+        </activity>
+        <activity
+            android:name=".RdvFiche"
+            android:label="@string/title_activity_rdv_fiche" >
         </activity>
     </application>
 

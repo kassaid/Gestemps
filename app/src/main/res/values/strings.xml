@@ -36,6 +36,8 @@
     <string name="title_activity_personne_fiche">Fiche de l\'élève</string>
     <string name="title_activity_personne_fich">Fiche de la l\'élève</string>
     <string name="title_activity_personne_modif">Modification de la fiche</string>
+    <string name="title_activity_rdv_liste_passe">Liste des RDV passés</string>
+    <string name="title_activity_rdv_fiche">La fiche d\'un RDV</string>
 
 
 </resources>

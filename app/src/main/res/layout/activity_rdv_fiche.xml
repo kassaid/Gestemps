@@ -1,0 +1,136 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.cnam.mobile.gestemps.Trajet">
+
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dateRdvView"
+                android:text="date"
+                android:layout_below="@+id/prenomPersView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/nomPersView"
+                android:text="nom"
+                android:layout_below="@+id/prenomPersView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/prenomPersView"
+                android:text="prénom"
+                android:layout_below="@+id/nomPersView"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+            <TextView
+                android:id="@+id/adresRdvView"
+                android:text="adresse rdv"
+                android:layout_below="@+id/prenomPersView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/telPersView"
+                android:text="téléphone"
+                android:layout_below="@+id/adresRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/niveauRdvView"
+                android:text="niveau"
+                android:layout_below="@+id/telPersView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tarifRdvView"
+                android:text="Tarif horaire"
+                android:layout_below="@+id/niveauRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/dureeRdvView"
+                android:text="duree prévue"
+                android:layout_below="@+id/tarifRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/paiementRdvView"
+                android:text="paiement reçu"
+                android:layout_below="@+id/dureeRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/infoRdvView"
+                android:text="information"
+                android:layout_below="@+id/dureeRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/soldePersView"
+                android:text="information"
+                android:layout_below="@+id/paiementRdvView"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:id="@+id/btnCreationRdv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="AJOUTER UN RDV"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                />
+
+            <Button
+                android:id="@+id/btnModifier"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="MODIIFIER"
+                android:layout_gravity="center_horizontal"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

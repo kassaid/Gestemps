@@ -79,7 +79,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
         rdvdao.open();
 
 
-        listRdv = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
+        listRdv = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp());
 
         RdvAdapter adapter = new RdvAdapter(this, listRdv);
 

@@ -86,7 +86,7 @@ public class PersonneFiche extends ActionBarActivity {
         };
         btnCreationRdv.setOnClickListener(ecoute1);
 
-        //Bouton AJOUTER UN RDV
+        //Bouton MODIFIER
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
             @Override

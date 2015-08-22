@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(i);
                                 return false;
                             case R.id.liste_rdvPasse:
-                                Intent i2 = new Intent(MainActivity.this, RdvListe.class);
+                                Intent i2 = new Intent(MainActivity.this, RdvListePasse.class);
                                 startActivity(i2);
                                 return false;
                             case R.id.liste_personne:

@@ -268,6 +268,21 @@ public class RdvDAO {
         return c;
     }
 
+    //Liste des tuples RDV avant un temps 'time'
+    //Trié par date de RDV
+    //RDV passé
+    public Cursor getRdvPasseAsCurs(long time){
+        //open();
+        Cursor c = db.query(
+                T_RDV,
+                null,
+                DATETIME+" <?",
+                new String[] {String.valueOf(time)},
+                null, null, DATETIME+" DESC",null);
+        Log.i(tag,"nombre de tuples: "+ c.getCount());
+        return c;
+    }
+
 
     //Liste des tuples RDV
     //Trié par date de RDV
@@ -350,10 +365,10 @@ public class RdvDAO {
     }
 
 
-    //Liste des RDV terminé
-    public List<Rdv> getAllRdvFin(long time){
+    //Liste des RDV passés
+    public List<Rdv> getAllRdvPasse(long time){
         List<Rdv> result = new ArrayList<Rdv>();
-        Cursor c = getRdvFinAsCurs();
+        Cursor c = getRdvPasseAsCurs(time);
         if (c.moveToFirst()){
             do{
                 Rdv rdv = new Rdv();

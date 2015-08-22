@@ -82,7 +82,7 @@ public class SeanceHonorair extends AppCompatActivity {
 
         String iitarif = "Tarif : "+String.valueOf(itarif)+" euros/h";
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
-        String iidureeSeance = "Durée : "+idureeSeance;
+        String iidureeSeance = "Durée de la séance : "+idureeSeance;
         String iimontantSeance = "Montant de la séance : "+imontantSeance;
 
         prenom.setText(iprenom);
