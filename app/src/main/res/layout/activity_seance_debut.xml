@@ -9,17 +9,12 @@
     tools:context="com.cnam.mobile.gestemps.SeanceDebut">
 
 
-    <TextView
-        android:id="@+id/titreView"
-        android:text="GESTEMPS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/prenomPersView"
         android:text="Prénom personne"
         android:layout_below="@+id/titreView"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

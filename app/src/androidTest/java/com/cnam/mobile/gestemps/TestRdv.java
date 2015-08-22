@@ -26,8 +26,8 @@ public class TestRdv extends AndroidTestCase {
 
         persDao.open();
         rdvDao.open();
-//        persDao.deleteAll();
-//        rdvDao.deleteAll();
+        persDao.deleteAll();
+        rdvDao.deleteAll();
     }
 
     public void testDateRdv() throws ParseException {
@@ -87,7 +87,7 @@ public class TestRdv extends AndroidTestCase {
         rdvdao.save(rdv);
         Log.i(tag,"Un RDV est créé: "+ rdv);
 
-        float m = rdv.montantSeance(rdv.getPointFinRdv(), rdv.getPointDebRdv());
+        long m = rdv.montantSeance(rdv.getPointFinRdv(), rdv.getPointDebRdv());
         rdv.setMontantRdv(m);
         rdvdao.modifier(rdv);
         Log.i(tag, "Un RDV est modifié: " + rdv);
@@ -96,9 +96,9 @@ public class TestRdv extends AndroidTestCase {
         Rdv rdv2 = rdvdao.getRdvById(id);
         Log.i(tag,"Le RDV selectionné est: "+ rdv2);
 
-        Rdv rdv3 = rdvdao.getRdvById(id);
-        String date = rdv3.changeDate(rdv3.getDateRdv());
-        Log.i(tag,"La date rdv selectionné est: "+date);
+//        Rdv rdv3 = rdvdao.getRdvById(id);
+//        String date = rdv3.changeDate(rdv3.getDateRdv());
+//        Log.i(tag,"La date rdv selectionné est: "+date);
 
     }
 

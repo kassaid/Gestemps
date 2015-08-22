@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ import java.util.List;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
-public class RdvCreation extends FragmentActivity {
+public class RdvCreation extends AppCompatActivity {
 
 
     private String nomPosition;
@@ -47,6 +48,7 @@ public class RdvCreation extends FragmentActivity {
 
 
         //final EditText lib = (EditText) findViewById(R.id.libEdit);
+        final EditText prenom = (EditText) findViewById(R.id.prenomEdit);
         final EditText adresse = (EditText) findViewById(R.id.adresseEdit);
         final EditText date = (EditText) findViewById(R.id.dateEdit);
         final EditText horaire = (EditText) findViewById(R.id.horaireEdit);
@@ -57,7 +59,6 @@ public class RdvCreation extends FragmentActivity {
         final Button btValider=(Button) findViewById(R.id.button1);
         final Button btAnnuler=(Button) findViewById(R.id.button2);
 
-        //final String niv;
         final Spinner spinlistPers = (Spinner) findViewById(R.id.personneSpinner);
 
 
@@ -73,6 +74,7 @@ public class RdvCreation extends FragmentActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 nomPosition = allNomPers.get(position);
                 pers = persdao.getPersonneByNom(nomPosition);
+                prenom.setText(pers.getPrenomPers());
                 adresse.setText(pers.getAdresPers());
                 idPersRdv = pers.getIdPers();
                 if (position!=0){

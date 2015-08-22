@@ -24,7 +24,7 @@ public class Rdv {
     private long pointFinRdv;
     private String niveauRdv;
     private float tarifRdv;
-    private float montantRdv;
+    private long montantRdv;
     private float soldeRdv;
     private String infoRdv;
     private long idPers;
@@ -35,7 +35,7 @@ public class Rdv {
 
     public Rdv(String libRdv, String adresRdv, float longitRdv, float latitRdv, long dateRdv, String horaireRdv,
                long dureeRdv, long pointDebRdv, long pointFinRdv, String niveauRdv, float tarifRdv,
-               float montantRdv, float soldeRdv, String infoRdv, long idPers) {
+               long montantRdv, float soldeRdv, String infoRdv, long idPers) {
         this.libRdv = libRdv;
         this.adresRdv = adresRdv;
         this.longitRdv = longitRdv;
@@ -149,11 +149,11 @@ public class Rdv {
         this.tarifRdv = tarifRdv;
     }
 
-    public float getMontantRdv() {
+    public long getMontantRdv() {
         return montantRdv;
     }
 
-    public void setMontantRdv(float montantRdv) {
+    public void setMontantRdv(long montantRdv) {
         this.montantRdv = montantRdv;
     }
 

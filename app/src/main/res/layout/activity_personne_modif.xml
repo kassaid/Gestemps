@@ -83,6 +83,7 @@
                 android:hint="Information utile"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapWords"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/mailEdit" />
 

@@ -22,9 +22,9 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
 
     public void onClickNom(final Rdv item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Rdv");
+        builder.setTitle("RDV du "+item.changeDate(item.getDateRdv()));
 
-        builder.setMessage("Voulez-vous aller à ce rdv n° " + item.getIdRdv() +" ?");
+        builder.setMessage("Voulez-vous aller à ce rdv ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener()
         {
             @Override

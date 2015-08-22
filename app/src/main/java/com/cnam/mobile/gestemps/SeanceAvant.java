@@ -216,7 +216,7 @@ public class SeanceAvant extends AppCompatActivity {
     //Arrivé à destination
     public void arriveConf(View v, final Intent intent){
         AlertDialog.Builder mes = new AlertDialog.Builder(ct);
-        mes.setMessage("Vous commencez la séance ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+        mes.setMessage("Voulez-vous débuter la séance ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

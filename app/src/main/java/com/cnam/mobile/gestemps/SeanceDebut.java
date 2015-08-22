@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 
 public class SeanceDebut extends AppCompatActivity {
@@ -135,6 +136,7 @@ public class SeanceDebut extends AppCompatActivity {
 
                 idureeSeance = rdv2.diffDateTime(pointF, pointD);
                 long m = rdv2.montantSeance(pointF,pointD);
+                //rdv2.setMontantRdv(parseFloat(m));
                 String iimontantRdv = String.valueOf(m)+" euros";
 
                 Intent i=new Intent(SeanceDebut.this, SeanceFin.class);

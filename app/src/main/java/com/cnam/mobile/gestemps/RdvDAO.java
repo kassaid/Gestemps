@@ -35,6 +35,7 @@ public class RdvDAO {
     public static final String POINTFIN = "pointFinRdv";
     public static final String NIVEAU = "niveauRdv";
     public static final String TARIF = "tarifRdv";
+    public static final String MONTANT = "montantRdv";
     public static final String SOLDE = "soldeRdv";
     public static final String INFO = "infoRdv";
     public static final String IDPERS = "idPers";
@@ -73,6 +74,7 @@ public class RdvDAO {
         v.put(POINTFIN, rdv.getPointFinRdv());
         v.put(NIVEAU, rdv.getNiveauRdv());
         v.put(TARIF, rdv.getTarifRdv());
+        v.put(MONTANT, rdv.getMontantRdv());
         v.put(SOLDE, rdv.getSoldeRdv());
         v.put(INFO, rdv.getInfoRdv());
         v.put(IDPERS, rdv.getIdPers());
@@ -122,6 +124,7 @@ public class RdvDAO {
                 rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
                 rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
                 rdv.setTarifRdv(c.getFloat(c.getColumnIndex(TARIF)));
+                rdv.setMontantRdv(c.getLong(c.getColumnIndex(MONTANT)));
                 rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
                 rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
                 rdv.setIdPers(c.getLong(c.getColumnIndex(IDPERS)));
@@ -175,9 +178,10 @@ public class RdvDAO {
         retRdv.setPointFinRdv(c.getLong(9));
         retRdv.setNiveauRdv(c.getString(10));
         retRdv.setTarifRdv(c.getFloat(11));
-        retRdv.setSoldeRdv(c.getFloat(12));
-        retRdv.setInfoRdv(c.getString(13));
-        retRdv.setIdPers(Integer.parseInt(c.getString(14)));
+        retRdv.setMontantRdv(c.getLong(12));
+        retRdv.setSoldeRdv(c.getFloat(13));
+        retRdv.setInfoRdv(c.getString(14));
+        retRdv.setIdPers(Integer.parseInt(c.getString(15)));
         // Ferme le curseur pour libérer les ressources
         c.close();
         Log.i(tag,"Cursor converti en objet RDV");
@@ -241,7 +245,8 @@ public class RdvDAO {
         v.put(POINTFIN, rdv.getPointFinRdv());
         v.put(NIVEAU, rdv.getNiveauRdv());
         v.put(TARIF, rdv.getTarifRdv());
-        v.put(SOLDE, rdv.getSoldeRdv());
+        v.put(MONTANT,rdv.getMontantRdv());
+ ;       v.put(SOLDE, rdv.getSoldeRdv());
         v.put(INFO, rdv.getInfoRdv());
         v.put(IDPERS, rdv.getIdPers());
         db.update(T_RDV, v, ID + " = ?", new String[]{String.valueOf(rdv.getIdRdv())});
@@ -333,6 +338,7 @@ public class RdvDAO {
                 rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
                 rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
                 rdv.setTarifRdv(c.getFloat(c.getColumnIndex(TARIF)));
+                rdv.setMontantRdv(c.getLong(c.getColumnIndex(MONTANT)));
                 rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
                 rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
                 rdv.setIdPers(c.getLong(c.getColumnIndex(IDPERS)));
@@ -363,6 +369,7 @@ public class RdvDAO {
                 rdv.setPointDebRdv(c.getLong(c.getColumnIndex(POINTDEB)));
                 rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
                 rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
+                rdv.setMontantRdv(c.getLong(c.getColumnIndex(MONTANT)));
                 rdv.setTarifRdv(c.getFloat(c.getColumnIndex(TARIF)));
                 rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
                 rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
@@ -394,6 +401,7 @@ public class RdvDAO {
                 rdv.setPointFinRdv(c.getLong(c.getColumnIndex(POINTFIN)));
                 rdv.setNiveauRdv(c.getString(c.getColumnIndex(NIVEAU)));
                 rdv.setTarifRdv(c.getFloat(c.getColumnIndex(TARIF)));
+                rdv.setMontantRdv(c.getLong(c.getColumnIndex(MONTANT)));
                 rdv.setSoldeRdv(c.getFloat(c.getColumnIndex(SOLDE)));
                 rdv.setInfoRdv(c.getString(c.getColumnIndex(INFO)));
                 rdv.setIdPers(c.getLong(c.getColumnIndex(IDPERS)));

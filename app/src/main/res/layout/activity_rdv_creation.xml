@@ -17,11 +17,6 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/titreView"
-                android:text="@string/title_ajouter_rdv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
 
 
 
@@ -36,7 +31,13 @@
                 android:layout_below="@+id/libEdit"
                 />
 
-
+            <EditText
+                android:id="@+id/prenomEdit"
+                android:hint="Prénom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/personneSpinner" />
 
             <EditText
                 android:id="@+id/adresseEdit"
@@ -95,6 +96,7 @@
                 android:hint="Information utile"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapWords"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/tarifEdit" />
 

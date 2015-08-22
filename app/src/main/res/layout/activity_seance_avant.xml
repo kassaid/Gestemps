@@ -21,7 +21,7 @@
         android:id="@+id/libRdvView"
         android:text="libellé rdv"
         android:layout_below="@+id/titreView"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
