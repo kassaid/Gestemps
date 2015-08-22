@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAdapterListener {
 
-    private ArrayList<Rdv> listOf;
+    private ArrayList<Rdv> listRdv;
 
 
     public void onClickNom(final Rdv item, int position) {
@@ -38,7 +38,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
                 long idureeRdv=item.getDureeRdv();
                 String iniveauRdv = item.getNiveauRdv();
                 float itarifRdv = item.getTarifRdv();
-                float imontantRdv=item.getMontantRdv();
+                long ipaiementRdv=item.getPaiementRdv();
                 long iidPers = item.getIdPers();
 
 
@@ -50,7 +50,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
                 i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("tarifRdv", itarifRdv);
-                i.putExtra("montantRdv", imontantRdv);
+                i.putExtra("paiementRdv", ipaiementRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
 
@@ -74,17 +74,14 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
         RdvDAO rdvdao = new RdvDAO(getBaseContext());
         rdvdao.open();
 
-//        TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
-//        dateDuJour.setText(lejour());
 
-        listOf = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
-       // listOf = (ArrayList<Rdv>) rdvdao.getAllRdv();
+        listRdv = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
 
-        RdvAdapter adapter = new RdvAdapter(this, listOf);
+        RdvAdapter adapter = new RdvAdapter(this, listRdv);
 
         adapter.addListener((RdvAdapter.RdvAdapterListener) this);
 
-        ListView list = (ListView)findViewById(R.id.listView1);
+        ListView list = (ListView)findViewById(R.id.listRdvView);
 
         list.setAdapter(adapter);
 

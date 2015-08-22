@@ -87,7 +87,7 @@ public class RdvAdapter extends BaseAdapter{
         //rdv_duree.setText(String.valueOf(list.get(position).getNbplace()));
         rdv_duree.setText(iduree);
         rdv_idPers.setText(String.valueOf(list.get(position).getIdPers()));
-        rdv_montant.setText(String.valueOf(list.get(position).getMontantRdv()));
+        rdv_montant.setText(String.valueOf(list.get(position).getPaiementRdv()));
 
 
         item.setTag(position);

@@ -38,7 +38,7 @@ public class SeanceAvant extends AppCompatActivity {
         setContentView(R.layout.activity_seance_avant);
 
 
-        final String tag = "SeanceAvant-test";
+        final String tag = "seanceAvant-test";
 
         TextView libRdv = (TextView) findViewById(R.id.libRdvView);
         prenomPers = (TextView) findViewById(R.id.prenomPersView);
@@ -63,7 +63,7 @@ public class SeanceAvant extends AppCompatActivity {
         final String iniveauRdv = i.getStringExtra("niveauRdv");
         final String iadresRdv = i.getStringExtra("adresRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
-        final String imontantRdv = i.getStringExtra("montantRdv");
+        final String ipaiementRdv = i.getStringExtra("paiementRdv");
 
         final String iniveau = "Niveau "+iniveauRdv;
         final String iduree = "Séance de "+String.valueOf(idureeRdv/10000)+" h";
@@ -113,6 +113,12 @@ public class SeanceAvant extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                RdvDAO rdvdao = new RdvDAO(ct);
+                rdvdao.open();
+                Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
+                r.setLibRdv("SÉANCE ANNULÉE");
+                rdvdao.modifier(r);
+
                 PersonneDAO persdao = new PersonneDAO(ct);
                 persdao.open();
                 Personne pers = persdao.getPersonneById(iidPers);
@@ -134,7 +140,7 @@ public class SeanceAvant extends AppCompatActivity {
                 RdvDAO rdvdao = new RdvDAO(ct);
                 rdvdao.open();
                 Rdv rdv = rdvdao.getRdvById(iidRdv);
-                rdv.setLibRdv("SÉANCE NON TERMINÉE !");
+                rdv.setLibRdv("SÉANCE NON TERMINÉE");
                 rdv.setPointDebRdv(timeStamp());
                 rdvdao.modifier(rdv);
                 PersonneDAO persdao = new PersonneDAO(ct);
@@ -156,7 +162,7 @@ public class SeanceAvant extends AppCompatActivity {
                 i.putExtra("dureeRdv", iduree);
                 i.putExtra("horaireRdv", ihoraire);
                 i.putExtra("pointDeb", ipointDeb);
-                i.putExtra("montantRdv", imontantRdv);
+                i.putExtra("paiementRdv", ipaiementRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
                 arriveConf(v, i);
@@ -206,6 +212,7 @@ public class SeanceAvant extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 smsTransmis(num, mess_annule);
+
                 dialog.dismiss();
             }
         }).setTitle("Message d'annulation").setIcon(R.drawable.autoriser).create();
@@ -264,12 +271,7 @@ public class SeanceAvant extends AppCompatActivity {
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
 
-
-    }
 
     public void appelTel(final String num){
        // Intent i = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("tel:+33623154373"));

@@ -26,8 +26,8 @@ public class TestRdv extends AndroidTestCase {
 
         persDao.open();
         rdvDao.open();
-        persDao.deleteAll();
-        rdvDao.deleteAll();
+//        persDao.deleteAll();
+//        rdvDao.deleteAll();
     }
 
     public void testDateRdv() throws ParseException {
@@ -88,7 +88,7 @@ public class TestRdv extends AndroidTestCase {
         Log.i(tag,"Un RDV est créé: "+ rdv);
 
         long m = rdv.montantSeance(rdv.getPointFinRdv(), rdv.getPointDebRdv());
-        rdv.setMontantRdv(m);
+        rdv.setPaiementRdv(m);
         rdvdao.modifier(rdv);
         Log.i(tag, "Un RDV est modifié: " + rdv);
 

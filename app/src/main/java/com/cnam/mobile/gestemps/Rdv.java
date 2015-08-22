@@ -24,7 +24,7 @@ public class Rdv {
     private long pointFinRdv;
     private String niveauRdv;
     private float tarifRdv;
-    private long montantRdv;
+    private long paiementRdv;
     private float soldeRdv;
     private String infoRdv;
     private long idPers;
@@ -35,7 +35,7 @@ public class Rdv {
 
     public Rdv(String libRdv, String adresRdv, float longitRdv, float latitRdv, long dateRdv, String horaireRdv,
                long dureeRdv, long pointDebRdv, long pointFinRdv, String niveauRdv, float tarifRdv,
-               long montantRdv, float soldeRdv, String infoRdv, long idPers) {
+               long paiementRdv, float soldeRdv, String infoRdv, long idPers) {
         this.libRdv = libRdv;
         this.adresRdv = adresRdv;
         this.longitRdv = longitRdv;
@@ -47,7 +47,7 @@ public class Rdv {
         this.pointFinRdv = pointFinRdv;
         this.niveauRdv = niveauRdv;
         this.tarifRdv = tarifRdv;
-        this.montantRdv = montantRdv;
+        this.paiementRdv = paiementRdv;
         this.soldeRdv = soldeRdv;
         this.infoRdv = infoRdv;
         this.idPers = idPers;
@@ -149,12 +149,12 @@ public class Rdv {
         this.tarifRdv = tarifRdv;
     }
 
-    public long getMontantRdv() {
-        return montantRdv;
+    public long getPaiementRdv() {
+        return paiementRdv;
     }
 
-    public void setMontantRdv(long montantRdv) {
-        this.montantRdv = montantRdv;
+    public void setPaiementRdv(long paiementRdv) {
+        this.paiementRdv = paiementRdv;
     }
 
     public float getSoldeRdv() {
@@ -232,10 +232,10 @@ public class Rdv {
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
     }
 
-    public float soldeTotal(long tps, float m){
+    public float soldeTotal(long tps, long m){
         float montantSeance = getTarifRdv() * tps;
-        float montantRecu = m;
-        return montantRecu - montantSeance;
+        long paiementRecu = m;
+        return paiementRecu - montantSeance;
     }
 
     @Override
@@ -253,7 +253,7 @@ public class Rdv {
                 ", pointFinRdv='" + pointFinRdv + '\'' +
                 ", niveauRdv='" + niveauRdv + '\'' +
                 ", tarifRdv=" + tarifRdv +
-                ", montantRdv=" + montantRdv +
+                ", paiementRdv=" + paiementRdv +
                 ", soldeRdv=" + soldeRdv +
                 ", infoRdv='" + infoRdv + '\'' +
                 ", idPers=" + idPers +

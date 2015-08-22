@@ -46,7 +46,7 @@ public class SeanceHonorair extends AppCompatActivity {
         TextView solde = (TextView) findViewById(R.id.soldeView);
         TextView dureeSeance = (TextView) findViewById(R.id.dureeSeanceView);
         TextView montantSeance = (TextView) findViewById(R.id.montantSeanceView);
-        final EditText paiement = (EditText) findViewById(R.id.paiementEdit);
+        final EditText paiementRdv = (EditText) findViewById(R.id.paiementEdit);
 
         btnValider = (Button) findViewById(R.id.btnValider);
         btnQuitter = (Button) findViewById(R.id.btnQuitter);
@@ -101,7 +101,7 @@ public class SeanceHonorair extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                paiementRec = paiement.getText().toString();
+                paiementRec = paiementRdv.getText().toString();
 
                 if (paiementRec.equals("")){
                     Toast.makeText(getBaseContext(), "Il n'y a aucun paiement !",
@@ -110,12 +110,10 @@ public class SeanceHonorair extends AppCompatActivity {
 //                    p.setSoldePers(p.totalSolde(parseFloat(paiementRec)));
 //                    persdao.modifier(p);
                     paiementConf(v);
-
                     Log.d(tag, "Le solde de " + p.getNomPers() + " est modifié");
                     //finish();
                 }
 
-                //finish();
             }
         };
         btnValider.setOnClickListener(ecoute1);
@@ -136,10 +134,6 @@ public class SeanceHonorair extends AppCompatActivity {
 
     }
 
-//    public float changeFloat(String s){
-//        return parseFloat(s);
-//    }
-
 
     //Calcul du nouveau solde
     public void paiementConf(View v){
@@ -157,7 +151,7 @@ public class SeanceHonorair extends AppCompatActivity {
     }
 
     public void nouveauSolde(){
-        p.setSoldePers(p.totalSolde(parseFloat(paiementRec)));
+        p.setSoldePers(p.creditSolde(parseFloat(paiementRec)));
         persdao.modifier(p);
 
     }

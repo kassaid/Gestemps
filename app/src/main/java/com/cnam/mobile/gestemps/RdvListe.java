@@ -17,9 +17,9 @@ import java.util.Date;
 
 public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapterListener {
 
-    private ArrayList<Rdv> listOf;
+    private ArrayList<Rdv> listRdv;
 
-    //TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
+
 
     public void onClickNom(final Rdv item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -32,9 +32,6 @@ public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapter
             public void onClick(DialogInterface dialog, int whichButton)
             {
 
-//                RdvDAO rdvdao = new RdvDAO(getBaseContext());
-//                rdvdao.open();
-                //rdvdao.delete(item.getIdRdv());
 
                 long iidRdv = item.getIdRdv();
                 String ilibRdv = item.getLibRdv();
@@ -48,16 +45,12 @@ public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapter
 //                long ipointFinRdv = item.getPointFinRdv();
                 String iniveauRdv = item.getNiveauRdv();
                 float itarifRdv = item.getTarifRdv();
-                float imontantRdv=item.getMontantRdv();
+                long ipaiementRdv=item.getPaiementRdv();
 //                float isoldeRdv=item.getSoldeRdv();
 //                String iinfoRdv=item.getInfoRdv();
-
                 long iidPers = item.getIdPers();
 
 
-//                finish();
-//                startActivity(getIntent());
-                //startActivity(ListOffre.this, ListOffre.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                 Intent i=new Intent(RdvListe.this, SeanceAvant.class);
                 i.putExtra("idRdv", iidRdv);
@@ -67,7 +60,7 @@ public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapter
                 i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("tarifRdv", itarifRdv);
-                i.putExtra("montantRdv", imontantRdv);
+                i.putExtra("paiementRdv", ipaiementRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
 
@@ -109,15 +102,15 @@ public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapter
 //            listOf = (ArrayList<Rdv>) rdvdao.getOffreByIdcom(res0);
 //        }
 //        else{
-            listOf = (ArrayList<Rdv>) rdvdao.getAllRdv();
+            listRdv = (ArrayList<Rdv>) rdvdao.getAllRdv();
             //listOf = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp()-2*60*60*1000);
 //        }
 //
-        RdvAdapter adapter = new RdvAdapter(this, listOf);
+        RdvAdapter adapter = new RdvAdapter(this, listRdv);
 
         adapter.addListener((RdvAdapter.RdvAdapterListener) this);
 
-        ListView list = (ListView)findViewById(R.id.listView1);
+        ListView list = (ListView)findViewById(R.id.listRdvView);
 
         list.setAdapter(adapter);
 

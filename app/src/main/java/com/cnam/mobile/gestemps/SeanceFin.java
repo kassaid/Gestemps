@@ -25,7 +25,7 @@ public class SeanceFin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seance_fin);
 
-        final String tag = "SeanceFin-test";
+        final String tag = "seanceFin-test";
 
         TextView prenom = (TextView) findViewById(R.id.prenomPersView);
         TextView nom = (TextView) findViewById(R.id.nomPersView);
@@ -55,7 +55,7 @@ public class SeanceFin extends AppCompatActivity {
         final String ipointDeb = i.getStringExtra("pointDeb");
         final String ipointFin = i.getStringExtra("pointFin");
         final String idureeSeance = i.getStringExtra("dureeSeance");
-        final String imontantSeance = i.getStringExtra("montantRdv");
+        final String imontantSeance = i.getStringExtra("montantSeance");
         final long iidPers = i.getLongExtra("idPers", 1);
 
 
@@ -64,10 +64,8 @@ public class SeanceFin extends AppCompatActivity {
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-        //duree.setText(String.valueOf(idureeRdv));
         duree.setText(idureeRdv);
         solde.setText(iisolde);
-
         pointDeb.setText(ipointDeb);
         pointFin.setText(ipointFin);
         dureeSeance.setText(idureeSeance);
