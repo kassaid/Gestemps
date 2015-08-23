@@ -22,7 +22,7 @@ public class RdvListeAttente extends AppCompatActivity implements RdvAdapter.Rdv
 
     public void onClickNom(final Rdv item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("RDV du "+item.changeDate(item.getDateRdv()));
+        builder.setTitle("RDV du "+item.changeDate(item.getDateRdv())).setIcon(R.drawable.logo_a6t_48).create();
 
         builder.setMessage("Voulez-vous voir la fiche ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {

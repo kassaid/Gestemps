@@ -116,30 +116,6 @@ public class RdvModif extends AppCompatActivity{
 
 
 
-        //allNomPers = persdao.allPersNames();
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,allNomPers);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinlistPers.setAdapter(adapter);
-//        spinlistPers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                nomPosition = allNomPers.get(position);
-//                pers = persdao.getPersonneByNom(nomPosition);
-//                prenom.setText(pers.getPrenomPers());
-//                adresse.setText(pers.getAdresPers());
-//                idPersRdv = pers.getIdPers();
-//                if (position!=0){
-//                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " est choisi",
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         final Spinner spinNiv = (Spinner) findViewById(R.id.niveauSpinner);
         final ArrayAdapter<CharSequence> adaptNiveau = ArrayAdapter.createFromResource(this,R.array.spinNiveau,android.R.layout.simple_spinner_item);
@@ -184,40 +160,7 @@ public class RdvModif extends AppCompatActivity{
                 }
                 else
                 {
-//                    Rdv rdv = null;
-//                    Log.i(tag, "envoie creation");
-//
-//                    try {
-//                        Log.i(tag, "Un compte creation en cours");
-//                        rdv = new Rdv(libRdv,
-//                                adresseRdv,
-//                                123,
-//                                456,
-//                                changeDate(dateRdv+" "+horaireRdv),
-//                                horaireRdv,
-//                                changeInt(dureeRdv)*1000*30,
-//                                0,
-//                                0,
-//                                niveauRdv,
-//                                changeFloat(tarifRdv),
-//                                0,
-//                                0f,
-//                                infoRdv,
-//                                idPersRdv);
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
 
-//                    RdvDAO rdvdao = new RdvDAO(ct);
-//                    rdvdao.open();
-//                    rdvdao.save(rdv);
-//                    Log.i(tag, "Un compte a été ajouté");
-//                    Toast.makeText(getBaseContext(),"Le RDV "+libRdv+" du "+dateRdv+" à "+horaireRdv+", a été créé!",
-//                            Toast.LENGTH_LONG).show();
-//                    Intent i=new Intent();
-//                    i.putExtra("libRdv", libRdv);
-//                    i.putExtra("dateRdv", dateRdv);
-//                    setResult(RESULT_OK,i);
                     RdvDAO rdvdao = new RdvDAO(ct);
                     rdvdao.open();
                     Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
@@ -253,9 +196,6 @@ public class RdvModif extends AppCompatActivity{
 
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_CANCELED);
-//                Intent i=new Intent(RdvCreation.this, MainActivity.class);
-//                startActivity(i);
                 finish();
             }
 
@@ -309,7 +249,6 @@ public class RdvModif extends AppCompatActivity{
                 }
             }
         });
-
 
     }
 

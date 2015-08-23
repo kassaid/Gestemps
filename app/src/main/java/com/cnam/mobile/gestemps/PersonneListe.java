@@ -22,7 +22,7 @@ public class PersonneListe extends AppCompatActivity implements PersonneAdapter.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(""+item.getPrenomPers()+" "+item.getNomPers());
 
-        builder.setMessage("Voulez-vous voir sa fiche ?");
+        builder.setMessage("Voulez-vous voir sa fiche ?").setIcon(R.drawable.logo_a6t_48).create();
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener()
         {
             @Override

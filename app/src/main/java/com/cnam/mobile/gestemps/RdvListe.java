@@ -23,7 +23,7 @@ public class RdvListe extends AppCompatActivity implements RdvAdapter.RdvAdapter
 
     public void onClickNom(final Rdv item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Rdv");
+        builder.setTitle("Rdv").setTitle("Confirmation paiement").setIcon(R.drawable.logo_a6t_48).create();
 
         builder.setMessage("Voulez-vous aller à ce rdv n° " + item.getIdRdv() +" ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener()

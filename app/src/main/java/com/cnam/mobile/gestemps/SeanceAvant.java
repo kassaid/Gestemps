@@ -88,8 +88,6 @@ public class SeanceAvant extends AppCompatActivity {
         adresRdv.setText(iadresRdv);
 
 
-
-
         //Bouton envoyer SMS RETARD
         View.OnClickListener ecoute1 = new  View.OnClickListener(){
 
@@ -202,7 +200,7 @@ public class SeanceAvant extends AppCompatActivity {
                 smsTransmis(num, mess_retard);
                 dialog.dismiss();
             }
-        }).setTitle("Message de retard").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Message de retard").setIcon(R.drawable.logo_a6t_48).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }
@@ -218,7 +216,7 @@ public class SeanceAvant extends AppCompatActivity {
 
                 dialog.dismiss();
             }
-        }).setTitle("Message d'annulation").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Message d'annulation").setIcon(R.drawable.logo_a6t_48).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }
@@ -234,7 +232,7 @@ public class SeanceAvant extends AppCompatActivity {
                 dialog.dismiss();
                 finish();
             }
-        }).setTitle("Arrivée à "+timeHeure()).setIcon(R.drawable.autoriser).create();
+        }).setTitle("Arrivée à "+timeHeure()).setIcon(R.drawable.logo_a6t_48).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }
@@ -249,7 +247,7 @@ public class SeanceAvant extends AppCompatActivity {
                 appelTel(num);
                 dialog.dismiss();
             }
-        }).setTitle("Téléphone").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Téléphone").setIcon(R.drawable.logo_a6t_48).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }

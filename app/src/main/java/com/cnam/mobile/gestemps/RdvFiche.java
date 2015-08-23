@@ -178,7 +178,7 @@ public class RdvFiche extends AppCompatActivity {
                 appelTel(num);
                 dialog.dismiss();
             }
-        }).setTitle("Téléphone").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Téléphone").setIcon(R.drawable.logo_a6t_48).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }

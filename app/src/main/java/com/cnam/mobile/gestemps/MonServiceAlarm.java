@@ -95,7 +95,7 @@ public class MonServiceAlarm extends Service {
 
         Intent intent1 = new Intent(this.getApplicationContext(),SeanceDebut.class);
 
-        Notification notification = new Notification(R.drawable.autoriser,"Un message de Gestemps !",
+        Notification notification = new Notification(R.drawable.logo_a6t_48,"Un message de Gestemps !",
                 System.currentTimeMillis());
 
         intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -159,7 +159,7 @@ public class MonServiceAlarm extends Service {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-        }).setTitle("Alerte de fin").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Alerte de fin").setIcon(R.drawable.logo_a6t_48).create();
         mes.show();
     }
 

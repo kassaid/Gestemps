@@ -27,7 +27,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
 
     public void onClickNom(final Rdv item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("RDV du "+item.changeDate(item.getDateRdv()));
+        builder.setTitle("RDV du "+item.changeDate(item.getDateRdv())).setIcon(R.drawable.logo_a6t_48).create();
 
         builder.setMessage("Voulez-vous aller à ce rdv ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
@@ -136,13 +136,5 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
     }
 
 
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
 
 }

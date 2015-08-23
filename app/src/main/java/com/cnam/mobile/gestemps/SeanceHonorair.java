@@ -152,7 +152,7 @@ public class SeanceHonorair extends AppCompatActivity {
                 dialog.dismiss();
                 finish();
             }
-        }).setTitle("Confirmation paiement").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Confirmation paiement").setIcon(R.drawable.logo_a6t_48).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }
