@@ -21,6 +21,12 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/titreView"
+                android:text="Titre avec date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
                 android:id="@+id/prenomPersView"
                 android:text="Prénom personne"
                 android:layout_below="@+id/titreView"

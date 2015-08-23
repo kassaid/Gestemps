@@ -256,12 +256,24 @@ public class RdvDAO {
     //Liste des tuples RDV à partir d'un temps 'time'
     //Trié par date de RDV
     //RDV non terminé
+//    public Cursor getRdvFuturAsCurs(long time){
+//        //open();
+//        Cursor c = db.query(
+//                T_RDV,
+//                null,
+//                DATETIME+" >? AND "+POINTFIN+"=0",
+//                new String[] {String.valueOf(time)},
+//                null, null, DATETIME+" ASC",null);
+//        Log.i(tag,"nombre de tuples: "+ c.getCount());
+//        return c;
+//    }
+
     public Cursor getRdvFuturAsCurs(long time){
         //open();
         Cursor c = db.query(
                 T_RDV,
                 null,
-                DATETIME+" >? AND "+POINTFIN+"=0",
+                DATETIME+" >? AND "+POINTDEB+"=0",
                 new String[] {String.valueOf(time)},
                 null, null, DATETIME+" ASC",null);
         Log.i(tag,"nombre de tuples: "+ c.getCount());

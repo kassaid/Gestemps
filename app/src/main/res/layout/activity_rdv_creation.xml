@@ -8,6 +8,14 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.cnam.mobile.gestemps.RdvCreation">
 
+    <TextView
+        android:id="@+id/titreView"
+        android:text="Tous les champs sont obligatoires sauf le commentaire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -19,15 +27,13 @@
 
 
 
-
-
-
             <Spinner
                 android:id="@+id/personneSpinner"
                 android:hint="Nom de la personne"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="40dp"
                 android:layout_below="@+id/libEdit"
                 />
 
@@ -74,7 +80,7 @@
 
             <Spinner
                 android:id="@+id/niveauSpinner"
-
+                android:layout_marginTop="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -93,7 +99,7 @@
 
             <EditText
                 android:id="@+id/infoEdit"
-                android:hint="Information utile"
+                android:hint="Commentaire"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"

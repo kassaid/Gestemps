@@ -5,8 +5,8 @@
     android:orientation="vertical" >
     
     <TextView
-		android:text="Libellé"
-		android:id="@+id/rdv_libelle"
+		android:text="Date et heure"
+		android:id="@+id/rdv_date"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content"
 		android:textStyle="bold"
@@ -27,35 +27,14 @@
 		android:layout_height="wrap_content"
 		android:textStyle="bold"
 		android:textSize="@dimen/abc_text_size_medium_material"/>
-		
-	<TextView
-		android:text="Date"
-		android:id="@+id/rdv_date"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" />
-	<TextView
-		android:text="PointDeb"
-		android:id="@+id/rdv_pointDeb"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
-
-	<TextView
-		android:text="PointFin"
-		android:id="@+id/rdv_pointFin"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
-
-	<TextView
-		android:text="Horaire"
-		android:id="@+id/rdv_horaire"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" />
-
 	<TextView
 		android:text="Destination"
 		android:id="@+id/rdv_dest"
-		android:layout_width="wrap_content" 
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
+
+
+
 		
 	<TextView
 		android:text="Durée"
@@ -63,15 +42,23 @@
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" />
 
+
 	<TextView
-		android:text="Numero Personne"
-		android:id="@+id/rdv_idPers"
+		android:text="Niveau"
+		android:id="@+id/rdv_niveau"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
 
 	<TextView
-		android:text="Montant"
-		android:id="@+id/rdv_montant"
+		android:text="Tarif"
+		android:id="@+id/rdv_tarif"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+
+
+	<TextView
+		android:text="Solde du compte"
+		android:id="@+id/rdv_solde"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" />
 

@@ -168,7 +168,7 @@ public class TestRdv extends AndroidTestCase {
     public void testUnRdvFuturByIdPers(){
         PersonneDAO persdao = new PersonneDAO(this.getContext());
         persdao.open();
-        persdao.deleteAll();
+        //persdao.deleteAll();
         for (int i=0;i<10;i++){
             Personne p = new Personne("JEFFROIS"+i,"Sandra"+i, i+"16 rue Papin 25000 Besançon",27,82,
                     "067856489"+i,"sandra.jeffrois@mail.fr"+i,98+i*100,"cours avec sandra"+i);
@@ -191,10 +191,68 @@ public class TestRdv extends AndroidTestCase {
         List<Rdv> list2 = rdvdao.getAllRdv();
         Log.i(tag, "Liste RDV " + list2);
 
-        Rdv rdv = rdvdao.getRdvByIdPersAndTime(5,rdvdao.timeStamp());
+        Rdv rdv = rdvdao.getRdvByIdPersAndTime(5, rdvdao.timeStamp());
         Log.i(tag,"Le premier RDV trouvé: "+ rdv);
 
-
     }
+
+
+//    public void testRemplissage(){
+//        PersonneDAO persdao = new PersonneDAO(this.getContext());
+//        persdao.open();
+//        persdao.deleteAll();
+//
+//        Personne p = new Personne("JEFFROIS","Sandra", "16 rue Papin 25000 Besançon",0,0,
+//                    "0623154373","sandra.jeffrois@mail.fr",0,"cours avec sandra");
+//        persdao.save(p);
+//        Personne p2 = new Personne("KLAUSSY","Ken", "6 rue Papino 25000 Besançon",0,0,
+//                "0623154373","sandra.jefios@mail.fr",0,"cours avec sandra");
+//        persdao.save(p2);
+//        Personne p3 = new Personne("LORMANO","Lucien", "167 rue Papie 25000 Besançon",0,0,
+//                "0623154373","andro.jeffrois@mail.fr",0,"cours urgent");
+//        persdao.save(p3);
+//        Personne p4 = new Personne("MANTONAS","Mandra", "87 rue Alpin 25000 Besançon",0,0,
+//                "0623154373","sandra.jelois@mail.fr",0,"cours avec personne");
+//        persdao.save(p4);
+//
+//        RdvDAO rdvdao = new RdvDAO(this.getContext());
+//        rdvdao.open();
+//        rdvDao.deleteAll();
+//        Rdv dernier = null;
+//        for (int i=0;i<4;i++) {
+//            Rdv rdv = new Rdv("RDV URGENT "+i+1, i+"19 rue Papino 25000 Besançon", 0, 0,1456789851, "10:30", 1, 0, 0, "Terminale", 350, 0, 0, "ok man"+i, i);
+//            rdv.setDateRdv(rdvdao.timeStamp()+i*24*60*60*1000);
+//            rdvdao.save(rdv);
+//            dernier = rdv;
+//        }
+//        for (int i=0;i<4;i++) {
+//            Rdv rdv = new Rdv("RDV URGENT "+i+5, "319 rue Papino 25000 Besançon", 0, 0,1456789851+i, "10:30", 1, 0, 0, "Terminale", 350, 0, 0, "ok man"+i, 3);
+//            rdv.setDateRdv(rdvdao.timeStamp() + i * 24 * 60 * 60 * 1000);
+//            rdvdao.save(rdv);
+//        }
+//
+//        for (int i=0;i<4;i++) {
+//            Rdv rdv = new Rdv("RDV URGENT "+i+9, i+"19 rue Papino 25000 Besançon", 0, 0,1456789851, "10:30", 1, 0, 0, "Terminale", 350, 0, 0, "ok man"+i, i);
+//            rdv.setDateRdv(rdvdao.timeStamp()-i*24*60*60*1000);
+//            rdvdao.save(rdv);
+//            dernier = rdv;
+//        }
+//
+//        List<Personne> list = persdao.getAllPersonne();
+//        Log.i(tag, "Liste PERSONNE " + list);
+//
+//        List<Rdv> list2 = rdvdao.getAllRdv();
+//        Log.i(tag, "Liste RDV total" + list2);
+//
+//        List<Rdv> list3 = rdvdao.getAllRdvFutur(rdvdao.timeStamp());
+//        Log.i(tag, "Liste RDV futur" + list3);
+//
+//        List<Rdv> list4 = rdvdao.getAllRdvPasse(rdvdao.timeStamp());
+//        Log.i(tag, "Liste RDV passé" + list4);
+//
+//        Rdv rdv = rdvdao.getRdvByIdPersAndTime(5,rdvdao.timeStamp());
+//        Log.i(tag,"Le premier RDV trouvé: "+ rdv);
+//
+//    }
 
 }

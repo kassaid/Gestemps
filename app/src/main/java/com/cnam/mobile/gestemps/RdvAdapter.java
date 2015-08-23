@@ -62,21 +62,26 @@ public class RdvAdapter extends BaseAdapter{
 
 
 
-        TextView rdv_libelle = (TextView)item.findViewById(R.id.rdv_libelle);
+        //TextView rdv_libelle = (TextView)item.findViewById(R.id.rdv_libelle);
         TextView rdv_nomPers = (TextView)item.findViewById(R.id.rdv_nomPers);
         TextView rdv_prenomPers = (TextView)item.findViewById(R.id.rdv_prenomPers);
         TextView rdv_date = (TextView)item.findViewById(R.id.rdv_date);
-        TextView rdv_pointDeb = (TextView)item.findViewById(R.id.rdv_pointDeb);
-        TextView rdv_pointFin = (TextView)item.findViewById(R.id.rdv_pointFin);
-        TextView rdv_horaire = (TextView)item.findViewById(R.id.rdv_horaire);
+//        TextView rdv_pointDeb = (TextView)item.findViewById(R.id.rdv_pointDeb);
+//        TextView rdv_pointFin = (TextView)item.findViewById(R.id.rdv_pointFin);
+        //TextView rdv_horaire = (TextView)item.findViewById(R.id.rdv_horaire);
         TextView rdv_dest = (TextView)item.findViewById(R.id.rdv_dest);
         TextView rdv_duree = (TextView)item.findViewById(R.id.rdv_duree);
-        TextView rdv_idPers = (TextView)item.findViewById(R.id.rdv_idPers);
-        TextView rdv_montant = (TextView)item.findViewById(R.id.rdv_montant);
+        TextView rdv_niveau = (TextView)item.findViewById(R.id.rdv_niveau);
+        TextView rdv_tarif = (TextView)item.findViewById(R.id.rdv_tarif);
+        TextView rdv_solde = (TextView)item.findViewById(R.id.rdv_solde);
+        //TextView rdv_idPers = (TextView)item.findViewById(R.id.rdv_idPers);
+        //TextView rdv_montant = (TextView)item.findViewById(R.id.rdv_montant);
 
-        final String iduree = "Séance de "+String.valueOf(list.get(position).getDureeRdv()/10000)+" h";
-        final String ihoraire = "Début de séance à "+list.get(position).getHoraireRdv();
-
+        final String iduree = "Durée prévue de la séance : "+String.valueOf(list.get(position).getDureeRdv())+" h";
+        final String iniveau = "Niveau d'étude : "+list.get(position).getNiveauRdv();
+        //final String ihoraire = "Début de séance à "+list.get(position).getHoraireRdv();
+        final String itarif = "Tarif : "+String.valueOf(list.get(position).getTarifRdv())+" euros/h";
+        final String isolde = "Solde du compte : "+String.valueOf(list.get(position).getSoldeRdv())+" euros";
 
         PersonneDAO persdao = new PersonneDAO(ct);
         persdao.open();
@@ -87,19 +92,22 @@ public class RdvAdapter extends BaseAdapter{
 
         String strdate = list.get(position).changeDate(list.get(position).getDateRdv());
 
-        rdv_libelle.setText(list.get(position).getLibRdv());
+        //rdv_libelle.setText(list.get(position).getLibRdv());
         rdv_nomPers.setText(nomPers);
         rdv_prenomPers.setText(prenomPers);
         //rdv_date.setText(String.valueOf(list.get(position).getDateRdv()));
         rdv_date.setText(strdate);
-        rdv_pointDeb.setText(String.valueOf(list.get(position).getPointDebRdv()));
-        rdv_pointFin.setText(String.valueOf(list.get(position).getPointFinRdv()));
-        rdv_horaire.setText(ihoraire);
+        //rdv_pointDeb.setText(String.valueOf(list.get(position).getPointDebRdv()));
+        //rdv_pointFin.setText(String.valueOf(list.get(position).getPointFinRdv()));
+       // rdv_horaire.setText(ihoraire);
         rdv_dest.setText(list.get(position).getAdresRdv());
         //rdv_duree.setText(String.valueOf(list.get(position).getNbplace()));
         rdv_duree.setText(iduree);
-        rdv_idPers.setText(String.valueOf(list.get(position).getIdPers()));
-        rdv_montant.setText(String.valueOf(list.get(position).getPaiementRdv()));
+        rdv_niveau.setText(iniveau);
+        rdv_tarif.setText(itarif);
+        rdv_solde.setText(isolde);
+        //rdv_idPers.setText(String.valueOf(list.get(position).getIdPers()));
+       // rdv_montant.setText(String.valueOf(list.get(position).getPaiementRdv()));
 
 
         item.setTag(position);

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
 
     private ArrayList<Rdv> listRdv;
     Context ct=this;
+    private static final String tag = "liste";
 
 
 
@@ -40,12 +42,13 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
                 String iniveauRdv = item.getNiveauRdv();
                 float itarifRdv = item.getTarifRdv();
                 long ipaiementRdv = item.getPaiementRdv();
+                String iinfoRdv = item.getInfoRdv();
                 long iidPers = item.getIdPers();
 
 
 
 
-
+                //Preparation et envoie de l'intent
                 Intent i = new Intent(RdvListeFutur.this, SeanceAvant.class);
                 i.putExtra("idRdv", iidRdv);
                 i.putExtra("libRdv", ilibRdv);
@@ -55,12 +58,11 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
                 i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("tarifRdv", itarifRdv);
                 i.putExtra("paiementRdv", ipaiementRdv);
+                i.putExtra("infoRdv",iinfoRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
-
                 startActivity(i);
                 finish();
-
 
             }
         });
@@ -74,12 +76,13 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rdv_liste_futur);
 
-
+        Log.d(tag, "liste rdv futur : onCreate");
         RdvDAO rdvdao = new RdvDAO(getBaseContext());
         rdvdao.open();
 
 
         listRdv = (ArrayList<Rdv>) rdvdao.getAllRdvFutur(rdvdao.timeStamp());
+
 
         RdvAdapter adapter = new RdvAdapter(this, listRdv);
 
@@ -100,9 +103,7 @@ public class RdvListeFutur extends AppCompatActivity implements RdvAdapter.RdvAd
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         switch (item.getItemId()) {
             case R.id.action_accueil:
                 //Bouton "Accueil"

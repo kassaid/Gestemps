@@ -27,6 +27,7 @@ import java.util.List;
 
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
 
 public class RdvCreation extends AppCompatActivity {
 
@@ -144,7 +145,7 @@ public class RdvCreation extends AppCompatActivity {
                                 456,
                                 changeDate(dateRdv+" "+horaireRdv),
                                 horaireRdv,
-                                changeInt(dureeRdv)*1000*30,
+                                changeLong(dureeRdv),
                                 0,
                                 0,
                                 niveauRdv,
@@ -184,9 +185,6 @@ public class RdvCreation extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_CANCELED);
-//                Intent i=new Intent(RdvCreation.this, MainActivity.class);
-//                startActivity(i);
                 finish();
             }
 
@@ -205,8 +203,8 @@ public class RdvCreation extends AppCompatActivity {
         return parseFloat(s);
     }
 
-    public long changeInt(String s){
-        return parseInt(s, 10);
+    public long changeLong(String s){
+        return parseLong(s, 10);
     }
 
     //Pointage horaire

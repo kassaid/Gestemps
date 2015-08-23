@@ -43,11 +43,15 @@ public class SeanceDebut extends AppCompatActivity {
         setContentView(R.layout.activity_seance_debut);
 
 
+
+        TextView titre = (TextView) findViewById(R.id.titreView);
         TextView prenom = (TextView) findViewById(R.id.prenomPersView);
         TextView nom = (TextView) findViewById(R.id.nomPersView);
         TextView duree = (TextView) findViewById(R.id.dureeRdvView);
+        TextView heureFin = (TextView) findViewById(R.id.heureFinView);
         TextView niveau = (TextView) findViewById(R.id.niveauRdvView);
         TextView solde = (TextView) findViewById(R.id.soldeView);
+        TextView info = (TextView) findViewById(R.id.infoRdvView);
         //final TextView time = (TextView) findViewById(R.id.timeView);
         TextView pointDeb = (TextView) findViewById(R.id.pointDebRdvView);
 
@@ -55,28 +59,32 @@ public class SeanceDebut extends AppCompatActivity {
         btnAnnuler = (Button) findViewById(R.id.btnAnnuler);
 
 
-
         Intent i = getIntent();
         final long iidRdv = i.getLongExtra("idRdv", 1);
         final String iprenom = i.getStringExtra("prenom");
         final String inom = i.getStringExtra("nom");
+        final long idateRdv = i.getLongExtra("dateRdv", 0);
         final String idureeRdv = i.getStringExtra("dureeRdv");
         final String iniveau = i.getStringExtra("niveauRdv");
         final float isolde = i.getFloatExtra("solde", 0);
+        final String iinfo = i.getStringExtra("info");
         //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String ipointDeb = i.getStringExtra("pointDeb");
         //final String ipaiementRdv = i.getStringExtra("paiementRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
 
+        final String ititre = "RDV du "+changeDateTime(idateRdv);
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
 
+
+        titre.setText(ititre);
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-
-        solde.setText(iisolde);
-        //duree.setText(String.valueOf(idureeRdv));
         duree.setText(idureeRdv);
+        solde.setText(iisolde);
+        info.setText(iinfo);
+        //duree.setText(String.valueOf(idureeRdv));
         pointDeb.setText(ipointDeb);
 
 
@@ -84,8 +92,16 @@ public class SeanceDebut extends AppCompatActivity {
         rdvdao.open();
         Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
 
-        final long dur = r.getDureeRdv();
-        final long tps = r.getPointDebRdv()+dur-timeStamp();
+        //dur: duree de la séance
+        //Pour la démo 1h = 10 s
+        final long dur = r.getDureeRdv()*1000*10;
+        final long tps = r.getPointDebRdv()+dur - timeStamp();
+        final long horaireFin = r.getPointDebRdv()+r.getDureeRdv()*1000*60*60;
+
+        String iheureFin = "Fin de la séance à "+changeTime(horaireFin);
+        heureFin.setText(iheureFin);
+
+
 
         if (tps<0){
             Log.d(tag, "temps écoulé");
@@ -105,7 +121,7 @@ public class SeanceDebut extends AppCompatActivity {
             {
                 final String ipointFin = timeJour();
 
-
+                //Arret du service alerte
                 stopService(v);
 
                 RdvDAO rdvdao = new RdvDAO(ct);
@@ -133,6 +149,7 @@ public class SeanceDebut extends AppCompatActivity {
                 Intent i=new Intent(SeanceDebut.this, SeanceFin.class);
                 i.putExtra("idRdv", iidRdv);
 //                i.putExtra("libRdv", ilibRdv);
+                i.putExtra("titre",ititre);
                 i.putExtra("prenom", iprenom);
                 i.putExtra("nom", inom);
                 i.putExtra("niveauRdv", iniveau);
@@ -142,6 +159,7 @@ public class SeanceDebut extends AppCompatActivity {
                 i.putExtra("pointFin", ipointFin);
                 i.putExtra("dureeSeance", idureeSeance);
                 i.putExtra("montantSeance", imontantSeance);
+                i.putExtra("infoRdv",iinfo);
                 i.putExtra("idPers", iidPers);
                 startActivity(i);
                 finish();
@@ -161,9 +179,6 @@ public class SeanceDebut extends AppCompatActivity {
 
         };
         btnAnnuler.setOnClickListener(ecoute2);
-
-
-
     }
 
 
@@ -192,6 +207,19 @@ public class SeanceDebut extends AppCompatActivity {
     public String timeJour() {
         final Date date = new Date();
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+    }
+
+    //Change date-heure en string
+    public String changeDateTime(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+    }
+    //Change heure seule en string
+    public String changeTime(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("hh:mm").format(date);
     }
 
 

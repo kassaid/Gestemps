@@ -17,7 +17,7 @@ import java.util.Date;
 public class RdvFiche extends AppCompatActivity {
 
     Context ct = this;
-    Button btnCreationRdv;
+    Button btnAnnuler;
     Button btnModifier;
 
     @Override
@@ -39,7 +39,7 @@ public class RdvFiche extends AppCompatActivity {
         TextView rdvPers = (TextView) findViewById(R.id.rdvPersView);
 //        TextView montantSeance = (TextView) findViewById(R.id.montantSeanceView);
 
-        btnCreationRdv = (Button) findViewById(R.id.btnCreationRdv);
+        btnAnnuler = (Button) findViewById(R.id.btnAnnuler);
         btnModifier = (Button) findViewById(R.id.btnModifier);
 
         Intent i = getIntent();
@@ -62,16 +62,18 @@ public class RdvFiche extends AppCompatActivity {
         persdao.open();
         Personne pers = persdao.getPersonneById(iidPers);
 
-        String inom = pers.getNomPers();
-        String iprenom = pers.getPrenomPers();
+        final String inom = pers.getNomPers();
+        final String iprenom = pers.getPrenomPers();
         String itel = pers.getTelPers();
         Float isolde = pers.getSoldePers();
 
-        final String iidateRdv = "RDV du "+changeDate(idateRdv);
+        final String iidateRdv = "RDV du "+changeDateTime(idateRdv);
+        final String iidateRdv2 = changeDate(idateRdv);
+        final String ihoraireRdv = changeTime(idateRdv);
         final String iiniveauRdv = "Niveau "+iniveauRdv;
         //final String iduree = "Séance de "+String.valueOf(idureeRdv/10000)+" h";
         final String iitarifRdv = "Tarif : "+String.valueOf(itarifRdv)+" euros/h";
-        final String iidureeRdv = "Durée prévue de "+String.valueOf(idureeRdv/10000)+" h";
+        final String iidureeRdv = "Durée prévue de "+String.valueOf(idureeRdv)+" h";
         final String iipaiementRdv = "Paiement reçu : "+String.valueOf(ipaiementRdv)+" euros";
         final String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
 
@@ -92,36 +94,63 @@ public class RdvFiche extends AppCompatActivity {
         soldePers.setText(iisolde);
 
         //Bouton MODIFIER
+        View.OnClickListener ecoute1 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(RdvFiche.this, RdvModif.class);
+                i.putExtra("idRdv", iidRdv);
+                //i.putExtra("libRdv", ilibRdv);
+                i.putExtra("dateRdv", iidateRdv2);
+                i.putExtra("horaireRdv", ihoraireRdv);
+                i.putExtra("nomPers",inom);
+                i.putExtra("prenomPers",iprenom);
+                i.putExtra("dureeRdv", idureeRdv);
+                i.putExtra("niveauRdv", iniveauRdv);
+                i.putExtra("tarifRdv", itarifRdv);
+                i.putExtra("paiementRdv", ipaiementRdv);
+                i.putExtra("adresRdv", iadresRdv);
+                i.putExtra("infoRdv", iinfoRdv);
+                i.putExtra("idPers", iidPers);
+                startActivity(i);
+                finish();
+            }
+        };
+        btnModifier.setOnClickListener(ecoute1);
+
+        //Bouton ANNULER
         View.OnClickListener ecoute2 = new  View.OnClickListener(){
 
             @Override
             public void onClick(View v)
             {
-//                Intent i=new Intent(RdvFiche.this, PersonneModif.class);
-//                i.putExtra("idRdv", iidRdv);
-//                i.putExtra("nomPers", inom);
-//                i.putExtra("prenomPers", iprenom);
-//                i.putExtra("adresPers", iadresse);
-//                i.putExtra("telPers", itel);
-//                i.putExtra("mailPers", imail);
-//                //i.putExtra("soldePers",isolde);
-//                i.putExtra("infoPers", iinfo);
-//
-//                startActivity(i);
                 finish();
             }
         };
-        btnModifier.setOnClickListener(ecoute2);
-
-
+        btnAnnuler.setOnClickListener(ecoute2);
 
     }
 
-    //Change date en string
-    public String changeDate(long d) {
+    //Change date-heure en string
+    public String changeDateTime(long d) {
         final Date date = new Date();
         date.setTime(d);
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+    }
+
+    //Change date seule en string
+    public String changeDate(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("dd/MM/yyyy").format(date);
+    }
+
+    //Change heure seule en string
+    public String changeTime(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("hh:mm").format(date);
     }
 
     @Override

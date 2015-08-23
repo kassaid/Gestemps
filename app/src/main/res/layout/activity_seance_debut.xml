@@ -8,13 +8,17 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.cnam.mobile.gestemps.SeanceDebut">
 
-
+    <TextView
+        android:id="@+id/titreView"
+        android:text="Titre avec date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/prenomPersView"
         android:text="Prénom personne"
         android:layout_below="@+id/titreView"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -43,12 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
-
-
     <TextView
-        android:id="@+id/soldeView"
-        android:text="solde compte"
+        android:id="@+id/heureFinView"
+        android:text="heure de fin"
         android:layout_below="@+id/dureeRdvView"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
@@ -56,10 +57,26 @@
 
 
     <TextView
+        android:id="@+id/soldeView"
+        android:text="solde compte"
+        android:layout_below="@+id/heureFinView"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/infoRdvView"
+        android:text="commentaire"
+        android:layout_below="@+id/soldeView"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
         android:id="@+id/pointDebRdvView"
         android:text="pointage de début"
-        android:layout_below="@+id/soldeView"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/infoRdvView"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -42,7 +42,7 @@ public class PersonneDAO {
     }
 
     public Cursor getPersonneAsCursor(){
-        return db.rawQuery("select * from " + T_PERSONNE, null);
+        return db.rawQuery("select * from " + T_PERSONNE+" ORDER BY "+NOM+" ASC", null);
     }
 
 

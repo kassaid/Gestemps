@@ -54,13 +54,13 @@ public class PersonneFiche extends ActionBarActivity {
         final float isolde = i.getFloatExtra("soldePers", 0);
         final String iinfo = i.getStringExtra("infoPers");
 
-        String iisolde = "Le solde du compte est de "+String.valueOf(isolde)+" euros";
+        String iisolde = "Le solde du compte est de  "+String.valueOf(isolde)+" euros";
 
         rdvdao = new RdvDAO(ct);
         rdvdao.open();
         rdv = rdvdao.getRdvByIdPersAndTime(iidPers,rdvdao.timeStamp());
         if (rdv!=null){
-            irdvPers = "La prochaine séance aura lieu le "+rdv.changeDate(rdv.getDateRdv())+".";
+            irdvPers = "La prochaine séance aura lieu le  "+rdv.changeDate(rdv.getDateRdv())+".";
         }
 
         nom.setText(inom);

@@ -58,9 +58,13 @@ public class PersonneAdapter extends BaseAdapter {
 
         TextView pers_nom = (TextView)item.findViewById(R.id.pers_nom);
         TextView pers_prenom = (TextView)item.findViewById(R.id.pers_prenom);
+        TextView pers_solde = (TextView)item.findViewById(R.id.pers_solde);
+
+        final String isolde = "Solde du compte : "+String.valueOf(list.get(position).getSoldePers())+" euros";
 
         pers_nom.setText(list.get(position).getNomPers());
         pers_prenom.setText((list.get(position).getPrenomPers()));
+        pers_solde.setText(isolde);
 
 
 

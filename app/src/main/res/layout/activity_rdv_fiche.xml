@@ -10,7 +10,6 @@
     tools:context="com.cnam.mobile.gestemps.Trajet">
 
 
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -24,7 +23,7 @@
                 android:id="@+id/dateRdvView"
                 android:text="date"
                 android:layout_below="@+id/prenomPersView"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -110,25 +109,28 @@
                 android:layout_below="@+id/paiementRdvView"
                 android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-            <Button
-                android:id="@+id/btnCreationRdv"
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="AJOUTER UN RDV"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"
                 />
-
             <Button
                 android:id="@+id/btnModifier"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="MODIIFIER"
+                android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
                 />
+
+            <Button
+                android:id="@+id/btnAnnuler"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="ANNULER"
+
+                android:layout_gravity="center_horizontal"
+                />
+
+
 
 
         </LinearLayout>

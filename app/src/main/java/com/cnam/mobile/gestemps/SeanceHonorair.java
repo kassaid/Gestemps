@@ -124,6 +124,8 @@ public class SeanceHonorair extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                paiementRec = "0";
+                nouveauSolde(paiementRec);
                 finish();
             }
         };
@@ -141,7 +143,7 @@ public class SeanceHonorair extends AppCompatActivity {
         mes.setMessage("Vous avez reçu un paiement ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                nouveauSolde();
+                nouveauSolde(paiementRec);
                 dialog.dismiss();
                 finish();
             }
@@ -150,8 +152,8 @@ public class SeanceHonorair extends AppCompatActivity {
         mes.show();
     }
 
-    public void nouveauSolde(){
-        p.setSoldePers(p.creditSolde(parseFloat(paiementRec)));
+    public void nouveauSolde(String versement){
+        p.setSoldePers(p.creditSolde(parseFloat(versement)));
         persdao.modifier(p);
 
     }

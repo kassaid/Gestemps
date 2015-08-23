@@ -27,6 +27,7 @@ public class SeanceFin extends AppCompatActivity {
 
         final String tag = "seanceFin-test";
 
+        TextView titre = (TextView) findViewById(R.id.titreView);
         TextView prenom = (TextView) findViewById(R.id.prenomPersView);
         TextView nom = (TextView) findViewById(R.id.nomPersView);
        // TextView time = (TextView) findViewById(R.id.timeView);
@@ -45,6 +46,7 @@ public class SeanceFin extends AppCompatActivity {
 
         Intent i = getIntent();
         final long iidRdv = i.getLongExtra("idRdv", 1);
+        final String ititre = i.getStringExtra("titre");
         final String iprenom = i.getStringExtra("prenom");
         final String inom = i.getStringExtra("nom");
 
@@ -59,8 +61,10 @@ public class SeanceFin extends AppCompatActivity {
         final long iidPers = i.getLongExtra("idPers", 1);
 
 
+        //String ititre = "RDV du "+changeDateTime(idateRdv);
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
 
+        titre.setText(ititre);
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);

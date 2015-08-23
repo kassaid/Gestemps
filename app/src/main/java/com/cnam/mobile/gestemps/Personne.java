@@ -118,12 +118,12 @@ public class Personne {
         this.infoPers = infoPers;
     }
 
-    public float creditSolde(float m){
-        return m + getSoldePers();
+    public float creditSolde(float versement){
+        return getSoldePers() + versement;
     }
 
-    public float debitSolde(long m){
-        return m - getSoldePers();
+    public float debitSolde(long honoraire){
+        return getSoldePers() - honoraire;
     }
 
     @Override

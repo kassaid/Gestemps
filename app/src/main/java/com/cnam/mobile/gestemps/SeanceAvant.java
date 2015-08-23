@@ -40,7 +40,7 @@ public class SeanceAvant extends AppCompatActivity {
 
         final String tag = "seanceAvant-test";
 
-        TextView libRdv = (TextView) findViewById(R.id.libRdvView);
+        //TextView libRdv = (TextView) findViewById(R.id.libRdvView);
         prenomPers = (TextView) findViewById(R.id.prenomPersView);
         TextView nomPers = (TextView) findViewById(R.id.nomPersView);
         TextView niveauRdv = (TextView) findViewById(R.id.niveauRdvView);
@@ -58,16 +58,17 @@ public class SeanceAvant extends AppCompatActivity {
         final String ilibRdv = i.getStringExtra("libRdv");
         final String iprenomPers = i.getStringExtra("prenomPers");
         final long idureeRdv = i.getLongExtra("dureeRdv", 0);
-        //final String idateRdv = i.getStringExtra("dateRdv");
+        final long idateRdv = i.getLongExtra("dateRdv", 0);
         final String ihoraireRdv = i.getStringExtra("horaireRdv");
         final String iniveauRdv = i.getStringExtra("niveauRdv");
         final String iadresRdv = i.getStringExtra("adresRdv");
+        final String iinfo = i.getStringExtra("infoRdv");
         final long iidPers = i.getLongExtra("idPers", 1);
         final String ipaiementRdv = i.getStringExtra("paiementRdv");
 
-        final String iniveau = "Niveau "+iniveauRdv;
-        final String iduree = "Séance de "+String.valueOf(idureeRdv/10000)+" h";
-        final String ihoraire = "Début de séance à "+ihoraireRdv;
+        final String iniveau = "Niveau d'étude : "+iniveauRdv;
+        final String iduree = "Durée prévue : "+String.valueOf(idureeRdv)+" h";
+        final String ihoraire = "La séance débutera à "+changeTime(idateRdv);
 
 
         PersonneDAO persdao = new PersonneDAO(ct);
@@ -77,7 +78,7 @@ public class SeanceAvant extends AppCompatActivity {
         String inom = pers.getNomPers();
         //Float isolde = pers.getSoldePers();
 
-        libRdv.setText(ilibRdv);
+        //libRdv.setText(ilibRdv);
         prenomPers.setText(iprenom);
         nomPers.setText(inom);
         //solde.setText(isolde);
@@ -159,11 +160,13 @@ public class SeanceAvant extends AppCompatActivity {
                 i.putExtra("nom", inomPers);
                 i.putExtra("solde",isolde);
                 i.putExtra("niveauRdv", iniveau);
+                i.putExtra("dateRdv", idateRdv);
                 i.putExtra("dureeRdv", iduree);
                 i.putExtra("horaireRdv", ihoraire);
                 i.putExtra("pointDeb", ipointDeb);
                 i.putExtra("paiementRdv", ipaiementRdv);
                 i.putExtra("adresRdv", iadresRdv);
+                i.putExtra("infoRdv",iinfo);
                 i.putExtra("idPers", iidPers);
                 arriveConf(v, i);
 
@@ -231,7 +234,7 @@ public class SeanceAvant extends AppCompatActivity {
                 dialog.dismiss();
                 finish();
             }
-        }).setTitle("Message d'arrivée").setIcon(R.drawable.autoriser).create();
+        }).setTitle("Arrivée à "+timeHeure()).setIcon(R.drawable.autoriser).create();
         mes.setNegativeButton("Non",null);
         mes.show();
     }
@@ -270,6 +273,11 @@ public class SeanceAvant extends AppCompatActivity {
         final Date date = new Date();
         return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
     }
+    //Heure du jour au format alphabétique
+    public String timeHeure() {
+        final Date date = new Date();
+        return new SimpleDateFormat("hh:mm").format(date);
+    }
 
 
 
@@ -279,6 +287,13 @@ public class SeanceAvant extends AppCompatActivity {
         Intent i = new Intent(android.content.Intent.ACTION_CALL,Uri.parse("tel:"+num));
 
         startActivity(i);
+    }
+
+    //Change heure seule en string
+    public String changeTime(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("hh:mm").format(date);
     }
 
     @Override

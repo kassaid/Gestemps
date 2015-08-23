@@ -44,9 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnListe = (Button) findViewById(R.id.btnListe);
         btnAjouter = (Button) findViewById(R.id.btnAjouter);
-        //btnListeRdv = (Button) findViewById(R.id.button3);
-        //btnListeEleves = (Button) findViewById(R.id.btnListeEleves);
-        //btnAjouter = (Button) findViewById(R.id.button4);
+
 
         dateDuJour.setText(lejour());
 

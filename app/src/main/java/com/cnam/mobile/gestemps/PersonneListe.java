@@ -20,9 +20,9 @@ public class PersonneListe extends AppCompatActivity implements PersonneAdapter.
 
     public void onClickNom(final Personne item, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Personne");
+        builder.setTitle(""+item.getPrenomPers()+" "+item.getNomPers());
 
-        builder.setMessage("Voulez-vous voir la fiche de " + item.getNomPers() +" ?");
+        builder.setMessage("Voulez-vous voir sa fiche ?");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener()
         {
             @Override

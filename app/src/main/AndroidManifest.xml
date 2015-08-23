@@ -114,6 +114,10 @@
             android:name=".RdvFiche"
             android:label="@string/title_activity_rdv_fiche" >
         </activity>
+        <activity
+            android:name=".RdvModif"
+            android:label="@string/title_activity_rdv_modif" >
+        </activity>
     </application>
 
 </manifest>

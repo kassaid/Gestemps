@@ -39,6 +39,7 @@ public class RdvListePasse extends AppCompatActivity implements RdvAdapter.RdvAd
                 String iniveauRdv = item.getNiveauRdv();
                 float itarifRdv = item.getTarifRdv();
                 long ipaiementRdv = item.getPaiementRdv();
+                String iinfoRdv = item.getInfoRdv();
                 long iidPers = item.getIdPers();
 
 
@@ -51,6 +52,7 @@ public class RdvListePasse extends AppCompatActivity implements RdvAdapter.RdvAd
                 i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("tarifRdv", itarifRdv);
                 i.putExtra("paiementRdv", ipaiementRdv);
+                i.putExtra("infoRdv",iinfoRdv);
                 i.putExtra("adresRdv", iadresRdv);
                 i.putExtra("idPers", iidPers);
 
@@ -76,6 +78,7 @@ public class RdvListePasse extends AppCompatActivity implements RdvAdapter.RdvAd
 
 
         listRdv = (ArrayList<Rdv>) rdvdao.getAllRdvPasse(rdvdao.timeStamp());
+
 
         RdvAdapter adapter = new RdvAdapter(this, listRdv);
 
