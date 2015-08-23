@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String tag = "main";
     Button btnListe;
     Button btnAjouter;
+    Button btnQuitter;
 
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
@@ -42,16 +43,17 @@ public class MainActivity extends AppCompatActivity {
         TextView dateDuJour = (TextView) findViewById(R.id.dateDuJourView);
         TextView nombreRdv = (TextView) findViewById(R.id.nb_rdvView);
 
+
         btnListe = (Button) findViewById(R.id.btnListe);
         btnAjouter = (Button) findViewById(R.id.btnAjouter);
-
+        btnQuitter = (Button) findViewById(R.id.btnQuitter);
 
         dateDuJour.setText(lejour());
 
 
         RdvDAO rdvdao = new RdvDAO(ct);
         rdvdao.open();
-        long nbDAO = rdvdao.nbRdvJour(rdvdao.timeStamp()-2*60*60*1000);
+        long nbDAO = rdvdao.nbRdvJour(rdvdao.timeStamp());
 
         final String nb_rdv;
         if (nbDAO!=0) {
@@ -89,9 +91,13 @@ public class MainActivity extends AppCompatActivity {
                                 Intent i2 = new Intent(MainActivity.this, RdvListePasse.class);
                                 startActivity(i2);
                                 return false;
-                            case R.id.liste_personne:
-                                Intent i3 = new Intent(MainActivity.this, PersonneListe.class);
+                            case R.id.liste_rdvAttente:
+                                Intent i3 = new Intent(MainActivity.this, RdvListeAttente.class);
                                 startActivity(i3);
+                                return false;
+                            case R.id.liste_personne:
+                                Intent i4 = new Intent(MainActivity.this, PersonneListe.class);
+                                startActivity(i4);
                                 return false;
                             default:
                                 return false;
@@ -135,10 +141,19 @@ public class MainActivity extends AppCompatActivity {
         };
         btnAjouter.setOnClickListener(ecoute2);
 
+        //Bouton QUITTER
+        View.OnClickListener ecoute3 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        };
+        btnQuitter.setOnClickListener(ecoute3);
+
 
     }
-
-
 
 
 

@@ -16,6 +16,8 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Float.parseFloat;
+
 public class PersonneModif extends ActionBarActivity {
 
     public final String tag = "personneModif-test";
@@ -24,7 +26,7 @@ public class PersonneModif extends ActionBarActivity {
     Context ct = this;
     Button btnValider;
     Button btnAnnuler;
-    String nomPers, prenomPers, adressePers, telPers, mailPers, infoPers;
+    String nomPers, prenomPers, adressePers, telPers, mailPers, soldePers, infoPers;
     Personne p;
 
 
@@ -40,6 +42,7 @@ public class PersonneModif extends ActionBarActivity {
         final EditText adresse = (EditText) findViewById(R.id.adresseEdit);
         final EditText tel = (EditText) findViewById(R.id.telEdit);
         final EditText mail = (EditText) findViewById(R.id.mailEdit);
+        final EditText solde = (EditText) findViewById(R.id.soldeEdit);
         final EditText info = (EditText) findViewById(R.id.infoEdit);
 
         btnValider = (Button) findViewById(R.id.btnValider);
@@ -52,7 +55,7 @@ public class PersonneModif extends ActionBarActivity {
         final String iadresse = i.getStringExtra("adresPers");
         final String itel = i.getStringExtra("telPers");
         final String imail = i.getStringExtra("mailPers");
-        //final long isolde = i.getLongExtra("soldePers", 0);
+        final float isolde = i.getFloatExtra("soldePers", 0);
         final String iinfo = i.getStringExtra("infoPers");
 
         idPers.setText(String.valueOf(iidPers));
@@ -61,7 +64,7 @@ public class PersonneModif extends ActionBarActivity {
         adresse.setText(iadresse);
         tel.setText(itel);
         mail.setText(imail);
-////        solde.setText(iisolde);
+        solde.setText(String.valueOf(isolde));
 ////        rdvPers.setText(irdvPers);
         info.setText(iinfo);
 
@@ -70,13 +73,13 @@ public class PersonneModif extends ActionBarActivity {
             @Override
             public void onClick(View vu) {
 
-                //finish();
 
                 nomPers = nom.getText().toString();
                 prenomPers = prenom.getText().toString();
                 adressePers = adresse.getText().toString();
                 telPers = tel.getText().toString();
                 mailPers = mail.getText().toString();
+                soldePers = solde.getText().toString();
                 infoPers = info.getText().toString();
 
                 //Contrôle du mail
@@ -94,16 +97,8 @@ public class PersonneModif extends ActionBarActivity {
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
-//                    Personne p = new Personne(
-//                            nomPers,
-//                            prenomPers,
-//                            adressePers,
-//                            123, 456,
-//                            telPers,
-//                            mailPers,
-//                            0,
-//                            infoPers);
-////
+
+
                     PersonneDAO persdao = new PersonneDAO(ct);
                     persdao.open();
                     p = persdao.getPersonneById(iidPers);
@@ -112,35 +107,14 @@ public class PersonneModif extends ActionBarActivity {
                     p.setAdresPers(adressePers);
                     p.setTelPers(telPers);
                     p.setMailPers(mailPers);
+                    p.setSoldePers(parseFloat(soldePers));
                     p.setInfoPers(infoPers);
                     persdao.modifier(p);
                     finish();
-//                    if (persdao.getPersonneByNomPrenom(nomPers, prenomPers)!=null) {
-//                        Toast.makeText(getBaseContext(),nomPers+" "+prenomPers+" est déjà enregistré !",
-//                                Toast.LENGTH_LONG).show();
-//                        nom.setText("");
-//                    }
-//
-//                    else {
-//                        persdao.save(p);
-//                        Log.i(tag, "Un compte a été ajouté");
-//                        Toast.makeText(getBaseContext(),"L'élève "+prenomPers+" "+nomPers+", a été créé !",
-//                                Toast.LENGTH_LONG).show();
-//                        //Toast.makeText(getBaseContext(), "Bienvenue "+cprenom+" "+cnom, Toast.LENGTH_LONG).show();
-//                        Intent i=new Intent();
-//                        i.putExtra("nomPers", nomPers);
-//                        i.putExtra("prenomPers", prenomPers);
-//                        setResult(RESULT_OK,i);
-//                        finish();
-//
-//                    }
-//                }
-//
+
             }
-//
-//            private Context getContext() {
-//
-//                return null;
+
+
             }
         };
         btnValider.setOnClickListener(ecoute1);

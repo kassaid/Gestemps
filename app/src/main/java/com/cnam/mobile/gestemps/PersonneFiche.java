@@ -1,7 +1,10 @@
 package com.cnam.mobile.gestemps;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +24,7 @@ public class PersonneFiche extends ActionBarActivity {
     RdvDAO rdvdao;
     Rdv rdv;
     String irdvPers = "Il n'y a aucun RDV de prévu.";
+    String inom,iprenom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +50,8 @@ public class PersonneFiche extends ActionBarActivity {
 
         Intent i = getIntent();
         final long iidPers = i.getLongExtra("idPers", 1);
-        final String inom = i.getStringExtra("nomPers");
-        final String iprenom = i.getStringExtra("prenomPers");
+        inom = i.getStringExtra("nomPers");
+        iprenom = i.getStringExtra("prenomPers");
         final String iadresse = i.getStringExtra("adresPers");
         final String itel = i.getStringExtra("telPers");
         final String imail = i.getStringExtra("mailPers");
@@ -99,7 +103,7 @@ public class PersonneFiche extends ActionBarActivity {
                 i.putExtra("adresPers", iadresse);
                 i.putExtra("telPers", itel);
                 i.putExtra("mailPers", imail);
-                //i.putExtra("soldePers",isolde);
+                i.putExtra("soldePers",isolde);
                 i.putExtra("infoPers", iinfo);
 
                 startActivity(i);
@@ -108,10 +112,40 @@ public class PersonneFiche extends ActionBarActivity {
         };
         btnModifier.setOnClickListener(ecoute2);
 
+        //Clic sur le numéro de téléphone
+        View.OnClickListener ecoute3 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                appelConf(itel);
+            }
+        };
+        tel.setOnClickListener(ecoute3);
+
 
 
     }
 
+    //Appel téléphonique
+    public void appelConf(final String num){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Souhaitez-vous appeler "+iprenom+" "+inom+" ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                appelTel(num);
+                dialog.dismiss();
+            }
+        }).setTitle("Téléphone").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    //Creation de l'intent appel telephonique
+    public void appelTel(final String num){
+        Intent i = new Intent(android.content.Intent.ACTION_CALL, Uri.parse("tel:" + num));
+        startActivity(i);
+    }
 //    //Date au format alphabétique
 //    public String lejour() {
 //        final Date date = new Date();

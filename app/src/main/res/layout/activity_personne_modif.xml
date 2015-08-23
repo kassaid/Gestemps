@@ -77,15 +77,23 @@
                 android:layout_alignParentRight="true"
                 android:inputType="textEmailAddress"
                 android:layout_below="@id/telEdit" />
+            <EditText
+                android:id="@+id/soldeEdit"
+                android:hint="Information utile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapWords|number"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/mailEdit" />
 
             <EditText
                 android:id="@+id/infoEdit"
-                android:hint="Information utile"
+                android:hint="solde du compte"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
                 android:layout_alignParentRight="true"
-                android:layout_below="@id/mailEdit" />
+                android:layout_below="@id/soldeEdit" />
 
 
             <Button

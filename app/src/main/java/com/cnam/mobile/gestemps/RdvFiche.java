@@ -1,7 +1,10 @@
 package com.cnam.mobile.gestemps;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,7 @@ public class RdvFiche extends AppCompatActivity {
     Context ct = this;
     Button btnAnnuler;
     Button btnModifier;
+    String iprenom,inom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class RdvFiche extends AppCompatActivity {
         final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String iinfoRdv = i.getStringExtra("infoRdv");
         //final String ihoraireRdv = i.getStringExtra("horaireRdv");
-        final String ipaiementRdv = i.getStringExtra("paiementRdv");
+        final long ipaiementRdv = i.getLongExtra("paiementRdv",0);
 
 
 
@@ -62,9 +66,9 @@ public class RdvFiche extends AppCompatActivity {
         persdao.open();
         Personne pers = persdao.getPersonneById(iidPers);
 
-        final String inom = pers.getNomPers();
-        final String iprenom = pers.getPrenomPers();
-        String itel = pers.getTelPers();
+        inom = pers.getNomPers();
+        iprenom = pers.getPrenomPers();
+        final String itel = pers.getTelPers();
         Float isolde = pers.getSoldePers();
 
         final String iidateRdv = "RDV du "+changeDateTime(idateRdv);
@@ -130,6 +134,18 @@ public class RdvFiche extends AppCompatActivity {
         };
         btnAnnuler.setOnClickListener(ecoute2);
 
+        //Clic sur le numéro de téléphone
+        View.OnClickListener ecoute3 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                appelConf(itel);
+            }
+        };
+        telPers.setOnClickListener(ecoute3);
+
+
     }
 
     //Change date-heure en string
@@ -151,6 +167,26 @@ public class RdvFiche extends AppCompatActivity {
         final Date date = new Date();
         date.setTime(d);
         return new SimpleDateFormat("hh:mm").format(date);
+    }
+
+    //Appel téléphonique
+    public void appelConf(final String num){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Souhaitez-vous appeler "+iprenom+" "+inom+" ?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                appelTel(num);
+                dialog.dismiss();
+            }
+        }).setTitle("Téléphone").setIcon(R.drawable.autoriser).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    //Creation de l'intent appel telephonique
+    public void appelTel(final String num){
+        Intent i = new Intent(android.content.Intent.ACTION_CALL, Uri.parse("tel:" + num));
+        startActivity(i);
     }
 
     @Override

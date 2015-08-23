@@ -118,6 +118,10 @@
             android:name=".RdvModif"
             android:label="@string/title_activity_rdv_modif" >
         </activity>
+        <activity
+            android:name=".RdvListeAttente"
+            android:label="@string/title_activity_rdv_liste_attente" >
+        </activity>
     </application>
 
 </manifest>

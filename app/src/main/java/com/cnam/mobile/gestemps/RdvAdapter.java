@@ -22,7 +22,7 @@ public class RdvAdapter extends BaseAdapter{
 
     private LayoutInflater affiche;
 
-    private String nomPers, prenomPers;
+    private String nomPers, prenomPers, soldePers;
 
 
     public RdvAdapter(Context context, List<Rdv> laliste) {
@@ -73,7 +73,7 @@ public class RdvAdapter extends BaseAdapter{
         TextView rdv_duree = (TextView)item.findViewById(R.id.rdv_duree);
         TextView rdv_niveau = (TextView)item.findViewById(R.id.rdv_niveau);
         TextView rdv_tarif = (TextView)item.findViewById(R.id.rdv_tarif);
-        TextView rdv_solde = (TextView)item.findViewById(R.id.rdv_solde);
+        TextView rdv_soldePers = (TextView)item.findViewById(R.id.rdv_solde);
         //TextView rdv_idPers = (TextView)item.findViewById(R.id.rdv_idPers);
         //TextView rdv_montant = (TextView)item.findViewById(R.id.rdv_montant);
 
@@ -81,16 +81,18 @@ public class RdvAdapter extends BaseAdapter{
         final String iniveau = "Niveau d'étude : "+list.get(position).getNiveauRdv();
         //final String ihoraire = "Début de séance à "+list.get(position).getHoraireRdv();
         final String itarif = "Tarif : "+String.valueOf(list.get(position).getTarifRdv())+" euros/h";
-        final String isolde = "Solde du compte : "+String.valueOf(list.get(position).getSoldeRdv())+" euros";
+
 
         PersonneDAO persdao = new PersonneDAO(ct);
         persdao.open();
         Personne p = persdao.getPersonneById(list.get(position).getIdPers());
         nomPers = p.getNomPers();
         prenomPers = p.getPrenomPers();
+        soldePers = String.valueOf(p.getSoldePers());
 
 
         String strdate = list.get(position).changeDate(list.get(position).getDateRdv());
+        final String isolde = "Solde du compte : "+soldePers+" euros";
 
         //rdv_libelle.setText(list.get(position).getLibRdv());
         rdv_nomPers.setText(nomPers);
@@ -105,7 +107,7 @@ public class RdvAdapter extends BaseAdapter{
         rdv_duree.setText(iduree);
         rdv_niveau.setText(iniveau);
         rdv_tarif.setText(itarif);
-        rdv_solde.setText(isolde);
+        rdv_soldePers.setText(isolde);
         //rdv_idPers.setText(String.valueOf(list.get(position).getIdPers()));
        // rdv_montant.setText(String.valueOf(list.get(position).getPaiementRdv()));
 

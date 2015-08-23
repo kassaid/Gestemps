@@ -60,6 +60,8 @@
                 android:text="téléphone"
                 android:layout_below="@+id/adresRdvView"
                 android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

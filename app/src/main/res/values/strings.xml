@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Gestemps</string>
+    <string name="app_name">A6Temps</string>
 
     <string name="hello_world">Je ne mets pas de string !</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_rdv_liste_futur">Liste des RDV futur</string>
+    <string name="title_activity_rdv_liste_futur">Liste des RDV futurs</string>
     <string name="title_activity_personne_liste">Liste des élèves</string>
     <string name="title_activity_maps">Destination</string>
     <string name="title_activity_rdv_liste">Liste des RDV</string>
@@ -39,6 +39,7 @@
     <string name="title_activity_rdv_liste_passe">Liste des RDV passés</string>
     <string name="title_activity_rdv_fiche">La fiche d\'un RDV</string>
     <string name="title_activity_rdv_modif">Modifier un RDV</string>
+    <string name="title_activity_rdv_liste_attente">Liste des RDV en attente</string>
 
 
 </resources>

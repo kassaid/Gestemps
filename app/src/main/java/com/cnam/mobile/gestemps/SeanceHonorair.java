@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import static java.lang.Float.parseFloat;
+import static java.lang.Long.parseLong;
 
 public class SeanceHonorair extends AppCompatActivity {
 
@@ -28,7 +29,9 @@ public class SeanceHonorair extends AppCompatActivity {
     Button btnQuitter;
     String paiementRec;
     PersonneDAO persdao;
+    RdvDAO rdvdao;
     Personne p;
+    Rdv r;
 
 
     @Override
@@ -60,7 +63,8 @@ public class SeanceHonorair extends AppCompatActivity {
 //        //final float isolde = i.getFloatExtra("solde", 0);
 //        //final String iniveau = i.getStringExtra("niveauRdv");
 //        //final float itarif = i.getFloatExtra("tarif", 0);
-        final String idureeRdv = i.getStringExtra("dureeRdv");
+        //final String idureeRdv = i.getStringExtra("dureeRdv");
+        final long idureeRdv = i.getLongExtra("dureeRdv", 0);
 //        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
 //        //final String ipointDeb = i.getStringExtra("pointDeb");
 //        //final String ipointFin = i.getStringExtra("pointFin");
@@ -68,9 +72,9 @@ public class SeanceHonorair extends AppCompatActivity {
         final String imontantSeance = i.getStringExtra("montantSeance");
 //        final long iidPers = i.getLongExtra("idPers", 1);
 
-        RdvDAO rdvdao = new RdvDAO(ct);
+        rdvdao = new RdvDAO(ct);
         rdvdao.open();
-        Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
+        r = (Rdv) rdvdao.getRdvById(iidRdv);
         persdao = new PersonneDAO(ct);
         persdao.open();
         p = (Personne) persdao.getPersonneById(iidPers);
@@ -81,6 +85,7 @@ public class SeanceHonorair extends AppCompatActivity {
         // long iduree = r.getDureeRdv();
 
         String iitarif = "Tarif : "+String.valueOf(itarif)+" euros/h";
+        final String iduree = "Durée prévue : "+String.valueOf(idureeRdv)+" h";
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
         String iidureeSeance = "Durée de la séance : "+idureeSeance;
         String iimontantSeance = "Montant de la séance : "+imontantSeance;
@@ -88,7 +93,7 @@ public class SeanceHonorair extends AppCompatActivity {
         prenom.setText(iprenom);
         nom.setText(inom);
 
-        dureeRdv.setText(idureeRdv);
+        dureeRdv.setText(iduree);
         tarif.setText(iitarif);
         solde.setText(iisolde);
         dureeSeance.setText(iidureeSeance);
@@ -155,7 +160,8 @@ public class SeanceHonorair extends AppCompatActivity {
     public void nouveauSolde(String versement){
         p.setSoldePers(p.creditSolde(parseFloat(versement)));
         persdao.modifier(p);
-
+        r.setPaiementRdv(parseLong(versement));
+        rdvdao.modifier(r);
     }
 
     @Override

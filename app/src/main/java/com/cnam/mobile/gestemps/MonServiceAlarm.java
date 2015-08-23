@@ -109,7 +109,7 @@ public class MonServiceAlarm extends Service {
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notification.setLatestEventInfo(
                 this.getApplicationContext(),
-                "GESTEMPS",
+                "A6Temps",
                 "La séance est terminée",
                 pendingNotificationIntent);
         mManager.notify(0, notification);

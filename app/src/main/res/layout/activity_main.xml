@@ -19,7 +19,7 @@
 
 
     <TextView
-        android:text="GESTEMPS"
+        android:text="A6T"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
@@ -78,6 +78,16 @@
         android:id="@+id/btnAjouter"
         android:layout_below="@+id/btnListe"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="QUITTER"
+        android:id="@+id/btnQuitter"
+        android:layout_below="@+id/btnAjouter"
+        android:layout_centerHorizontal="true" />
+
+
 
 
 

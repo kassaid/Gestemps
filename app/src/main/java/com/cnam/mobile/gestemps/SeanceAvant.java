@@ -159,9 +159,9 @@ public class SeanceAvant extends AppCompatActivity {
                 i.putExtra("prenom", iprenomPers);
                 i.putExtra("nom", inomPers);
                 i.putExtra("solde",isolde);
-                i.putExtra("niveauRdv", iniveau);
+                i.putExtra("niveauRdv", iniveauRdv);
                 i.putExtra("dateRdv", idateRdv);
-                i.putExtra("dureeRdv", iduree);
+                i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("horaireRdv", ihoraire);
                 i.putExtra("pointDeb", ipointDeb);
                 i.putExtra("paiementRdv", ipaiementRdv);

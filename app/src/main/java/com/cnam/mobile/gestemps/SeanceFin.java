@@ -51,9 +51,9 @@ public class SeanceFin extends AppCompatActivity {
         final String inom = i.getStringExtra("nom");
 
         final String iniveau = i.getStringExtra("niveauRdv");
-        final String idureeRdv = i.getStringExtra("dureeRdv");
+        //final String idureeRdv = i.getStringExtra("dureeRdv");
         final float isolde = i.getFloatExtra("solde", 0);
-        //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
+        final long idureeRdv = i.getLongExtra("dureeRdv", 0);
         final String ipointDeb = i.getStringExtra("pointDeb");
         final String ipointFin = i.getStringExtra("pointFin");
         final String idureeSeance = i.getStringExtra("dureeSeance");
@@ -62,13 +62,14 @@ public class SeanceFin extends AppCompatActivity {
 
 
         //String ititre = "RDV du "+changeDateTime(idateRdv);
+        final String iduree = "Durée prévue : "+String.valueOf(idureeRdv)+" h";
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
 
         titre.setText(ititre);
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-        duree.setText(idureeRdv);
+        duree.setText(iduree);
         solde.setText(iisolde);
         pointDeb.setText(ipointDeb);
         pointFin.setText(ipointFin);

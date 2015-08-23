@@ -61,11 +61,13 @@ public class SeanceDebut extends AppCompatActivity {
 
         Intent i = getIntent();
         final long iidRdv = i.getLongExtra("idRdv", 1);
+        final String iadresRdv = i.getStringExtra("adresRdv");
         final String iprenom = i.getStringExtra("prenom");
         final String inom = i.getStringExtra("nom");
         final long idateRdv = i.getLongExtra("dateRdv", 0);
-        final String idureeRdv = i.getStringExtra("dureeRdv");
-        final String iniveau = i.getStringExtra("niveauRdv");
+        final long idureeRdv = i.getLongExtra("dureeRdv", 0);
+        //final String idureeRdv = i.getStringExtra("dureeRdv");
+        final String iniveauRdv = i.getStringExtra("niveauRdv");
         final float isolde = i.getFloatExtra("solde", 0);
         final String iinfo = i.getStringExtra("info");
         //final long idureeRdv = i.getLongExtra("dureeRdv", 0);
@@ -74,6 +76,8 @@ public class SeanceDebut extends AppCompatActivity {
         final long iidPers = i.getLongExtra("idPers", 1);
 
         final String ititre = "RDV du "+changeDateTime(idateRdv);
+        final String iniveau = "Niveau d'étude : "+iniveauRdv;
+        final String iduree = "Durée prévue : "+String.valueOf(idureeRdv)+" h";
         String iisolde = "Solde du compte : "+String.valueOf(isolde)+" euros";
 
 
@@ -81,7 +85,7 @@ public class SeanceDebut extends AppCompatActivity {
         prenom.setText(iprenom);
         nom.setText(inom);
         niveau.setText(iniveau);
-        duree.setText(idureeRdv);
+        duree.setText(iduree);
         solde.setText(iisolde);
         info.setText(iinfo);
         //duree.setText(String.valueOf(idureeRdv));
@@ -98,7 +102,7 @@ public class SeanceDebut extends AppCompatActivity {
         final long tps = r.getPointDebRdv()+dur - timeStamp();
         final long horaireFin = r.getPointDebRdv()+r.getDureeRdv()*1000*60*60;
 
-        String iheureFin = "Fin de la séance à "+changeTime(horaireFin);
+        String iheureFin = "Fin de séance prévue à "+changeTime(horaireFin);
         heureFin.setText(iheureFin);
 
 
@@ -152,7 +156,8 @@ public class SeanceDebut extends AppCompatActivity {
                 i.putExtra("titre",ititre);
                 i.putExtra("prenom", iprenom);
                 i.putExtra("nom", inom);
-                i.putExtra("niveauRdv", iniveau);
+                i.putExtra("niveauRdv", iniveauRdv);
+                //i.putExtra("dateRdv", idateRdv);
                 i.putExtra("dureeRdv", idureeRdv);
                 i.putExtra("solde",isolde);
                 i.putExtra("pointDeb", ipointDeb);
@@ -171,9 +176,38 @@ public class SeanceDebut extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //setResult(RESULT_CANCELED);
-                //startActivity(SeanceDebut.this, SeanceDebut.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //final String ipointFin = timeJour();
+
+                //Arret du service alerte
                 stopService(v);
+
+                RdvDAO rdvdao = new RdvDAO(ct);
+                rdvdao.open();
+                Rdv r = (Rdv) rdvdao.getRdvById(iidRdv);
+                r.setPointDebRdv(0);
+                r.setLibRdv("SÉANCE NON TERMINÉE");
+                rdvdao.modifier(r);
+
+
+                Intent i=new Intent(SeanceDebut.this, SeanceAvant.class);
+                i.putExtra("idRdv", iidRdv);
+//                i.putExtra("libRdv", ilibRdv);
+                i.putExtra("titre",ititre);
+                i.putExtra("prenom", iprenom);
+                i.putExtra("nom", inom);
+                i.putExtra("niveauRdv", iniveauRdv);
+                i.putExtra("dateRdv", idateRdv);
+                i.putExtra("dureeRdv", idureeRdv);
+                i.putExtra("solde",isolde);
+                i.putExtra("pointDeb", ipointDeb);
+                i.putExtra("adresRdv", iadresRdv);
+//                i.putExtra("pointFin", ipointFin);
+//                i.putExtra("dureeSeance", idureeSeance);
+//                i.putExtra("montantSeance", imontantSeance);
+                i.putExtra("infoRdv",iinfo);
+                i.putExtra("idPers", iidPers);
+
+                startActivity(i);
                 finish();
             }
 
