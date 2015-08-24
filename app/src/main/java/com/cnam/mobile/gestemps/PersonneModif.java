@@ -87,7 +87,7 @@ public class PersonneModif extends ActionBarActivity {
                 Matcher m = pat.matcher(mailPers);
 
 
-                if (nomPers.equals("")||prenomPers.equals("")||adressePers.equals("")||telPers.equals("")){
+                if (nomPers.equals("")||prenomPers.equals("")||adressePers.equals("")||telPers.equals("")||soldePers.equals("")){
                     Toast.makeText(getBaseContext(), "Veuillez remplir les champs obligatoires !", Toast.LENGTH_LONG).show();
                 }
                 else

@@ -79,7 +79,7 @@
                 android:layout_below="@id/telEdit" />
             <EditText
                 android:id="@+id/soldeEdit"
-                android:hint="Information utile"
+                android:hint="Solde du compte"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords|number"
@@ -88,7 +88,7 @@
 
             <EditText
                 android:id="@+id/infoEdit"
-                android:hint="solde du compte"
+                android:hint="Information utile"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
