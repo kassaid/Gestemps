@@ -33,8 +33,6 @@
         android:text="prénom"
         android:layout_below="@+id/nomPersView"
         android:layout_marginTop="15dp"
-        android:clickable="true"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -45,6 +43,9 @@
         android:text="adresse"
         android:layout_below="@+id/prenomPersView"
         android:layout_marginTop="15dp"
+        android:clickable="true"
+        android:textStyle="bold|italic"
+        android:textColor="@color/abc_search_url_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -54,6 +55,8 @@
         android:layout_below="@+id/adresPersView"
         android:layout_marginTop="15dp"
         android:clickable="true"
+        android:textStyle="bold|italic"
+        android:textColor="@color/abc_search_url_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

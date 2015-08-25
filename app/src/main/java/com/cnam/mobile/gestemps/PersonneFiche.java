@@ -123,6 +123,17 @@ public class PersonneFiche extends ActionBarActivity {
         };
         tel.setOnClickListener(ecoute3);
 
+        //Clic sur le numéro de téléphone
+        View.OnClickListener ecoute4 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                addressConf(iadresse);
+            }
+        };
+        adresse.setOnClickListener(ecoute4);
+
 
 
     }
@@ -151,6 +162,44 @@ public class PersonneFiche extends ActionBarActivity {
 //        final Date date = new Date();
 //        return new SimpleDateFormat("EEEE d MMM yyyy").format(date);
 //    }
+
+    //Navigation adresse
+    public void addressConf(final String adress){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Souhaitez-vous allez vers " + iprenom + " " + inom + "?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AdressUri(adress);
+                dialog.dismiss();
+            }
+        }).setTitle("Adresse").setIcon(R.drawable.logo_a6t_48).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    // conversion adresse vers uri
+    public void AdressUri(String sEdit) {
+        Uri uri;
+        Uri uriDefault = Uri.parse("geo:0,0?q=Place+Charles+de+Gaulle+%2C+PARIS");
+        if(sEdit.length()!=0) {
+            String geo = "geo:0,0?q=" +
+                    sEdit.replace(" ", "+");
+            uri = Uri.parse(geo);
+        }
+        else uri = uriDefault;
+        //Toast toast = Toast.makeText(getApplicationContext(), "(" + sEdit.length() + ") " + uri.toString(), Toast.LENGTH_SHORT);
+        //toast.show();
+        showMap(uri);
+    }
+
+    // envoi d'uri au système
+    public void showMap(Uri geoLocation) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
