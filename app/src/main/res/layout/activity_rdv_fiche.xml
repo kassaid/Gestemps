@@ -52,6 +52,8 @@
                 android:text="adresse rdv"
                 android:layout_below="@+id/prenomPersView"
                 android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
