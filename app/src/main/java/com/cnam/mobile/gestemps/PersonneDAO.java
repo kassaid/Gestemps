@@ -61,14 +61,17 @@ public class PersonneDAO {
     }
 
     //Liste des NOM de la table PERSONNE
-    public List<String> allPersNames(){
-        List<String> result = new ArrayList<String>();
-        String selectQuery = "SELECT "+NOM+" FROM "+T_PERSONNE;
+    public List<PersonneNom> allPersNames(){
+        List<PersonneNom> result = new ArrayList<>();
+        String selectQuery = "SELECT " + ID + ", " + NOM + ", " + PRENOM + " FROM " + T_PERSONNE + " ORDER BY " + NOM + " ASC";
         Cursor c = db.rawQuery(selectQuery, null);
         if (c.moveToFirst()){
             do{
-                String n = c.getString(c.getColumnIndex(NOM));
-                result.add(n);
+                int id = c.getInt(c.getColumnIndex(ID));
+                String nomPers = c.getString(c.getColumnIndex(NOM));
+                String prenomPers = c.getString(c.getColumnIndex(PRENOM));
+                PersonneNom p = new PersonneNom(id, nomPers, prenomPers);
+                result.add(p);
             }while (c.moveToNext());
         }
         return result;

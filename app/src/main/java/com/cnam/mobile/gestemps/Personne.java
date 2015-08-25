@@ -5,9 +5,9 @@ package com.cnam.mobile.gestemps;
  */
 public class Personne {
 
-    private long idPers;
-    private String nomPers;
-    private String prenomPers;
+    protected long idPers;
+    protected String nomPers;
+    protected String prenomPers;
     private String adresPers;
     private float longitPers;
     private float latitPers;
@@ -37,6 +37,7 @@ public class Personne {
         this.soldePers = soldePers;
         this.infoPers = infoPers;
     }
+
 
     public long getIdPers() {
         return idPers;

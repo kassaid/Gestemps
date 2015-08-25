@@ -32,8 +32,8 @@ import static java.lang.Long.parseLong;
 public class RdvCreation extends AppCompatActivity {
 
 
-    private String nomPosition;
-    private List<String> allNomPers;
+    private Personne nomPosition;
+    private List<PersonneNom> allNomPers;
     private List<Personne> listPers;
     private Personne pers;
     private long idPersRdv = 1;
@@ -49,7 +49,6 @@ public class RdvCreation extends AppCompatActivity {
 
 
         //final EditText lib = (EditText) findViewById(R.id.libEdit);
-        final EditText prenom = (EditText) findViewById(R.id.prenomEdit);
         final EditText adresse = (EditText) findViewById(R.id.adresseEdit);
         final EditText date = (EditText) findViewById(R.id.dateEdit);
         final EditText horaire = (EditText) findViewById(R.id.horaireEdit);
@@ -67,19 +66,18 @@ public class RdvCreation extends AppCompatActivity {
         persdao.open();
         allNomPers = persdao.allPersNames();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,allNomPers);
+        ArrayAdapter<PersonneNom> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,allNomPers);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinlistPers.setAdapter(adapter);
         spinlistPers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 nomPosition = allNomPers.get(position);
-                pers = persdao.getPersonneByNom(nomPosition);
-                prenom.setText(pers.getPrenomPers());
+                pers = persdao.getPersonneById(nomPosition.getIdPers());
                 adresse.setText(pers.getAdresPers());
                 idPersRdv = pers.getIdPers();
                 if (position!=0){
-                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position)+" est choisi",
+                    Toast.makeText(getBaseContext(), parent.getItemAtPosition(position) + " est choisi",
                             Toast.LENGTH_LONG).show();
                 }
             }

@@ -38,14 +38,6 @@
                 />
 
             <EditText
-                android:id="@+id/prenomEdit"
-                android:hint="Prénom"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/personneSpinner" />
-
-            <EditText
                 android:id="@+id/adresseEdit"
                 android:hint="Adresse du RDV"
                 android:layout_width="fill_parent"
