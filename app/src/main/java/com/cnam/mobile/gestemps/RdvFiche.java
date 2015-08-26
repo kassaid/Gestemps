@@ -164,7 +164,7 @@ public class RdvFiche extends AppCompatActivity {
     public String changeDateTime(long d) {
         final Date date = new Date();
         date.setTime(d);
-        return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+        return new SimpleDateFormat("dd/MM/yyyy 'à' HH:mm").format(date);
     }
 
     //Change date seule en string
@@ -178,7 +178,7 @@ public class RdvFiche extends AppCompatActivity {
     public String changeTime(long d) {
         final Date date = new Date();
         date.setTime(d);
-        return new SimpleDateFormat("hh:mm").format(date);
+        return new SimpleDateFormat("HH:mm").format(date);
     }
 
     //Appel téléphonique

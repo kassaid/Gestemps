@@ -8,9 +8,41 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.cnam.mobile.gestemps.RdvCreation">
 
+    <LinearLayout
+        android:id="@+id/LinNomPers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nomPersView"
+            android:text="NOM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/Base.TextAppearance.AppCompat.Title" />
+
+        <TextView
+            android:id="@+id/prenomPersView"
+            android:text="Prénom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/Base.TextAppearance.AppCompat.Title" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/sepTitre"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#FF909090"
+        android:layout_below="@+id/LinNomPers" />
+
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sepTitre">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -18,67 +50,41 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/nomPersView"
-                android:text="nom"
-                android:layout_below="@+id/prenomPersView"
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/prenomPersView"
-                android:text="prénom"
-                android:layout_below="@+id/nomPersView"
-                android:layout_marginTop="15dp"
-                android:clickable="true"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
 
             <EditText
                 android:id="@+id/adresRdvEdit"
                 android:hint="Adresse du RDV"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/personneSpinner" />
+                android:layout_alignParentRight="true" />
 
             <EditText
                 android:id="@+id/dateEdit"
                 android:hint="Date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/adresseEdit" />
+                android:layout_alignParentRight="true" />
 
             <EditText
                 android:id="@+id/horaireEdit"
                 android:hint="Horaire"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/dateEdit" />
+                android:layout_alignParentRight="true" />
 
             <EditText android:id="@+id/dureeEdit"
                 android:hint="Durée prévue (heure)"
                 android:inputType="number"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/horaireEdit" />
-
+                android:layout_alignParentRight="true" />
 
             <Spinner
                 android:id="@+id/niveauSpinner"
 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/dureeEdit"
-                />
-
+                android:layout_alignParentRight="true" />
 
             <EditText
                 android:id="@+id/tarifEdit"
@@ -86,8 +92,7 @@
                 android:inputType="number"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/niveauSpinner" />
+                android:layout_alignParentRight="true" />
 
             <EditText
                 android:id="@+id/infoEdit"
@@ -95,26 +100,24 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/tarifEdit" />
+                android:layout_alignParentRight="true" />
 
             <Button
+                android:id="@+id/button1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bt_valider"
-                android:id="@+id/button1"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/infoEdit" />
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bt_annuler"
-                android:layout_below="@id/button1"
                 android:layout_centerHorizontal="true" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>

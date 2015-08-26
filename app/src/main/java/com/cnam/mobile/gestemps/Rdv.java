@@ -220,7 +220,7 @@ public class Rdv {
     }
 
     public  long changeDate(String s) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
         Date d = sdf.parse(s);
         return d.getTime();
     }
@@ -229,7 +229,7 @@ public class Rdv {
     public String changeDate(long d) {
         final Date date = new Date();
         date.setTime(d);
-        return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+        return new SimpleDateFormat("dd/MM/yyyy 'à' HH:mm").format(date);
     }
 
     public float soldeTotal(long tps, long m){

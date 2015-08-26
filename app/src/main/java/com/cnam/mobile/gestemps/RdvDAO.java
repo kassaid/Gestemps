@@ -252,7 +252,7 @@ public class RdvDAO {
         v.put(INFO, rdv.getInfoRdv());
         v.put(IDPERS, rdv.getIdPers());
         db.update(T_RDV, v, ID + " = ?", new String[]{String.valueOf(rdv.getIdRdv())});
-        Log.i(tag, "modification RDV "+rdv.getIdRdv()+" réussi!");
+        Log.i(tag, "modification RDV "+rdv.getIdRdv()+" réussi!"+rdv.getHoraireRdv());
     }
 
 

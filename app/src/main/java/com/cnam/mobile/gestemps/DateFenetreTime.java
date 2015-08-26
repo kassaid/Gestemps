@@ -25,7 +25,7 @@ public class DateFenetreTime extends DialogFragment implements TimePickerDialog.
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         final Calendar cal = Calendar.getInstance();
-        int heure = cal.get(Calendar.HOUR);
+        int heure = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
         TimePickerDialog dialog;
         dialog = new TimePickerDialog(getActivity(),this,heure,minute,true);
