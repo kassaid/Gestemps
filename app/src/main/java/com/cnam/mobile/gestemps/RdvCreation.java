@@ -192,7 +192,7 @@ public class RdvCreation extends AppCompatActivity {
     }
 
     public  long changeDate(String s) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
         Date d = sdf.parse(s);
         return d.getTime();
     }

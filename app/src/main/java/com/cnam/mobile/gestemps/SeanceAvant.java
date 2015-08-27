@@ -269,12 +269,12 @@ public class SeanceAvant extends AppCompatActivity {
     //Date du jour au format alphabétique
     public String timeJour() {
         final Date date = new Date();
-        return new SimpleDateFormat("dd/MM/yyyy 'à' hh:mm").format(date);
+        return new SimpleDateFormat("dd/MM/yyyy 'à' HH:mm").format(date);
     }
     //Heure du jour au format alphabétique
     public String timeHeure() {
         final Date date = new Date();
-        return new SimpleDateFormat("hh:mm").format(date);
+        return new SimpleDateFormat("HH:mm").format(date);
     }
 
 
@@ -291,7 +291,7 @@ public class SeanceAvant extends AppCompatActivity {
     public String changeTime(long d) {
         final Date date = new Date();
         date.setTime(d);
-        return new SimpleDateFormat("hh:mm").format(date);
+        return new SimpleDateFormat("HH:mm").format(date);
     }
 
     @Override
