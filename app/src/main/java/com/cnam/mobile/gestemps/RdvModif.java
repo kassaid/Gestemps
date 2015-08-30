@@ -172,13 +172,10 @@ public class RdvModif extends AppCompatActivity{
                     r.setAdresRdv(adres);
                     r.setHoraireRdv(horaire);
                     r.setDureeRdv(changeInt(duree));
+                    r.setNiveauRdv(niveau);
                     r.setTarifRdv(changeFloat(tarif));
                     r.setInfoRdv(info);
                     rdvdao.modifier(r);
-
-
-
-
                     finish();
                 }
 
