@@ -107,7 +107,7 @@
         android:id="@+id/btnModifier"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="MODIIFIER"
+        android:text="MODIFIER"
         android:layout_gravity="center_horizontal"
         />
 

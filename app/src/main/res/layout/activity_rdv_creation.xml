@@ -13,71 +13,55 @@
         android:text="Tous les champs sont obligatoires sauf le commentaire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        />
+        android:layout_marginBottom="10dp"/>
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/titreView">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
 
             <Spinner
                 android:id="@+id/personneSpinner"
                 android:hint="Nom de la personne"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="40dp"
-                android:layout_below="@+id/libEdit"
                 />
 
             <EditText
                 android:id="@+id/adresseEdit"
                 android:hint="Adresse du RDV"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/personneSpinner" />
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/dateEdit"
                 android:hint="Date"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/adresseEdit" />
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/horaireEdit"
                 android:hint="Horaire"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/dateEdit" />
+                android:layout_height="wrap_content" />
 
             <EditText android:id="@+id/dureeEdit"
                 android:hint="Durée prévue (heure)"
                 android:inputType="number"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/horaireEdit" />
+                android:layout_height="wrap_content" />
 
 
             <Spinner
                 android:id="@+id/niveauSpinner"
                 android:layout_marginTop="10dp"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/dureeEdit"
-                />
+                android:layout_height="wrap_content" />
 
 
             <EditText
@@ -85,36 +69,30 @@
                 android:hint="Tarif horaire (euros)"
                 android:inputType="number"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/niveauSpinner" />
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/infoEdit"
                 android:hint="Commentaire"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/tarifEdit" />
+                android:inputType="textCapWords" />
 
             <Button
+                android:id="@+id/button1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bt_valider"
-                android:id="@+id/button1"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/infoEdit" />
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/bt_annuler"
-                android:layout_below="@id/button1"
-                android:layout_centerHorizontal="true" />
+                android:text="@string/bt_annuler" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>

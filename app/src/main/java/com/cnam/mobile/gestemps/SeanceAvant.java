@@ -23,13 +23,15 @@ import java.util.Date;
 public class SeanceAvant extends AppCompatActivity {
 
     Context ct = this;
-    TextView prenomPers;
+    TextView nomPers;
     Button btnSmsRetard;
     Button btnSmsAnnule;
     Button btnArrive;
+    Button btnModifier;
     String num_tel = "0623154373";
     String mess_retard = "Désolé je serais en retard";
     String mess_annule = "Désolé, suite à un empêchement j'annule le cours";
+    String iprenom,inom;
 
 
     @Override
@@ -41,8 +43,8 @@ public class SeanceAvant extends AppCompatActivity {
         final String tag = "seanceAvant-test";
 
         //TextView libRdv = (TextView) findViewById(R.id.libRdvView);
-        prenomPers = (TextView) findViewById(R.id.prenomPersView);
-        TextView nomPers = (TextView) findViewById(R.id.nomPersView);
+        nomPers = (TextView) findViewById(R.id.nomPersView);
+        TextView prenomPers = (TextView) findViewById(R.id.prenomPersView);
         TextView niveauRdv = (TextView) findViewById(R.id.niveauRdvView);
         TextView dureeRdv = (TextView) findViewById(R.id.dureeRdvView);
         TextView horaireRdv = (TextView) findViewById(R.id.horaireRdvView);
@@ -51,6 +53,7 @@ public class SeanceAvant extends AppCompatActivity {
         btnSmsRetard = (Button) findViewById(R.id.btnRetard);
         btnSmsAnnule = (Button) findViewById(R.id.btnAnnule);
         btnArrive = (Button) findViewById(R.id.btnArrive);
+        btnModifier = (Button) findViewById(R.id.btnModifier);
 
 
         Intent i = getIntent();
@@ -74,13 +77,17 @@ public class SeanceAvant extends AppCompatActivity {
         PersonneDAO persdao = new PersonneDAO(ct);
         persdao.open();
         Personne pers = persdao.getPersonneById(iidPers);
-        String iprenom = pers.getPrenomPers();
-        String inom = pers.getNomPers();
+        inom = pers.getNomPers();
+        iprenom = pers.getPrenomPers();
         //Float isolde = pers.getSoldePers();
 
+        final String iidateRdv2 = changeDate(idateRdv);
+        final float itarifRdv = i.getFloatExtra("tarifRdv", 0);
+        final String iinfoRdv = i.getStringExtra("infoRdv");
+
         //libRdv.setText(ilibRdv);
-        prenomPers.setText(iprenom);
         nomPers.setText(inom);
+        prenomPers.setText(iprenom);
         //solde.setText(isolde);
         niveauRdv.setText(iniveau);
         dureeRdv.setText(iduree);
@@ -172,8 +179,34 @@ public class SeanceAvant extends AppCompatActivity {
         };
         btnArrive.setOnClickListener(ecoute3);
 
-        //Clic sur le prenom
-        View.OnClickListener ecoute4 = new  View.OnClickListener(){
+        //Bouton MODIFIER
+        View.OnClickListener ecouteMod = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent i=new Intent(SeanceAvant.this, RdvModif.class);
+                i.putExtra("idRdv", iidRdv);
+                //i.putExtra("libRdv", ilibRdv);
+                i.putExtra("dateRdv", iidateRdv2);
+                i.putExtra("horaireRdv", ihoraireRdv);
+                i.putExtra("nomPers",inom);
+                i.putExtra("prenomPers",iprenom);
+                i.putExtra("dureeRdv", idureeRdv);
+                i.putExtra("niveauRdv", iniveauRdv);
+                i.putExtra("tarifRdv", itarifRdv);
+                i.putExtra("paiementRdv", ipaiementRdv);
+                i.putExtra("adresRdv", iadresRdv);
+                i.putExtra("infoRdv", iinfoRdv);
+                i.putExtra("idPers", iidPers);
+                startActivity(i);
+                finish();
+            }
+        };
+        btnModifier.setOnClickListener(ecouteMod);
+
+        //Clic sur le NOM
+        View.OnClickListener ecouteAdress = new  View.OnClickListener(){
 
             @Override
             public void onClick(View v)
@@ -185,7 +218,18 @@ public class SeanceAvant extends AppCompatActivity {
                 appelConf(tel);
             }
         };
-        prenomPers.setOnClickListener(ecoute4);
+        nomPers.setOnClickListener(ecouteAdress);
+
+        //Clic sur l'adresse
+        View.OnClickListener ecoute4 = new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                addressConf(iadresRdv);
+            }
+        };
+        adresRdv.setOnClickListener(ecoute4);
 
 
     }
@@ -260,6 +304,45 @@ public class SeanceAvant extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+
+    //Navigation adresse
+    public void addressConf(final String adress){
+        AlertDialog.Builder mes = new AlertDialog.Builder(ct);
+        mes.setMessage("Souhaitez-vous allez vers " + iprenom + " " + inom + "?").setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AdressUri(adress);
+                dialog.dismiss();
+            }
+        }).setTitle("Adresse").setIcon(R.drawable.logo_a6t_48).create();
+        mes.setNegativeButton("Non",null);
+        mes.show();
+    }
+
+    // conversion adresse vers uri
+    public void AdressUri(String sEdit) {
+        Uri uri;
+        Uri uriDefault = Uri.parse("geo:0,0?q=Place+Charles+de+Gaulle+%2C+PARIS");
+        if(sEdit.length()!=0) {
+            String geo = "geo:0,0?q=" +
+                    sEdit.replace(" ", "+");
+            uri = Uri.parse(geo);
+        }
+        else uri = uriDefault;
+        //Toast toast = Toast.makeText(getApplicationContext(), "(" + sEdit.length() + ") " + uri.toString(), Toast.LENGTH_SHORT);
+        //toast.show();
+        showMap(uri);
+    }
+
+    // envoi d'uri au système
+    public void showMap(Uri geoLocation) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
     //Pointage
     public long timeStamp(){
         final Date date = new Date();
@@ -277,7 +360,12 @@ public class SeanceAvant extends AppCompatActivity {
         return new SimpleDateFormat("HH:mm").format(date);
     }
 
-
+    //Change date seule en string
+    public String changeDate(long d) {
+        final Date date = new Date();
+        date.setTime(d);
+        return new SimpleDateFormat("dd/MM/yyyy").format(date);
+    }
 
     public void appelTel(final String num){
        // Intent i = new Intent(android.content.Intent.ACTION_VIEW,Uri.parse("tel:+33623154373"));

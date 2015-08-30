@@ -123,7 +123,7 @@ public class PersonneFiche extends ActionBarActivity {
         };
         tel.setOnClickListener(ecoute3);
 
-        //Clic sur le numéro de téléphone
+        //Clic sur l'adresse
         View.OnClickListener ecoute4 = new  View.OnClickListener(){
 
             @Override

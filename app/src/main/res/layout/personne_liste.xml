@@ -10,22 +10,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="@dimen/abc_text_size_medium_material"/>
+        android:textSize="@dimen/abc_text_size_medium_material" />
 
     <TextView
         android:text="Prénom"
         android:id="@+id/pers_prenom"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/abc_text_size_medium_material" />
 
     <TextView
         android:text="Solde du compte"
         android:id="@+id/pers_solde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-
-
-
-
 </LinearLayout>
