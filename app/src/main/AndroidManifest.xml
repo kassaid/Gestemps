@@ -23,8 +23,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <receiver android:name=".MonRecepteur" />
+        <receiver android:name=".MonRecepteurDeb" />
 
         <service android:name=".MonServiceAlarm" />
+        <service android:name=".MonServiceAlarmDeb" />
+
         <service android:name=".MonServiceSeance" />
 
         <activity

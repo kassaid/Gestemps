@@ -111,6 +111,7 @@ public class SeanceDebut extends AppCompatActivity {
             Log.d(tag, "temps écoulé");
             Toast.makeText(getBaseContext(), "Séance est terminée!",
                     Toast.LENGTH_LONG).show();
+            stopService(new View(ct));
             finish();
         }
         setAlerte(dur);

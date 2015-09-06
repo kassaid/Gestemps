@@ -1,8 +1,11 @@
 package com.cnam.mobile.gestemps;
 
+import android.app.AlarmManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -37,6 +40,8 @@ public class RdvCreation extends AppCompatActivity {
     private List<Personne> listPers;
     private Personne pers;
     private long idPersRdv = 1;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     public final String tag = "rdvCreation-test";
     String libRdv, adresseRdv, dateRdv, horaireRdv, dureeRdv, niveauRdv, tarifRdv, infoRdv;
@@ -152,6 +157,9 @@ public class RdvCreation extends AppCompatActivity {
                                 0f,
                                 infoRdv,
                                 idPersRdv);
+
+                        setAlerte(changeDate(dateRdv + " " + horaireRdv));
+
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -194,7 +202,9 @@ public class RdvCreation extends AppCompatActivity {
     public  long changeDate(String s) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
         Date d = sdf.parse(s);
-        return d.getTime();
+        long res = d.getTime();
+        Log.d(tag, "Resultat: " + res);
+        return res;
     }
 
     public float changeFloat(String s){
@@ -211,6 +221,13 @@ public class RdvCreation extends AppCompatActivity {
         return date.getTime();
     }
 
+    private void setAlerte(long date){
+        alarmMgr = (AlarmManager)ct.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(ct, MonRecepteurDeb.class);
+        alarmIntent = PendingIntent.getBroadcast(ct, 1, intent, 0);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, date, alarmIntent);
+        Log.d(tag, "alarme déclenchée par setAlerte RdvCreation");
+    }
 
     @Override
     public void onStart(){
